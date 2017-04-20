@@ -16,6 +16,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Login"
+            android:name=".CreateActivity_2_FullNamePassword"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,8 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".CreateActivity_3_UserName" />
+        <activity android:name=".CreateActivity_5_ProfilePhoto">
+        </activity>
     </application>
 
 </manifest>
