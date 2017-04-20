@@ -6,4 +6,56 @@
     android:layout_height="match_parent"
     tools:context="team10.hkr.challengeapp.CreateActivity_5_ProfilePhoto">
 
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+
+        <ImageView
+            android:id="@+id/profilePictureImageView"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="56dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="true"
+            android:src="@drawable/profilePhotoLogo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Upload a Profile Picture"
+            android:layout_below="@+id/profilePictureImageView"
+            android:padding="8dp"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Finish"/>
+
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
 </android.support.constraint.ConstraintLayout>
