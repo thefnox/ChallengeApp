@@ -88,7 +88,8 @@
             android:layout_below="@+id/facebook_login_button"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="31dp"
-            android:text="Create a new account" />
+            android:text="Create a new account"
+            android:onClick="createAccount"/>
 
     </RelativeLayout>
 

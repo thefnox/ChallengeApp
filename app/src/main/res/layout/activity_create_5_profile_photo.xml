@@ -31,7 +31,7 @@
             android:layout_marginTop="56dp"
             android:adjustViewBounds="false"
             android:cropToPadding="true"
-            android:src="@drawable/profilePhotoLogo" />
+            android:src="@drawable/profile_photo_logo" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,7 +48,8 @@
             android:padding="16dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="Finish"/>
+            android:text="Finish"
+            android:onClick="onFinishClick"/>
 
 
 

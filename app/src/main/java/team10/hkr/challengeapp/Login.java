@@ -3,6 +3,7 @@ package team10.hkr.challengeapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.facebook.CallbackManager;
@@ -17,6 +18,7 @@ public class Login extends AppCompatActivity {
 
     LoginButton facebook_login_button;
     CallbackManager callbackManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +26,12 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initializeControls();
         loginWithFB();
+    }
 
+    public void createAccount(View view) {
+        //changing the activity with the button
+        Intent myIntent = new Intent(Login.this, CreateActivity_1_Email.class);
+        startActivity(myIntent);
     }
 
     private void initializeControls() {
