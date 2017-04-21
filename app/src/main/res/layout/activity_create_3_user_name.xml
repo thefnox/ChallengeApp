@@ -39,9 +39,9 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Username"
-            tools:layout_marginTop="128dp"
-            tools:layout_centerHorizontal="true"  />
+            android:hint="Create a Username"
+            android:layout_marginTop="128dp"
+            android:layout_centerHorizontal="true"  />
 
     </RelativeLayout>
 
