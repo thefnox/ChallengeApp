@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:text="Continue"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:onClick="onContinueClick"/>
 
         <EditText
             android:id="@+id/CreateUsernamePlainText"
