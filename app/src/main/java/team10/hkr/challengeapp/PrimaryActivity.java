@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-public class Primary extends AppCompatActivity {
+public class PrimaryActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -53,6 +53,9 @@ public class Primary extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+        //This is where I add the Icons. They should be bigger I know.
+        tabLayout.getTabAt(0).setIcon(R.drawable.medal_icon_white); tabLayout.getTabAt(1).setIcon(R.drawable.medal_icon_white); tabLayout.getTabAt(2).setIcon(R.drawable.medal_icon_white);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -126,9 +129,9 @@ public class Primary extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Winning";
+                    return null;
                 case 1:
-                    return "Fresh";
+                    return null;
                 case 2:
                     return "Subs";
             }
