@@ -1,9 +1,12 @@
 package team10.hkr.challengeapp;
 
+import android.app.SearchManager;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -43,6 +46,8 @@ public class PrimaryActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.medal_with_shadow);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -55,7 +60,15 @@ public class PrimaryActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         //This is where I add the Icons. They should be bigger I know.
-        tabLayout.getTabAt(0).setIcon(R.drawable.medal_icon_white); tabLayout.getTabAt(1).setIcon(R.drawable.medal_icon_white); tabLayout.getTabAt(2).setIcon(R.drawable.medal_icon_white);
+        tabLayout.getTabAt(0).setIcon(R.drawable.medal_with_shadow);
+        tabLayout.getTabAt(1).setIcon(R.drawable.medal_icon_white);
+        tabLayout.getTabAt(2).setIcon(R.drawable.medal_with_shadow);
+
+        //testing the profile button for the app bar
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setIcon(R.drawable.medal_with_shadow);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +86,7 @@ public class PrimaryActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_primary, menu);
+
         return true;
     }
 
