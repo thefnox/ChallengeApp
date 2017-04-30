@@ -1,11 +1,10 @@
-package team10.hkr.challengeapp;
+package team10.hkr.challengeapp.SignUpActivity;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class CreateActivity_5_ProfilePhoto extends AppCompatActivity {
+public class SignUpActivity5ProfilePhoto extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,11 +1,13 @@
-package team10.hkr.challengeapp;
+package team10.hkr.challengeapp.SignUpActivity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class CreateActivity_3_UserName extends AppCompatActivity {
+import team10.hkr.challengeapp.R;
+
+public class SignUpActivity3UserName extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +17,7 @@ public class CreateActivity_3_UserName extends AppCompatActivity {
 
     public void onContinueClick(View view) {
         //changing the activity with the button
-        Intent myIntent = new Intent(CreateActivity_3_UserName.this, CreateActivity_5_ProfilePhoto.class);
+        Intent myIntent = new Intent(SignUpActivity3UserName.this, SignUpActivity5ProfilePhoto.class);
         startActivity(myIntent);
 
         //Add more action here

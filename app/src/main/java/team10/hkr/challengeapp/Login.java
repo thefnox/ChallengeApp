@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -13,6 +12,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
+import team10.hkr.challengeapp.SignUpActivity.SignUpActivity1Email;
 
 public class Login extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class Login extends AppCompatActivity {
 
     public void createAccount(View view) {
         //changing the activity with the button
-        Intent myIntent = new Intent(Login.this, CreateActivity_1_Email.class);
+        Intent myIntent = new Intent(Login.this, SignUpActivity1Email.class);
         startActivity(myIntent);
     }
 

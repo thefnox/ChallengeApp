@@ -31,10 +31,10 @@
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".CreateActivity_1_Email" />
-        <activity android:name=".CreateActivity_2_FullNamePassword" />
-        <activity android:name=".CreateActivity_3_UserName" />
-        <activity android:name=".CreateActivity_5_ProfilePhoto"></activity>
+        <activity android:name=".SignUpActivity.SignUpActivity1Email" />
+        <activity android:name=".SignUpActivity.SignUpActivity2FullNamePassword" />
+        <activity android:name=".SignUpActivity.SignUpActivity3UserName" />
+        <activity android:name=".SignUpActivity.SignUpActivity5ProfilePhoto"></activity>
         <activity
             android:name=".Login"
             android:label="@string/title_activity_primary"
