@@ -143,9 +143,9 @@ public class PrimaryActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return null;
+                    return "Winning";
                 case 1:
-                    return null;
+                    return "Fresh";
                 case 2:
                     return "Subs";
             }
