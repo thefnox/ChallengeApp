@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="team10.hkr.challengeapp.PrimaryActivity">
+    tools:context="team10.hkr.challengeapp.Controllers.PrimaryActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

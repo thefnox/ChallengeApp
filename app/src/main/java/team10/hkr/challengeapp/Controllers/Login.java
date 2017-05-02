@@ -1,4 +1,4 @@
-package team10.hkr.challengeapp;
+package team10.hkr.challengeapp.Controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +13,8 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import team10.hkr.challengeapp.SignUpActivity.SignUpActivity1Email;
+import team10.hkr.challengeapp.R;
+import team10.hkr.challengeapp.Controllers.SignUpActivity.SignUpActivity1Email;
 
 public class Login extends AppCompatActivity {
 

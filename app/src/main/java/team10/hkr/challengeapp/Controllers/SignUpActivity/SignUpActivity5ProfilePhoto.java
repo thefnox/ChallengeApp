@@ -1,8 +1,9 @@
-package team10.hkr.challengeapp.SignUpActivity;
+package team10.hkr.challengeapp.Controllers.SignUpActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import team10.hkr.challengeapp.R;
 
 public class SignUpActivity5ProfilePhoto extends AppCompatActivity {
 
