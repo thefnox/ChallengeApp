@@ -1,4 +1,4 @@
-package team10.hkr.challengeapp.SignUpActivity;
+package team10.hkr.challengeapp.Controllers.SignUpActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

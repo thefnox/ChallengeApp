@@ -1,10 +1,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="team10.hkr.challengeapp.PrimaryActivity">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
+    tools:context="team10.hkr.challengeapp.Controllers.PrimaryActivity" >
+    <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
+        android:orderInCategory="100"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/sign_out_button"
+        android:title="Sign Out"
+        android:orderInCategory="101"
+        app:showAsAction="never"
+        ></item>
+    <item
+        android:id="@+id/search_button"
+        android:title="Search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:orderInCategory="101"
+        app:showAsAction="always"></item>
+    <item
+        android:id="@+id/profile_button"
+        android:title="Profile"
+        android:icon="@android:drawable/picture_frame"
+        app:showAsAction="always"
+        ></item>
+
 </menu>

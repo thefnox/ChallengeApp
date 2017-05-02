@@ -1,4 +1,4 @@
-package team10.hkr.challengeapp;
+package team10.hkr.challengeapp.Controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +13,10 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import team10.hkr.challengeapp.SignUpActivity.SignUpActivity1Email;
+import team10.hkr.challengeapp.R;
+import team10.hkr.challengeapp.Controllers.SignUpActivity.SignUpActivity1Email;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     LoginButton facebook_login_button;
     CallbackManager callbackManager;
@@ -31,7 +32,7 @@ public class Login extends AppCompatActivity {
 
     public void createAccount(View view) {
         //changing the activity with the button
-        Intent myIntent = new Intent(Login.this, SignUpActivity1Email.class);
+        Intent myIntent = new Intent(LoginActivity.this, SignUpActivity1Email.class);
         startActivity(myIntent);
     }
 

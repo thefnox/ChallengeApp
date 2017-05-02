@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team10.hkr.challengeapp.SignUpActivity.SignUpActivity1Email">
+    tools:context=".Controllers.SignUpActivity.SignUpActivity1Email">
 
     <RelativeLayout
         android:layout_width="0dp"

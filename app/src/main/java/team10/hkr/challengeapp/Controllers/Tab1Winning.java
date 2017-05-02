@@ -1,4 +1,4 @@
-package team10.hkr.challengeapp;
+package team10.hkr.challengeapp.Controllers;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,14 +16,17 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import team10.hkr.challengeapp.CustomListViewAdapter;
+import team10.hkr.challengeapp.R;
+
 /**
  * Created by Charlie on 25.04.2017.
  */
 
 public class Tab1Winning extends Fragment {
 
-     private CustomListViewAdapter customListViewAdapter;
-
+    private CustomListViewAdapter customListViewAdapter;
+    private ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +53,7 @@ public class Tab1Winning extends Fragment {
 //            tagList.add(data);
 //        }
 
-        ListView listView = (ListView) view.findViewById(R.id.winning_list);
+        listView = (ListView) view.findViewById(R.id.winning_list);
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
                 getActivity(),
@@ -60,18 +63,15 @@ public class Tab1Winning extends Fragment {
 
         listView.setAdapter(listViewAdapter);
 
-        //Setup adapter
-//        customListViewAdapter = new CustomListViewAdapter(getActivity().getApplicationContext(), tagList);
-//        listView.setAdapter(customListViewAdapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                int myPosition = position;
-//                String itemClickedId = listView.getItemAtPosition(myPosition).toString();
-//                Toast.makeText(getActivity().getApplicationContext(), "ID Clicked: " + itemClickedId, Toast.LENGTH_LONG).show();
-//
-//            }
-//        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int myPosition = position;
+                String itemClickedId = listView.getItemAtPosition(myPosition).toString();
+                Toast.makeText(getActivity().getApplicationContext(), "ID Clicked: " + itemClickedId, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
 
