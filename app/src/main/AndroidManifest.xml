@@ -34,13 +34,11 @@
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity1Email" />
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity2FullNamePassword" />
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity3UserName" />
-        <activity android:name=".Controllers.SignUpActivity.SignUpActivity5ProfilePhoto" />
+        <activity android:name=".Controllers.SignUpActivity.SignUpActivity5ProfilePhoto"></activity>
         <activity
-            android:name=".Controllers.Login"
+            android:name=".Controllers.LoginActivity"
             android:label="@string/title_activity_primary"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Controllers.SettingsActivity" />
-        <activity android:name=".Controllers.CloseAccountActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

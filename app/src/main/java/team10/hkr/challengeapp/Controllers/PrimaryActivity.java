@@ -40,7 +40,14 @@ public class PrimaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_primary);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
+        //Where we add the logo
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setIcon(R.drawable.medal_with_shadow);
+
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -53,7 +60,15 @@ public class PrimaryActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         //This is where I add the Icons. They should be bigger I know.
-        tabLayout.getTabAt(0).setIcon(R.drawable.medal_icon_white); tabLayout.getTabAt(1).setIcon(R.drawable.medal_icon_white); tabLayout.getTabAt(2).setIcon(R.drawable.medal_icon_white);
+        tabLayout.getTabAt(0).setIcon(R.drawable.medal_with_shadow);
+        tabLayout.getTabAt(1).setIcon(R.drawable.medal_icon_white);
+        tabLayout.getTabAt(2).setIcon(R.drawable.medal_with_shadow);
+
+        //testing the profile button for the app bar
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setIcon(R.drawable.medal_with_shadow);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +86,7 @@ public class PrimaryActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_primary, menu);
+
         return true;
     }
 
@@ -127,9 +143,9 @@ public class PrimaryActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return null;
+                    return "Winning";
                 case 1:
-                    return null;
+                    return "Fresh";
                 case 2:
                     return "Subs";
             }

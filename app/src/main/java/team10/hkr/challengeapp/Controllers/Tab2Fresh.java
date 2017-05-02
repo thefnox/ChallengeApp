@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import team10.hkr.challengeapp.R;
+
 /**
  * Created by Charlie on 25.04.2017.
  */

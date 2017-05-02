@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import team10.hkr.challengeapp.R;
 
+import team10.hkr.challengeapp.R;
+
 public class SignUpActivity5ProfilePhoto extends AppCompatActivity {
 
     @Override
