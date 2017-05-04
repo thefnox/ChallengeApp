@@ -15,9 +15,11 @@ import android.widget.Toast;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import team10.hkr.challengeapp.CustomListViewAdapter;
 import team10.hkr.challengeapp.R;
+import team10.hkr.challengeapp.WinningListAdapter;
 
 /**
  * Created by Charlie on 25.04.2017.
@@ -38,11 +40,20 @@ public class Tab1Winning extends Fragment {
 
         String[] tagList = {
                 "#Bucket",
-                "#Mannequin",
+                "#Bucket",
                 "#Planking",
-                "#Farting",
-                "#OneFinger"
+                "#OneFinger",
+                "#OneCupTwoGirls",
+                "#Vaccum"
         };
+//        tagList.add("#Bucket");
+//        tagList.add("#Bucket");
+//        tagList.add("#Planking");
+//        tagList.add("#OneFinger");
+//        tagList.add("#OneCupTwoGirls");
+//        tagList.add("#Meme");
+//        tagList.add("#Vaccum");
+
 
 //        ArrayList<HashMap<String, String>> tagList = new ArrayList<>();
 
@@ -61,6 +72,9 @@ public class Tab1Winning extends Fragment {
                 tagList
         );
 
+        //BURDAYDIN
+        //WinningListAdapter adapter = new WinningListAdapter(this, tagList);
+
         listView.setAdapter(listViewAdapter);
 
 
@@ -73,8 +87,11 @@ public class Tab1Winning extends Fragment {
             }
         });
 
+
+
         return view;
 
     }
+
 
 }
