@@ -1,5 +1,7 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.content.ClipData;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import team10.hkr.challengeapp.R;
 
@@ -99,6 +102,8 @@ public class PrimaryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent myIntent = new Intent(PrimaryActivity.this, SettingsActivity.class);
+            startActivity(myIntent);
             return true;
         }
 
