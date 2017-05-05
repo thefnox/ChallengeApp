@@ -55,6 +55,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@mipmap/ic_floating_add"
+        app:backgroundTint="#FFED4F44"
+        />
 
 </android.support.design.widget.CoordinatorLayout>
