@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -34,11 +37,13 @@
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity1Email" />
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity2FullNamePassword" />
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity3UserName" />
-        <activity android:name=".Controllers.SignUpActivity.SignUpActivity5ProfilePhoto"></activity>
+        <activity android:name=".Controllers.SignUpActivity.SignUpActivity5ProfilePhoto" />
         <activity
             android:name=".Controllers.LoginActivity"
             android:label="@string/title_activity_primary"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Controllers.ProfileActivity" />
+        <activity android:name=".Controllers.UploadPostActivity.UploadPostDescriptionActivity"></activity>
     </application>
 
 </manifest>
