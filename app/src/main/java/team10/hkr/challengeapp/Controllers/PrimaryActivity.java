@@ -3,12 +3,14 @@ package team10.hkr.challengeapp.Controllers;
 import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.Intent;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
@@ -111,9 +113,12 @@ public class PrimaryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //for having it as a fragment
+//            getFragmentManager().beginTransaction().replace(R.id.main_content,
+//                    new SettingsFragment()).commit();
+            Intent mIntent = new Intent(PrimaryActivity.this, SettingsActivity.class);
+            startActivity(mIntent);
 
-            getFragmentManager().beginTransaction().replace(R.id.main_content,
-                    new SettingsFragment()).commit();
 
             return true;
         } else if (id == R.id.profile_button) {
@@ -175,24 +180,26 @@ public class PrimaryActivity extends AppCompatActivity {
         }
     }
 
-
-    public static class SettingsFragment extends PreferenceFragment {
-
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-
-            // Load the preferences from an XML resource
-            addPreferencesFromResource(R.xml.settings_main_preferences);
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View view = super.onCreateView(inflater, container, savedInstanceState);
-            view.setBackgroundColor(getResources().getColor(white));
-
-            return view;
-        }
+        //for having it as a fragment
+//    public static class SettingsFragment extends PreferenceActivity {
+//
+//        public void onCreate(Bundle savedInstanceState) {
+//            super.onCreate(savedInstanceState);
+//
+//            // Load the preferences from an XML resource
+//            addPreferencesFromResource(R.xml.settings_main_preferences);
+//        }
+//
+//
+//        @Override
+//        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//            View view = super.onCreateView(inflater, container, savedInstanceState);
+//            view.setBackgroundColor(getResources().getColor(white));
+//
+//            return view;
+//        }
+//  }
 
 
     }
-}
+
