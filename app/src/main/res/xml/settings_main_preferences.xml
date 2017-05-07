@@ -50,17 +50,17 @@
 
         </PreferenceScreen>
 
-        <Preference
-            android:title="Close Account"
-            android:key="closeAccountPreference">
+        <!--<Preference-->
+            <!--android:title="Close Account"-->
+            <!--android:key="closeAccountPreference">-->
 
-            <Intent
-                android:action="android.intent.action.VIEW"
-                android:targetPackage="team10.hkr.challengeapp.Controllers"
-                android:targetClass="CloseAccountActivity"
-            />
+            <!--<Intent-->
+                <!--android:action="android.intent.action.VIEW"-->
+                <!--android:targetPackage="team10.hkr.challengeapp.Controllers"-->
+                <!--android:targetClass="CloseAccountActivity"-->
+            <!--/>-->
 
-        </Preference>
+        <!--</Preference>-->
 
     </PreferenceCategory>
 

@@ -1,24 +1,31 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.Intent;
+import android.preference.PreferenceFragment;
+import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import team10.hkr.challengeapp.R;
+
+import static android.R.color.white;
 
 public class PrimaryActivity extends AppCompatActivity {
 
@@ -102,9 +109,17 @@ public class PrimaryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent myIntent = new Intent(PrimaryActivity.this, SettingsActivity.class);
-            startActivity(myIntent);
+
+            getFragmentManager().beginTransaction().replace(R.id.main_content,
+                    new SettingsFragment()).commit();
+
             return true;
+        } else if (id == R.id.profile_button) {
+
+            Intent intent = new Intent(PrimaryActivity.this, ProfileActivity.class);
+            startActivity(intent);
+            return true;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -123,19 +138,19 @@ public class PrimaryActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-           switch (position) {
-               case 0:
-                   Tab1Winning tab1 = new Tab1Winning();
-                   return tab1;
-               case 1:
-                   Tab2Fresh tab2 = new Tab2Fresh();
-                   return tab2;
-               case 2:
-                   Tab3CustomFeed tab3 = new Tab3CustomFeed();
-                   return tab3;
-               default:
-                   return null;
-           }
+            switch (position) {
+                case 0:
+                    Tab1Winning tab1 = new Tab1Winning();
+                    return tab1;
+                case 1:
+                    Tab2Fresh tab2 = new Tab2Fresh();
+                    return tab2;
+                case 2:
+                    Tab3CustomFeed tab3 = new Tab3CustomFeed();
+                    return tab3;
+                default:
+                    return null;
+            }
         }
 
         @Override
@@ -156,5 +171,26 @@ public class PrimaryActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+
+    public static class SettingsFragment extends PreferenceFragment {
+
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            // Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.settings_main_preferences);
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = super.onCreateView(inflater, container, savedInstanceState);
+            view.setBackgroundColor(getResources().getColor(white));
+
+            return view;
+        }
+
+
     }
 }

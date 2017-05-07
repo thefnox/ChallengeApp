@@ -7,23 +7,25 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never" />
+
     <item
         android:id="@+id/sign_out_button"
-        android:title="Sign Out"
+        android:title="@string/sign_out"
         android:orderInCategory="101"
         app:showAsAction="never"
-        ></item>
+        />
+
     <item
         android:id="@+id/search_button"
-        android:title="Search"
+        android:title="@string/search"
         android:icon="@drawable/ic_search"
         android:orderInCategory="101"
-        app:showAsAction="always"></item>
+        app:showAsAction="always"/>
+
     <item
         android:id="@+id/profile_button"
-        android:title="Profile"
+        android:title="@string/profile"
         android:icon="@drawable/ic_account_circle_white_24dp"
-        app:showAsAction="always"
-        ></item>
+        app:showAsAction="always"/>
 
 </menu>

@@ -43,7 +43,7 @@
             android:label="@string/title_activity_primary"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Controllers.ProfileActivity" />
-        <activity android:name=".Controllers.UploadPostActivity.UploadPostDescriptionActivity"></activity>
+        <activity android:name=".Controllers.UploadPostActivity.UploadPostDescriptionActivity" />
     </application>
 
 </manifest>
