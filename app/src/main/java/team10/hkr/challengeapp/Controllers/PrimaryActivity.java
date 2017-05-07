@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import team10.hkr.challengeapp.Controllers.UploadPostActivity.CameraActivity;
 import team10.hkr.challengeapp.R;
 
 import static android.R.color.white;
@@ -84,11 +85,12 @@ public class PrimaryActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
-                
-
+                Intent cameraIntent = new Intent(PrimaryActivity.this, CameraActivity.class);
+                startActivity(cameraIntent);
 
             }
         });
@@ -180,7 +182,7 @@ public class PrimaryActivity extends AppCompatActivity {
         }
     }
 
-        //for having it as a fragment
+        //for having Settings as a fragment
 //    public static class SettingsFragment extends PreferenceActivity {
 //
 //        public void onCreate(Bundle savedInstanceState) {
