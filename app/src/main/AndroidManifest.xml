@@ -44,6 +44,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Controllers.ProfileActivity" />
         <activity android:name=".Controllers.UploadPostActivity.UploadPostDescriptionActivity" />
+        <activity android:name=".Controllers.SettingsActivity"></activity>
     </application>
 
 </manifest>
