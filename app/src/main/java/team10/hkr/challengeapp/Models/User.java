@@ -6,19 +6,26 @@ package team10.hkr.challengeapp.Models;
 
 public class User {
 
+    private String UUID;
     private String userName;
     private String realName;
     private String email;
     private String password;
-    private String UUID;
+    private String facebookLink;
+    private String twitterHandle;
+    private String profileDescription;
+    private String city;
+    private String country;
     private int stars;
+    private int champions;
     private int postCount;
     private int commentCount;
     private boolean isAdmin;
 
 
 
-    public User(String userName, String realName, String email, String password, String UUID, int stars,
+    public User(String UUID, String userName, String realName, String email, String password, String facebookLink,
+                String twitterHandle, String profileDescription, String city, String country, int stars, int champions,
                 int postCount, int commentCount, boolean isAdmin) {
 
         this.userName = userName;
@@ -30,16 +37,21 @@ public class User {
         this.postCount = postCount;
         this.commentCount = commentCount;
         this.isAdmin = isAdmin;
+        this.twitterHandle = twitterHandle;
+        this.profileDescription = profileDescription;
+        this.champions = champions;
+        this.facebookLink = facebookLink;
+        this.country = country;
+        this.city = city;
 
     }
+    public String getUUID() { return UUID; }
 
     public String getUserName() {
         return userName;
     }
 
-    public String getRealName() {
-        return realName;
-    }
+    public String getRealName() { return realName; }
 
     public String getEmail() {
         return email;
@@ -49,13 +61,21 @@ public class User {
         return password;
     }
 
-    public String getUUID() {
-        return UUID;
-    }
+    public String getFacebookLink() { return facebookLink; }
+
+    public String getTwitterHandle() { return twitterHandle; }
+
+    public String getProfileDescription() { return profileDescription; }
+
+    public String getCity() { return city; }
+
+    public String getCountry() {return country; }
 
     public int getStars() {
         return stars;
     }
+
+    public int getChampions() { return champions; }
 
     public int getPostCount() {
         return postCount;
@@ -69,9 +89,7 @@ public class User {
         return isAdmin;
     }
 
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
+    public void setRealName(String realName) { this.realName = realName; }
 
     public void setEmail(String email) {
         this.email = email;
@@ -84,6 +102,18 @@ public class User {
     public void setStars(int stars) {
         this.stars = stars;
     }
+
+    public void setFacebookLink(String facebookLink) { this.facebookLink=facebookLink; }
+
+    public void setTwitterHandle(String twitterHandle) { this.twitterHandle = twitterHandle; }
+
+    public void setProfileDescription(String profileDescription) { this.profileDescription = profileDescription; }
+
+    public void setCity(String city) { this.city = city; }
+
+    public void setCountry(String country ) { this.country = country; }
+
+    public void setChampions(int champions) { this.champions = champions; }
 
     public void setPostCount(int postCount) {
         this.postCount = postCount;
