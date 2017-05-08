@@ -30,6 +30,7 @@ import team10.hkr.challengeapp.R;
 
 import static android.R.color.white;
 
+
 public class PrimaryActivity extends AppCompatActivity {
 
     /**
@@ -51,6 +52,8 @@ public class PrimaryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_primary);
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -115,20 +118,26 @@ public class PrimaryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             //for having it as a fragment
 //            getFragmentManager().beginTransaction().replace(R.id.main_content,
 //                    new SettingsFragment()).commit();
+
             Intent mIntent = new Intent(PrimaryActivity.this, SettingsActivity.class);
             startActivity(mIntent);
-
-
             return true;
+
         } else if (id == R.id.profile_button) {
 
             Intent intent = new Intent(PrimaryActivity.this, ProfileActivity.class);
             startActivity(intent);
             return true;
 
+        } else if (id == R.id.search_button) {
+
+            Intent mIntent = new Intent(PrimaryActivity.this, SearchActivity.class);
+            startActivity(mIntent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
