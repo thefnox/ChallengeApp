@@ -43,6 +43,8 @@ public class CameraActivity extends Activity {
         public void onClick(View view){
             Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(photoIntent, CAM_REQUEST);
+//            Intent intent = new Intent(CameraActivity.this, UploadPostDescriptionActivity.class);
+//            startActivity(intent);
         }
 
     }
@@ -55,6 +57,9 @@ public class CameraActivity extends Activity {
 
             Intent videoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
             startActivityForResult(videoIntent, REQUEST_VIDEO_CAPTURE);
+//            Intent intent = new Intent(CameraActivity.this, UploadPostDescriptionActivity.class);
+//            startActivity(intent);
+
 
         }
     }

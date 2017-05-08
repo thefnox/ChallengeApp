@@ -39,16 +39,19 @@
                     <CheckBoxPreference
                         android:title="Comments on your post"
                         android:key="commentNotificationBox"
-                        android:defaultValue="true"/>
+                        android:defaultValue="true"
+                        android:dependency="turnOnNotificationsBox"/>
                     <CheckBoxPreference
                         android:title="Comment Replies"
                         android:key="commentReplyNotificationBox"
-                        android:defaultValue="true"/>
+                        android:defaultValue="true"
+                        android:dependency="turnOnNotificationsBox"/>
 
                    <CheckBoxPreference
                         android:title="Post Shares"
                         android:key="postShareNotificationBox"
-                        android:defaultValue="true"/>
+                        android:defaultValue="true"
+                        android:dependency="turnOnNotificationsBox"/>
 
                 </PreferenceCategory>
 
