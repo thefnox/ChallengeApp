@@ -45,7 +45,8 @@
         <activity android:name=".Controllers.ProfileActivity" />
         <activity android:name=".Controllers.UploadPostActivity.UploadPostDescriptionActivity" />
         <activity android:name=".Controllers.SettingsActivity" />
-        <activity android:name=".Controllers.UploadPostActivity.CameraActivity"></activity>
+        <activity android:name=".Controllers.UploadPostActivity.CameraActivity" />
+        <activity android:name=".Controllers.PostActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -40,7 +42,6 @@ public class Tab1Winning extends Fragment {
                 // as whatever else we want.
         ArrayList<Object> taglist = new ArrayList<>();
         taglist.add("#Bucket");
-        taglist.add("#OneCupTwoGirls");
         taglist.add("#OneFinger");
         taglist.add("#Planking");
         taglist.add("#Mannequin");
@@ -61,6 +62,10 @@ public class Tab1Winning extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent mIntent = new Intent(getActivity(), PostActivity.class);                                                                         //
+                startActivity(mIntent);
+
                 int myPosition = position;
                 String itemClickedId = listView.getItemAtPosition(myPosition).toString();
                 Toast.makeText(getActivity().getApplicationContext(), "ID Clicked: " + itemClickedId, Toast.LENGTH_SHORT).show();
