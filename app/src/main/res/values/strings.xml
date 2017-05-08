@@ -81,6 +81,22 @@
     <string name="sign_out">Sign Out</string>
     <string name="search">Search</string>
     <string name="profile">Profile</string>
+    <string name="champions">Champions</string>
+    <string name="stars">Stars</string>
+    <string name="profile_picture">profile picture</string>
 
     <!-- Strings related to login -->
+    <string-array name="report_reasons">
+
+        <item>Select Option Here…</item>
+        <item>Sexual Content</item>
+        <item>Violent of Repulsive Content</item>
+        <item>Hateful or Abusive Content</item>
+        <item>Harmful Dangerous Acts</item>
+        <item>Child Abuse</item>
+        <item>Spam or Misleading</item>
+        <item>Infringes my Rights</item>
+
+    </string-array>
+
 </resources>

@@ -42,10 +42,10 @@ public class ProfileActivity extends AppCompatActivity {
         profilePicture.setImageResource(R.drawable.profile_picture_test);
 
         profileName.setText(user.getRealName());
-        profileStars.setText(String.valueOf(user.getStars())+ " Stars");
+        profileStars.setText(String.valueOf(user.getStars())+ getString(R.string.stars));
         profileCity.setText(user.getCity());
         profileCountry.setText(user.getCountry());
-        profileChampions.setText(String.valueOf(user.getChampions())+ " Champions");
+        profileChampions.setText(String.valueOf(user.getChampions())+ getString(R.string.champions));
         profileFacebook.setText(user.getFacebookLink());
         profileTwitter.setText(user.getTwitterHandle());
         profileDescription.setText(user.getProfileDescription());

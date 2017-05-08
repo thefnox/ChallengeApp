@@ -51,10 +51,12 @@
                 android:layout_height="35dp"
                 android:text="S"/>
             <Button
+                android:id="@+id/reportButton"
                 android:layout_marginLeft="3dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:text="F"/>
+                android:text="F"
+                android:onClick="onReportClick"/>
 
         </LinearLayout>
         <ListView

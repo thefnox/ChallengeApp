@@ -182,6 +182,7 @@ public class PrimaryActivity extends AppCompatActivity {
         }
     }
 
+
         //for having Settings as a fragment
 //    public static class SettingsFragment extends PreferenceActivity {
 //

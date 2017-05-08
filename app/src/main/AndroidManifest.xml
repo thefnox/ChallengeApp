@@ -46,7 +46,9 @@
         <activity android:name=".Controllers.UploadPostActivity.UploadPostDescriptionActivity" />
         <activity android:name=".Controllers.SettingsActivity" />
         <activity android:name=".Controllers.UploadPostActivity.CameraActivity" />
-        <activity android:name=".Controllers.PostActivity"></activity>
+        <activity android:name=".Controllers.PostActivity" />
+        <activity android:name=".Controllers.ReportActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
     </application>
 
 </manifest>

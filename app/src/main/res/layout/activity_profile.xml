@@ -35,7 +35,6 @@
                         android:id="@+id/profilePicture"
                         android:layout_width="match_parent"
                         android:layout_height="187dp"
-                        android:layout_centerHorizontal="true"
                         android:adjustViewBounds="true"
                         android:cropToPadding="true"
                         android:maxHeight="150dp"
