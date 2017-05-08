@@ -49,6 +49,7 @@
         <activity android:name=".Controllers.PostActivity" />
         <activity android:name=".Controllers.ReportActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:name=".Controllers.SearchActivity"></activity>
     </application>
 
 </manifest>
