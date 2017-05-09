@@ -29,6 +29,7 @@ public class PostActivity extends AppCompatActivity {
                 "Hello there to you too sir!",                                                                                                  //
                 "What a fascinating challenge you got there!"
         };
+
         ArrayAdapter<String> itemsAdapter =
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, comments);
         ListView listView = (ListView) findViewById(R.id.comment_list);
