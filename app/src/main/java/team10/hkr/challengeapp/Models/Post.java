@@ -1,5 +1,8 @@
 package team10.hkr.challengeapp.Models;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 
 /**
@@ -10,26 +13,96 @@ public class Post {
 
     private String UUID;
     private String description;
-    private Date creationDate;
-    private Date updateDate;
+    private String creationDate;
+    private String updateDate;
     private boolean deleted;
     private int likes;
     private int views;
     private int dailyLikes;
+
+
     private int dailyViews;
 
-    public Post(String UUID, String description, Date creationDate, Date updateDate,
-                boolean deleted, int likes, int views, int dailyLikes, int dailyViews)
+    public Post(JSONObject jsonobj) throws JSONException
 
     {
-        this.UUID = UUID;
+        this.UUID = jsonobj.has("_id")? jsonobj.getString("_id") : "";
+        this.description = jsonobj.has("description")? jsonobj.getString("description") : "";
+        this.creationDate =  jsonobj.has("creationDate") ? jsonobj.getString("creationDate") : "";
+        this.updateDate = jsonobj.has("updateDate") ? jsonobj.getString("updateDate") : "";
+        this.deleted = jsonobj.has("deleted") && jsonobj.getBoolean("deleted");
+        this.likes = jsonobj.has("likes") ? jsonobj.getInt("likes") : 0;
+        this.views = jsonobj.has("views") ? jsonobj.getInt("views") : 0;
+        this.dailyLikes = jsonobj.has("dailyLikes") ? jsonobj.getInt("dailyLikes") : 0;
+        this.dailyViews = jsonobj.has("dailyViews") ? jsonobj.getInt("dailyViews") : 0;
+
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public String getUpdateDate() {
+        return updateDate;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public int getDailyLikes() {
+        return dailyLikes;
+    }
+
+    public int getDailyViews() {
+        return dailyViews;
+    }
+
+    public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public void setViews(int views) {
         this.views = views;
+    }
+
+    public void setDailyLikes(int dailyLikes) {
         this.dailyLikes = dailyLikes;
+    }
+
+    public void setDailyViews(int dailyViews) {
         this.dailyViews = dailyViews;
     }
 }

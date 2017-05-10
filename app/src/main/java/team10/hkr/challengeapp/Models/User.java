@@ -37,7 +37,6 @@ public class User {
         this.userName = jsonObject.has("userName") ? jsonObject.getString("userName") : "";
         this.country = jsonObject.has("country") ? jsonObject.getString("country") : "";
         this.firstName = jsonObject.has("firstName") ? jsonObject.getString("firstName") : "";
-
         this.lastName = jsonObject.has("lastName") ? jsonObject.getString("lastName") : "";
         this.email = jsonObject.has("email") ? jsonObject.getString("email") : "";
         this.password = jsonObject.has("password") ? jsonObject.getString("password") : "";

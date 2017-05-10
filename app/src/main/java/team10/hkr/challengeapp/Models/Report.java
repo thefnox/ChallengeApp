@@ -1,5 +1,8 @@
 package team10.hkr.challengeapp.Models;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 
 /**
@@ -11,14 +14,42 @@ public class Report {
     private String UUID;
     private String reportType;
     private String reason;
-    private Date creationDate;
+    private String creationDate;
 
-    public Report(String UUID, String reportType, String reason, Date creationDate) {
+    public Report(JSONObject jsonObject) throws JSONException{
 
-        this.UUID = UUID;
+        this.UUID = jsonObject.has("_id") ? jsonObject.getString("_id") : "";
+        this.reportType = jsonObject.has("reportType") ? jsonObject.getString("reportType") : "";
+        this.reason = jsonObject.has("reason") ? jsonObject.getString("reason") : "";
+        this.creationDate = jsonObject.has("creationDate") ? jsonObject.getString("creationDate") : "";
+
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public String getReportType() {
+        return reportType;
+    }
+
+    public void setReportType(String reportType) {
         this.reportType = reportType;
-        this.reason = reason;
-        this.creationDate = creationDate;
+    }
 
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 }
