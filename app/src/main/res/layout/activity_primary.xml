@@ -21,7 +21,14 @@
             android:layout_height="?attr/actionBarSize"
             android:background="#ed4f44"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:popupTheme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/profile_button"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/ic_account_circle_white_24dp"
+                android:clickable="true"/>
 
             <ImageView
                 android:id="@+id/action_bar_logo"
@@ -29,7 +36,8 @@
                 android:layout_height="60dp"
                 android:src="@drawable/medal_with_shadow"
                 android:padding="8dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:clickable="true"/>
 
         </android.support.v7.widget.Toolbar>
 

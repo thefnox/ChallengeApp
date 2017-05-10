@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import team10.hkr.challengeapp.Controllers.UploadPostActivity.CameraActivity;
 import team10.hkr.challengeapp.R;
@@ -54,15 +56,18 @@ public class PrimaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_primary);
 
 
+        ImageView profileButton = (ImageView)(findViewById(R.id.profile_button));
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PrimaryActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-
-        //Where we add the logo
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setIcon(R.drawable.medal_with_shadow);
-
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -79,12 +84,6 @@ public class PrimaryActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.medal_with_shadow);
         tabLayout.getTabAt(1).setIcon(R.drawable.medal_icon_white);
         tabLayout.getTabAt(2).setIcon(R.drawable.medal_with_shadow);
-
-        //testing the profile button for the app bar
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setIcon(R.drawable.medal_with_shadow);
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -125,12 +124,6 @@ public class PrimaryActivity extends AppCompatActivity {
 
             Intent mIntent = new Intent(PrimaryActivity.this, SettingsActivity.class);
             startActivity(mIntent);
-            return true;
-
-        } else if (id == R.id.profile_button) {
-
-            Intent intent = new Intent(PrimaryActivity.this, ProfileActivity.class);
-            startActivity(intent);
             return true;
 
         } else if (id == R.id.search_button) {

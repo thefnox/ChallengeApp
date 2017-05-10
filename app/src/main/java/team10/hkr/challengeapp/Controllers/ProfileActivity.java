@@ -24,10 +24,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void fillProfileInfo(){
 
-        User user = new User("00001a5", "TestBoy123", "Marliendo Valerssoynh",
-                "test@test.com", "hello", "facebook.com/testtesttest", "@testboy", "This is a test profile",
-                "Kristianstad", "Sweden", 0, 0, 0, 0, false);
-
         ImageView profilePicture = (ImageView) findViewById(R.id.profilePicture);
         TextView profileName = (TextView) findViewById(R.id.profileName);
         TextView profileCity = (TextView) findViewById(R.id.profileCity);
@@ -41,14 +37,14 @@ public class ProfileActivity extends AppCompatActivity {
 
         profilePicture.setImageResource(R.drawable.profile_picture_test);
 
-        profileName.setText(user.getRealName());
-        profileStars.setText(String.valueOf(user.getStars())+ getString(R.string.stars));
-        profileCity.setText(user.getCity());
-        profileCountry.setText(user.getCountry());
-        profileChampions.setText(String.valueOf(user.getChampions())+ getString(R.string.champions));
-        profileFacebook.setText(user.getFacebookLink());
-        profileTwitter.setText(user.getTwitterHandle());
-        profileDescription.setText(user.getProfileDescription());
+//        profileName.setText(user.getRealName());
+//        profileStars.setText(String.valueOf(user.getStars())+ getString(R.string.stars));
+//        profileCity.setText(user.getCity());
+//        profileCountry.setText(user.getCountry());
+//        profileChampions.setText(String.valueOf(user.getChampions())+ getString(R.string.champions));
+//        profileFacebook.setText(user.getFacebookLink());
+//        profileTwitter.setText(user.getTwitterHandle());
+//        profileDescription.setText(user.getProfileDescription());
 
 
     }
