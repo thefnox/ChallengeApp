@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/post_layout_profile_image"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/profile_picture_test"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FFF"
+            android:layout_gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/post_layout_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Naruto Kun"
+            android:layout_marginLeft="6dp"
+            android:textAlignment="center"
+            android:layout_gravity="center_vertical"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/post_layout_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:src="@drawable/dummyContent"
+        android:background="#f0f0f0f"/>
+    <LinearLayout
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/com_facebook_button_icon_blue"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+</LinearLayout>

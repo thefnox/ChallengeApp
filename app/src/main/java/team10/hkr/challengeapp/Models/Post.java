@@ -35,7 +35,6 @@ public class Post {
         this.views = jsonobj.has("views") ? jsonobj.getInt("views") : 0;
         this.dailyLikes = jsonobj.has("dailyLikes") ? jsonobj.getInt("dailyLikes") : 0;
         this.dailyViews = jsonobj.has("dailyViews") ? jsonobj.getInt("dailyViews") : 0;
-
     }
 
     public String getUUID() {
