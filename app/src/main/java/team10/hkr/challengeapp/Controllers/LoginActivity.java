@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,16 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initializeControls();
         loginWithFB();
+        Button mButton = (Button) findViewById(R.id.sign_in_button);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logInUser();
+                Intent mIntent = new Intent(LoginActivity.this, PrimaryActivity.class);
+                startActivity(mIntent);
+            }
+        });
+
     }
 
     public void createAccount(View view) {
@@ -62,6 +75,34 @@ public class LoginActivity extends AppCompatActivity {
         facebook_login_button = (LoginButton)findViewById(R.id.facebook_login_button);
     }
 
+    private void logInUser() {
+        final String USERNAME_OR_EMAIL_KEY = "usernameOrEmail";
+        final String PASSWORD_KEY = "password";
+        final String SIGNIN_URL = "http://95.85.16.177:3000/api/auth/signin";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SIGNIN_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put(USERNAME_OR_EMAIL_KEY, "Test");
+                params.put(PASSWORD_KEY, "Testhello1!");
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
 
     private void loginWithFB() {
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
