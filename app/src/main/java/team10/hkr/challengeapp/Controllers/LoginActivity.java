@@ -40,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
 
     LoginButton facebook_login_button;
     CallbackManager callbackManager;
-    EditText usernameOrEmail;
-    EditText password;
+    EditText usernameEditText;
+    EditText passwordEditText;
 
 
 
@@ -57,8 +57,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 logInUser();
-                Intent mIntent = new Intent(LoginActivity.this, PrimaryActivity.class);
-                startActivity(mIntent);
             }
         });
 
@@ -79,23 +77,28 @@ public class LoginActivity extends AppCompatActivity {
         final String USERNAME_OR_EMAIL_KEY = "usernameOrEmail";
         final String PASSWORD_KEY = "password";
         final String SIGNIN_URL = "http://95.85.16.177:3000/api/auth/signin";
+        usernameEditText = (EditText) findViewById(R.id.email_user_edittext_signin);
+        passwordEditText = (EditText) findViewById(R.id.password_edittext_signin);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SIGNIN_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
+                Intent mIntent = new Intent(LoginActivity.this, PrimaryActivity.class);
+                startActivity(mIntent);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+
                 Map<String, String> params = new HashMap<String, String>();
-                params.put(USERNAME_OR_EMAIL_KEY, "Test");
-                params.put(PASSWORD_KEY, "Testhello1!");
+                params.put(USERNAME_OR_EMAIL_KEY, usernameEditText.getText().toString());
+                params.put(PASSWORD_KEY, passwordEditText.getText().toString());
                 return params;
             }
         };

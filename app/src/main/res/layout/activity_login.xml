@@ -24,7 +24,7 @@
 
 
         <EditText
-            android:id="@+id/email_user_edittext"
+            android:id="@+id/email_user_edittext_signin"
             android:hint="Username or E-mail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,12 +36,12 @@
             tools:text="Username or E-Mail" />
 
         <EditText
-            android:id="@+id/password_edittext"
+            android:id="@+id/password_edittext_signin"
             android:hint="Password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/email_user_edittext"
-            android:layout_below="@+id/email_user_edittext"
+            android:layout_alignStart="@+id/email_user_edittext_signin"
+            android:layout_below="@+id/email_user_edittext_signin"
             android:layout_marginTop="15dp"
             android:ems="10"
             android:inputType="textPassword"
@@ -52,7 +52,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/password_edittext"
+            android:layout_below="@+id/password_edittext_signin"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="24dp"
             android:onClick="onClickSignIn"
