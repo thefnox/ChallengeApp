@@ -35,6 +35,7 @@ import java.util.Map;
 import team10.hkr.challengeapp.Models.Pokemon;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.Controllers.SignUpActivity.SignUpActivity1Email;
+import team10.hkr.challengeapp.RequestQueueSingleton;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -103,8 +104,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        RequestQueueSingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
     private void loginWithFB() {

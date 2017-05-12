@@ -48,6 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         final String url = "http://95.85.16.177:3000/api/user/me";
+
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
