@@ -32,6 +32,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import team10.hkr.challengeapp.Models.Pokemon;
 import team10.hkr.challengeapp.Models.Post;
 import team10.hkr.challengeapp.R;
 
@@ -39,16 +40,31 @@ import static android.R.attr.id;
 
 public class PostActivity extends AppCompatActivity {
 
+    Pokemon bulba;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        final String url = "http://95.85.16.177:3000/api/post";
+
+
+        final String url = "http://pokeapi.co/api/v2/pokemon/1";
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.v("YUPPI", "Response; " + response.toString());
+                try {
+                    bulba = new Pokemon(response);
+                    System.out.println(bulba.getName());
+                    System.out.println(bulba.getId());
+                    System.out.println(bulba.getHeight());
+                    System.out.println(bulba.getWeight());
+                    System.out.println(bulba.getOrder());
+                    System.out.println(bulba.getBase_experience());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -58,7 +74,6 @@ public class PostActivity extends AppCompatActivity {
         });
 
         Volley.newRequestQueue(this).add(jsonObjectRequest);
-
 
         String[] comments = {                                                                                                                   //
                 "Hello there!",                                                                                                                 //
