@@ -22,11 +22,11 @@
             android:name=".Controllers.PrimaryActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <meta-data
@@ -38,10 +38,17 @@
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity2FullNamePassword" />
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity3UserName" />
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity5ProfilePhoto" />
+
         <activity
             android:name=".Controllers.LoginActivity"
             android:label="@string/title_activity_primary"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".Controllers.ProfileActivity" />
         <activity android:name=".Controllers.UploadPostActivity.UploadPostDescriptionActivity" />
         <activity android:name=".Controllers.SettingsActivity" />

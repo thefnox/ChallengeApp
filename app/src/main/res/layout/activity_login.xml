@@ -49,15 +49,16 @@
 
         <Button
             android:id="@+id/sign_in_button"
-            android:textColor="@color/com_facebook_blue"
-            android:textAllCaps="false"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/password_edittext"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="24dp"
-            android:text="Sign in" />
+            android:onClick="onClickSignIn"
+            android:text="Sign in"
+            android:textAllCaps="false"
+            android:textColor="@color/com_facebook_blue" />
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/facebook_login_button"
