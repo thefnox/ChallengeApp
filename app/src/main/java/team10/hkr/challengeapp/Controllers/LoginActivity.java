@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SIGNIN_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this,"Logged in as " + usernameEditText.getText(), Toast.LENGTH_LONG).show();
                 Intent mIntent = new Intent(LoginActivity.this, PrimaryActivity.class);
                 startActivity(mIntent);
             }

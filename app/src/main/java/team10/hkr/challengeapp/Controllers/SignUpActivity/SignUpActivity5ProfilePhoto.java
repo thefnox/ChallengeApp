@@ -16,7 +16,7 @@ import java.net.CookieHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-import team10.hkr.challengeapp.Controllers.AppSingleton;
+import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.Controllers.PrimaryActivity;
 import team10.hkr.challengeapp.R;
 

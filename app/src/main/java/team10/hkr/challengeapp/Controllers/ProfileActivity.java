@@ -1,6 +1,7 @@
 package team10.hkr.challengeapp.Controllers;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.net.CookieHandler;
 
@@ -27,17 +29,10 @@ import team10.hkr.challengeapp.R;
 public class ProfileActivity extends AppCompatActivity {
 
     AppSingleton sessionManager = AppSingleton.getInstance();
-    ImageView profilePicture = (ImageView) findViewById(R.id.profilePicture);
-    TextView profileName = (TextView) findViewById(R.id.profileName);
-    TextView profileCity = (TextView) findViewById(R.id.profileCity);
-    TextView profileCountry = (TextView) findViewById(R.id.profileCountry);
-    TextView profileStars = (TextView) findViewById(R.id.profileStars);
-    TextView profileChampions = (TextView) findViewById(R.id.profileChampions);
-    TextView profileFacebook = (TextView) findViewById(R.id.profileFacebook);
-    TextView profileTwitter = (TextView) findViewById(R.id.profileTwitter);
-    TextView profileDescription = (TextView) findViewById(R.id.profileDescription);
-
-
+    ImageView profilePicture;
+    TextView profileUsername;
+    TextView profileName;
+    TextView profileDescription;
 
 
     @Override
@@ -46,8 +41,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         CookieHandler.setDefault(sessionManager.getCookieManager());
-        Task task = new Task();
-        task.execute();
+        serverRequest();
+//        Task task = new Task();
+//        task.execute();
 
     }
 
@@ -62,11 +58,17 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.v("YUPPI", "Response; " + response.toString());
                 try {
                     User user = new User(response);
+                    profilePicture = (ImageView) findViewById(R.id.photo_profile);
+                    profileName = (TextView) findViewById(R.id.name_and_surname_profile);
+                    profileUsername = (TextView) findViewById(R.id.username_profile);
+                    profileDescription = (TextView) findViewById(R.id.profile_description);
+
                     Toast.makeText(ProfileActivity.this, response.getString("username"), Toast.LENGTH_LONG).show();
 
+                    profileName.setText(user.getFirstName() + " " + user.getLastName());
+                    profileUsername.setText(user.getUserName());
                     profilePicture.setImageResource(R.drawable.profile_picture_test);
-                    profileName.setText(response.getString("username"));
-                    profileCity.setText("City: " + user.getUserName());
+                    profileDescription.setText(user.getProfileDescription());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -95,6 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
         @Override
         protected Void doInBackground(Void... params) {
+
             serverRequest();
             return null;
         }
