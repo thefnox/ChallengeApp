@@ -3,7 +3,6 @@ package team10.hkr.challengeapp.Controllers;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,19 +16,22 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import team10.hkr.challengeapp.Models.Pokemon;
+import java.net.CookieHandler;
+
 import team10.hkr.challengeapp.Models.User;
 import team10.hkr.challengeapp.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
-
     User user;
+    AppSingleton sessionManager = AppSingleton.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        CookieHandler.setDefault(sessionManager.getCookieManager());
         fillProfileInfo();
 
     }
@@ -37,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void fillProfileInfo(){
 
         ImageView profilePicture = (ImageView) findViewById(R.id.profilePicture);
-        final TextView profileName = (TextView) findViewById(R.id.profileName);
+        TextView profileName = (TextView) findViewById(R.id.profileName);
         TextView profileCity = (TextView) findViewById(R.id.profileCity);
         TextView profileCountry = (TextView) findViewById(R.id.profileCountry);
         TextView profileStars = (TextView) findViewById(R.id.profileStars);
@@ -45,7 +47,6 @@ public class ProfileActivity extends AppCompatActivity {
         TextView profileFacebook = (TextView) findViewById(R.id.profileFacebook);
         TextView profileTwitter = (TextView) findViewById(R.id.profileTwitter);
         TextView profileDescription = (TextView) findViewById(R.id.profileDescription);
-
 
         final String url = "http://95.85.16.177:3000/api/user/me";
 
@@ -55,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.v("YUPPI", "Response; " + response.toString());
                 try {
                     user = new User(response);
-                    Toast.makeText(ProfileActivity.this, response.getString("name"), Toast.LENGTH_LONG).show();
+                   // Toast.makeText(ProfileActivity.this, response.getString("username"), Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -71,9 +72,10 @@ public class ProfileActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(jsonObjectRequest);
 
         profilePicture.setImageResource(R.drawable.profile_picture_test);
-        if( user != null) {
-            profileName.setText(user.getCity());
-        }
+
+        profileName.setText(user.getCity());
+        Toast.makeText(ProfileActivity.this, user.getFirstName(), Toast.LENGTH_LONG).show();
+
     }
 
 
