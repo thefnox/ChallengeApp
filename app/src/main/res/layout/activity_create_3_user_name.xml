@@ -28,10 +28,10 @@
             android:id="@+id/CreateContinueButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Continue"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:onClick="onContinueClick"/>
+            android:onClick="onContinueClick"
+            android:text="Finish" />
 
         <EditText
             android:id="@+id/CreateUsernamePlainText"
