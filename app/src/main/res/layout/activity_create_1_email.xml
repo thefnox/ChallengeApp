@@ -24,12 +24,13 @@
 
         <Button
             android:id="@+id/continueButton1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Continue"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:onClick="onContinueClick"/>
+            android:onClick="onContinueClick"
+            android:text="Continue" />
 
         <EditText
             android:id="@+id/enterEmailField"

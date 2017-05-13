@@ -26,12 +26,35 @@
 
         <Button
             android:id="@+id/CreateContinueButton3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:onClick="onContinueClick"
             android:text="Finish" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/CreateUsernamePlainText"
+            android:layout_alignStart="@+id/CreateUsernamePlainText"
+            android:layout_below="@+id/CreateUsernamePlainText"
+            android:layout_marginTop="16dp"
+            android:text="*You will be unable to change your Username once your account has been created."
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/CreateContinueButton3"
+            android:layout_alignParentBottom="false"
+            android:layout_marginBottom="8dp"
+            android:text='On selecting "Finish" your account will be created. Please ensure your details are correct!'
+            android:textAlignment="center"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/CreateUsernamePlainText"
