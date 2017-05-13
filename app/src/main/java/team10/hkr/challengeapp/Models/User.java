@@ -34,7 +34,7 @@ public class User {
         this.stars = jsonObject.has("stars") ? jsonObject.getInt("stars") : 0;
         this.UUID = jsonObject.has("_id") ? jsonObject.getString("_id") : "";
         this.city = jsonObject.has("city") ? jsonObject.getString("city") : "";
-        this.userName = jsonObject.has("userName") ? jsonObject.getString("userName") : "";
+        this.userName = jsonObject.has("username") ? jsonObject.getString("username") : "";
         this.country = jsonObject.has("country") ? jsonObject.getString("country") : "";
         this.firstName = jsonObject.has("firstName") ? jsonObject.getString("firstName") : "";
         this.lastName = jsonObject.has("lastName") ? jsonObject.getString("lastName") : "";

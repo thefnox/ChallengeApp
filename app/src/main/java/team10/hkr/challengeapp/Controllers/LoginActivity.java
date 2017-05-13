@@ -10,11 +10,9 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -27,6 +25,7 @@ import java.net.CookieHandler;
 import java.util.HashMap;
 import java.util.Map;
 
+import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.Controllers.SignUpActivity.SignUpActivity1Email;
 import team10.hkr.challengeapp.RequestQueueSingleton;

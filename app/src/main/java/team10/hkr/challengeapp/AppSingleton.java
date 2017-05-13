@@ -1,4 +1,4 @@
-package team10.hkr.challengeapp.Controllers;
+package team10.hkr.challengeapp;
 
 import java.net.CookieManager;
 
