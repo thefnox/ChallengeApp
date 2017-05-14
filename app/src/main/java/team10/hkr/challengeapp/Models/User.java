@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Models;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,6 +21,7 @@ public class User {
     private String profileDescription;
     private String city;
     private String country;
+    private JSONArray posts;
     private int stars;
     private int champions;
     private int postCount;
@@ -28,6 +30,7 @@ public class User {
 
 
     public User(JSONObject jsonObject) throws JSONException {
+        this.posts = jsonObject.has("posts") ? jsonObject.getJSONArray("posts") : null;
         this.isAdmin = jsonObject.has("isAdmin") ? jsonObject.getBoolean("isAdmin") : false;
         this.commentCount = jsonObject.has("commentCount") ? jsonObject.getInt("commentCount") : 0;
         this.champions = jsonObject.has("champions") ? jsonObject.getInt("champions") : 0;
@@ -143,4 +146,7 @@ public class User {
         return lastName;
     }
 
+    public JSONArray getPosts() {
+        return posts;
+    }
 }

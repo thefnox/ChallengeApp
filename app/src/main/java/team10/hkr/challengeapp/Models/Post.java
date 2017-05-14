@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Models;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,27 +12,31 @@ import java.util.Date;
 
 public class Post {
 
+    private JSONArray tags;
+    private JSONObject content;
     private String UUID;
     private String description;
     private String creationDate;
     private String updateDate;
+    private JSONArray comments;
     private boolean deleted;
     private int likes;
     private int views;
     private int dailyLikes;
-
-
     private int dailyViews;
 
     public Post(JSONObject jsonobj) throws JSONException
 
     {
+        this.comments = jsonobj.has("comments") ? jsonobj.getJSONArray("comments") : null;
+        this.tags = jsonobj.has("tags")? jsonobj.getJSONArray("tags") : null;
+        this.content = jsonobj.has("content")? jsonobj.getJSONObject("content") : null;
         this.UUID = jsonobj.has("_id")? jsonobj.getString("_id") : "";
         this.description = jsonobj.has("description")? jsonobj.getString("description") : "";
         this.creationDate =  jsonobj.has("creationDate") ? jsonobj.getString("creationDate") : "";
         this.updateDate = jsonobj.has("updateDate") ? jsonobj.getString("updateDate") : "";
         this.deleted = jsonobj.has("deleted") && jsonobj.getBoolean("deleted");
-        this.likes = jsonobj.has("likes") ? jsonobj.getInt("likes") : 0;
+        this.likes = jsonobj.has("likes") ? jsonobj.getJSONArray("likes").length() : 0;
         this.views = jsonobj.has("views") ? jsonobj.getInt("views") : 0;
         this.dailyLikes = jsonobj.has("dailyLikes") ? jsonobj.getInt("dailyLikes") : 0;
         this.dailyViews = jsonobj.has("dailyViews") ? jsonobj.getInt("dailyViews") : 0;
@@ -103,5 +108,17 @@ public class Post {
 
     public void setDailyViews(int dailyViews) {
         this.dailyViews = dailyViews;
+    }
+
+    public JSONArray getTags() {
+        return tags;
+    }
+
+    public JSONObject getContent() {
+        return content;
+    }
+
+    public JSONArray getComments() {
+        return comments;
     }
 }

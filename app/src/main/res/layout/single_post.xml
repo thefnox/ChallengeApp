@@ -13,7 +13,7 @@
         android:layout_marginRight="6dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/post_layout_profile_image"
+            android:id="@+id/profile_photo_post"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -23,18 +23,40 @@
             android:layout_gravity="center_vertical"
             />
         <TextView
-            android:id="@+id/post_layout_username"
+            android:id="@+id/username_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Naruto Kun"
-            android:layout_marginLeft="6dp"
+            android:layout_marginStart="6dp"
             android:textAlignment="center"
             android:layout_gravity="center_vertical"
             android:textSize="20sp"
             />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/challenge_tag_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#ButWhy #Mannequin #Bucket"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/description_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:text="This is where the description for the post goes baby!"/>
+    </LinearLayout>
     <ImageView
-        android:id="@+id/post_layout_content_view"
+        android:id="@+id/content_view_post"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginLeft="6dp"
@@ -47,32 +69,36 @@
         android:layout_width="match_parent"
         android:layout_height="40dp">
         <ImageView
+            android:id="@+id/thumbsup_post"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_thumbsup"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_gravity="center_vertical"/>
         <ImageView
+            android:id="@+id/comment_post"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_comment"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_gravity="center_vertical" />
         <ImageView
+            android:id="@+id/share_post"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_share"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_gravity="center_vertical"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
+                android:id="@+id/flag_post"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:src="@drawable/ic_flag"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
     </LinearLayout>
@@ -83,19 +109,34 @@
         android:layout_marginRight="6dp">
 
         <TextView
+            android:id="@+id/views_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:text="300 Views"
             android:layout_gravity="center_vertical"
             android:textSize="16sp"/>
         <TextView
+            android:id="@+id/likes_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:text="46 Likes"
             android:layout_gravity="center_vertical"
             android:textSize="16sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="4dp">
+
+        <ListView
+            android:id="@+id/comment_list_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
     </LinearLayout>
 
 </LinearLayout>

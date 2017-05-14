@@ -29,42 +29,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             >
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp">
+                android:layout_marginStart="24dp">
                 <TextView
                     android:id="@+id/following_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="24sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="FOLLOWING"
-                    android:layout_marginLeft="4dp"
-                    android:textSize="10dp"
+                    android:layout_marginStart="4dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/followers_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:layout_marginLeft="16dp"
-                    android:textStyle="bold" />
+                    android:layout_marginStart="16dp"
+                    android:textStyle="bold"
+                    android:textSize="24sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="FOLLOWERS"
-                    android:layout_marginLeft="4dp"
-                    android:textSize="10dp"
+                    android:layout_marginStart="4dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +80,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/stars"
                         android:layout_gravity="center_vertical"
-                        android:textSize="10dp"/>
+                        android:textSize="14sp"/>
                     <ImageView
                         android:id="@+id/stars_profile"
                         android:layout_width="20dp"
@@ -93,12 +95,12 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp">
+                    android:layout_marginTop="4dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CHAMPIONS"
-                        android:textSize="10dp"
+                        android:textSize="14sp"
                         android:layout_gravity="center_vertical"/>
                     <ImageView
                         android:id="@+id/champions_profile"
@@ -110,7 +112,7 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
-        android:layout_marginLeft="6dp"
+        android:layout_marginStart="6dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -123,8 +125,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MarkMarkerinyo"
-                android:layout_gravity="center_vertical"
-                android:textSize="13dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="13.3sp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/name_and_surname_profile"
@@ -132,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:text="Mark Zuckherberg"
                 android:layout_gravity="center_horizontal"
-                android:textSize="10dp"
+                android:textSize="12sp"
                 android:textStyle="italic"/>
         </LinearLayout>
         <TextView
@@ -141,9 +143,42 @@
             android:layout_height="wrap_content"
             android:text="What a nice person I am."
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
             />
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="130dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/com_facebook_button_icon_blue"/>
+        <TextView
+            android:id="@+id/facebook_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/D4Dionysos"
+            android:textSize="12sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="4dp"/>
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:src="@drawable/ic_twitter"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"/>
+        <TextView
+            android:id="@+id/twitter_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/cagrituna"
+            android:textSize="12sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="3dp"/>
     </LinearLayout>
     <View
         android:layout_marginTop="6dp"
@@ -159,11 +194,9 @@
         android:layout_marginRight="6dp"
         android:layout_marginTop="6dp">
         <ListView
-            android:id="@+id/list_view_profile"
+            android:id="@+id/post_list_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
-
 
 </LinearLayout>

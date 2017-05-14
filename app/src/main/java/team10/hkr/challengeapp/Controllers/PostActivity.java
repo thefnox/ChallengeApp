@@ -18,9 +18,11 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,41 +30,58 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.CookieHandler;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Objects;
 
+import team10.hkr.challengeapp.AppSingleton;
+import team10.hkr.challengeapp.CommentListAdapter;
+import team10.hkr.challengeapp.CustomListAdapter;
+import team10.hkr.challengeapp.Models.Comment;
 import team10.hkr.challengeapp.Models.Pokemon;
 import team10.hkr.challengeapp.Models.Post;
+import team10.hkr.challengeapp.Models.User;
 import team10.hkr.challengeapp.R;
 
 import static android.R.attr.id;
 
 public class PostActivity extends AppCompatActivity {
 
-    Pokemon bulba;
-
+    AppSingleton sessionManager = AppSingleton.getInstance();
+    Post post;
+    ArrayList<Comment> commentObjects = new ArrayList<Comment>();
+    ListView commentsListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post);
+        CookieHandler.setDefault(sessionManager.getCookieManager());
+        setContentView(R.layout.single_post);
+        setTheFeed();
+    }
 
+    public void onReportClick(View view) {
 
+        Intent reportIntent = new Intent(this, ReportActivity.class);
+        startActivity(reportIntent);
 
-        final String url = "http://pokeapi.co/api/v2/pokemon/1";
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+    }
+
+    private void setTheFeed() {
+
+        final String url = "95.85.16.177:3000/api/post/5914cd3b46c5141865ef3340";
+        final JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.v("YUPPI", "Response; " + response.toString());
                 try {
-                    bulba = new Pokemon(response);
-                    System.out.println(bulba.getName());
-                    System.out.println(bulba.getId());
-                    System.out.println(bulba.getHeight());
-                    System.out.println(bulba.getWeight());
-                    System.out.println(bulba.getOrder());
-                    System.out.println(bulba.getBase_experience());
-                } catch (JSONException e) {
+                    post = new Post(response);
+                    for(int i = 0; i < post.getComments().length(); i++) {
+                        commentObjects.add(i, new Comment(post.getComments().getJSONObject(i)));
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -72,39 +91,11 @@ public class PostActivity extends AppCompatActivity {
                 Log.v("WTF", "Err: " + error.getLocalizedMessage());
             }
         });
+        Volley.newRequestQueue(this).add(jsonArrayRequest);
 
-        Volley.newRequestQueue(this).add(jsonObjectRequest);
-
-        String[] comments = {                                                                                                                   //
-                "Hello there!",                                                                                                                 //
-                "Hello there to you too sir!",                                                                                                  //
-                "What a fascinating challenge you got there!"
-        };
-
-        ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, comments);
-        ListView listView = (ListView) findViewById(R.id.comment_list);
-        listView.setAdapter(itemsAdapter);
-
-        Button reportButton = (Button) findViewById(R.id.reportButton);
-                                                                                                                      //
-
-
-//        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.post_layout);
-//
-//        ImageView imageView = new ImageView(getApplicationContext());
-//        imageView.setLayoutParams(new ViewGroup.LayoutParams(
-//                ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT
-//        ));
-//        //Instead of this we gonna get the source from the post object
-//        imageView.setImageDrawable(getResources().getDrawable(R.drawable.medal_with_shadow));
-    }
-
-    public void onReportClick(View view) {
-
-        Intent reportIntent = new Intent(this, ReportActivity.class);
-        startActivity(reportIntent);
-
+        CommentListAdapter adapter = new CommentListAdapter(PostActivity.this, commentObjects);
+        commentsListView = (ListView) findViewById(R.id.comment_list_post);
+        commentsListView.setAdapter(adapter);
     }
 }
+

@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -21,11 +20,9 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
 import java.net.CookieHandler;
 import java.util.HashMap;
 import java.util.Map;
-
 import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.Controllers.SignUpActivity.SignUpActivity1Email;
@@ -37,9 +34,6 @@ public class LoginActivity extends AppCompatActivity {
     LoginButton facebook_login_button;
     CallbackManager callbackManager;
     AppSingleton sessionManager = AppSingleton.getInstance();
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
