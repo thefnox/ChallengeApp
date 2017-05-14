@@ -1,7 +1,9 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -26,9 +28,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.net.CookieHandler;
+import java.util.HashMap;
+import java.util.Map;
+
+import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.Controllers.UploadPostActivity.CameraActivity;
 import team10.hkr.challengeapp.R;
+import team10.hkr.challengeapp.RequestQueueSingleton;
+import team10.hkr.challengeapp.SharedPref;
 
 import static android.R.color.white;
 
@@ -50,10 +66,14 @@ public class PrimaryActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    AppSingleton sessionManager = AppSingleton.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_primary);
+        SharedPref.init(getApplicationContext());
+        CookieHandler.setDefault(sessionManager.getCookieManager());
 
 
         ImageView profileButton = (ImageView)(findViewById(R.id.profile_button));
@@ -131,7 +151,45 @@ public class PrimaryActivity extends AppCompatActivity {
             Intent mIntent = new Intent(PrimaryActivity.this, SearchActivity.class);
             startActivity(mIntent);
             return true;
+
+        } else if (id == R.id.sign_out_button){
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Sign Out")
+                    .setMessage("Are you sure you want to sign out?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+
+                            final String SIGN_OUT_URL = "http://95.85.16.177:3000/api/auth/signout";
+
+                            StringRequest stringRequest = new StringRequest(Request.Method.GET, SIGN_OUT_URL, new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    Toast.makeText(PrimaryActivity.this,"Signed Out", Toast.LENGTH_LONG).show();
+                                    Intent mIntent = new Intent(PrimaryActivity.this, LoginActivity.class);
+
+                                    mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(mIntent);
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(PrimaryActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                            RequestQueueSingleton.getInstance(PrimaryActivity.this).addToRequestQueue(stringRequest);
+
+                        }})
+
+                    .setNegativeButton(android.R.string.no, null).show();
+
+
         }
+
+
 
         return super.onOptionsItemSelected(item);
     }
