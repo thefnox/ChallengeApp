@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers.SignUpActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class SignUpActivity5ProfilePhoto extends AppCompatActivity {
                         getIntent().getStringExtra("username"), Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(SignUpActivity5ProfilePhoto.this, PrimaryActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
 
             }

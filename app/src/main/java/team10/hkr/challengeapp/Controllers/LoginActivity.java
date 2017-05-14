@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,13 +30,12 @@ import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.Controllers.SignUpActivity.SignUpActivity1Email;
 import team10.hkr.challengeapp.RequestQueueSingleton;
+import team10.hkr.challengeapp.SharedPref;
 
 public class LoginActivity extends AppCompatActivity {
 
     LoginButton facebook_login_button;
     CallbackManager callbackManager;
-    EditText usernameEditText;
-    EditText passwordEditText;
     AppSingleton sessionManager = AppSingleton.getInstance();
 
 
@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
+
         initializeControls();
         loginWithFB();
         CookieHandler.setDefault(sessionManager.getCookieManager());
@@ -56,6 +57,19 @@ public class LoginActivity extends AppCompatActivity {
                 logInUser();
             }
         });
+
+        SharedPref.init(getApplicationContext());
+
+        if (!SharedPref.read("USERNAME_OR_EMAIL", "").equals("")) {
+
+            EditText usernameEditText = (EditText) findViewById(R.id.email_user_edittext_signin);
+            EditText passwordEditText = (EditText) findViewById(R.id.password_edittext_signin);
+            CheckBox rememberMeBox = (CheckBox) findViewById(R.id.rememberMeBox);
+
+            usernameEditText.setText(SharedPref.read("USERNAME_OR_EMAIL", ""));
+            passwordEditText.setText(SharedPref.read("PASSWORD", ""));
+            rememberMeBox.setChecked(true);
+        }
 
     }
 
@@ -74,14 +88,30 @@ public class LoginActivity extends AppCompatActivity {
         final String USERNAME_OR_EMAIL_KEY = "usernameOrEmail";
         final String PASSWORD_KEY = "password";
         final String SIGNIN_URL = "http://95.85.16.177:3000/api/auth/signin";
-        usernameEditText = (EditText) findViewById(R.id.email_user_edittext_signin);
-        passwordEditText = (EditText) findViewById(R.id.password_edittext_signin);
+        final EditText usernameEditText = (EditText) findViewById(R.id.email_user_edittext_signin);
+        final EditText passwordEditText = (EditText) findViewById(R.id.password_edittext_signin);
+        final CheckBox rememberMe = (CheckBox) findViewById(R.id.rememberMeBox);
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SIGNIN_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(LoginActivity.this,"Logged in as " + usernameEditText.getText(), Toast.LENGTH_LONG).show();
                 Intent mIntent = new Intent(LoginActivity.this, PrimaryActivity.class);
+
+                if (rememberMe.isChecked()){
+
+                    SharedPref.write("USERNAME_OR_EMAIL", usernameEditText.getText().toString());
+                    SharedPref.write("PASSWORD", passwordEditText.getText().toString());
+
+                } else {
+
+                    SharedPref.write("USERNAME_OR_EMAIL", "");
+                    SharedPref.write("PASSWORD", "");
+
+                }
+
+                mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(mIntent);
             }
         }, new Response.ErrorListener() {

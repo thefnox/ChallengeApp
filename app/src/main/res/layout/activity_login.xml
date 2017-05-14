@@ -47,12 +47,21 @@
             android:inputType="textPassword"
             tools:text="Password" />
 
+        <CheckBox
+            android:id="@+id/rememberMeBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/password_edittext_signin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:text="Remember Me" />
+
         <Button
             android:id="@+id/sign_in_button"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/password_edittext_signin"
+            android:layout_below="@+id/rememberMeBox"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="24dp"
             android:onClick="onClickSignIn"
