@@ -2,49 +2,21 @@ package team10.hkr.challengeapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
-import android.hardware.display.DisplayManager;
-import android.icu.util.Calendar;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.StyleSpan;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
-import team10.hkr.challengeapp.Controllers.ProfileActivity;
+import team10.hkr.challengeapp.Controllers.CommentActivity;
+import team10.hkr.challengeapp.Controllers.ReportActivity;
 import team10.hkr.challengeapp.Models.Comment;
 import team10.hkr.challengeapp.Models.Post;
 
@@ -64,6 +36,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private TextView views;
     private TextView likes;
     private ImageView commentButton;
+    private ImageView flagButton;
     private ListView commentListView;
     private TextView firstCommentView;
     private TextView secondCommentView;
@@ -79,17 +52,22 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         final View customView = inflater.inflate(R.layout.single_post, parent, false);
 
+        // Header
         profilePhoto = (ImageView) customView.findViewById(R.id.profile_photo_post);
         username = (TextView) customView.findViewById(R.id.username_post);
         description = (TextView) customView.findViewById(R.id.description_post);
+        // Content
         content = (ImageView) customView.findViewById(R.id.content_view_post);
+        // Interaction buttons
         commentButton = (ImageView) customView.findViewById(R.id.comment_post);
+        flagButton = (ImageView) customView.findViewById(R.id.flag_post);
+        // Statistics
         views = (TextView) customView.findViewById(R.id.views_post);
         likes = (TextView) customView.findViewById(R.id.likes_post);
+
+       // ################ declare #############
         profilePhoto.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
-
         content.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
-
         username.setText(sessionManager.getUser().getUserName());
         description.setText(getItem(position).getDescription());
 
@@ -104,6 +82,8 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 //        }
 
 
+        // ##################  Click listeners ####################
+
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +92,15 @@ public class PostListAdapter extends ArrayAdapter<Post> {
                 getContext().startActivity(mIntent);
             }
         });
+        flagButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(customView.getContext(), ReportActivity.class);
+                mIntent.putExtra("post_id", getItem(position).getUUID());
+                getContext().startActivity(mIntent);
+            }
+        });
+
         return customView;
     }
 

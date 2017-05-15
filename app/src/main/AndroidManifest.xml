@@ -62,7 +62,7 @@
         <activity android:name=".Controllers.SettingsActivity.ChangeNameView" />
         <activity android:name=".Controllers.SettingsActivity.ChangeEmailView" />
         <activity android:name=".Controllers.SettingsActivity.ChangePasswordView" />
-        <activity android:name=".CommentActivity"></activity>
+        <activity android:name=".Controllers.CommentActivity"></activity>
     </application>
 
 </manifest>
