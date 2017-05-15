@@ -85,9 +85,9 @@ public class PrimaryActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         //This is where I add the Icons. They should be bigger I know.
-        tabLayout.getTabAt(0).setIcon(R.drawable.medal_with_shadow);
-        tabLayout.getTabAt(1).setIcon(R.drawable.medal_icon_white);
-        tabLayout.getTabAt(2).setIcon(R.drawable.medal_with_shadow);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_star);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_coffee);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_filter_list);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

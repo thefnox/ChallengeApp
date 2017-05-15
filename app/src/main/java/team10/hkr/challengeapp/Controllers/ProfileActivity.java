@@ -64,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.v("YUPPI", "Response; " + response.toString());
                 try {
                     user = new User(response);
+                    sessionManager.setUser(new User(response));
                     profilePicture = (ImageView) findViewById(R.id.photo_profile);
                     profileName = (TextView) findViewById(R.id.name_and_surname_profile);
                     profileUsername = (TextView) findViewById(R.id.username_profile);
@@ -74,7 +75,6 @@ public class ProfileActivity extends AppCompatActivity {
                     profileName.setText(user.getFirstName() + " " + user.getLastName());
                     profileUsername.setText(user.getUserName());
                     profilePicture.setImageResource(R.drawable.profile_picture_test);
-
                     //profileDescription.setText(user.getProfileDescription());
 
                 } catch (JSONException e) {
@@ -99,11 +99,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    Log.v("YUPPI", "Response; " + response.toString());
-
                     for(int i=0; i < response.length(); i++) {
-                        postArrayList.add(i, new Post(response.getJSONObject(i)));
+                        postArrayList.add(new Post(response.getJSONObject(i)));
                     }
+                    Log.v("YUPPI", "Response; " + response.length() + " " + postArrayList.size() + " - >> "
+                            + postArrayList.get(0).getDescription() + response.toString());
                     postsListView = (ListView) findViewById(R.id.post_list_profile);
                     postsListView.setAdapter(new PostListAdapter(ProfileActivity.this, postArrayList));
                 } catch (Exception e) {
@@ -119,7 +119,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         Volley.newRequestQueue(this).add(jsonArrayRequest);
-
     }
 
 }

@@ -25,16 +25,15 @@ import team10.hkr.challengeapp.Models.Post;
 public class PostListAdapter extends ArrayAdapter<Post> {
 
     private ArrayList<Comment> comments;
-    private ArrayList<Post> posts;
+    AppSingleton sessionManager = AppSingleton.getInstance();
 
     public PostListAdapter(Context context, ArrayList<Post> posts) {
         super(context, R.layout.single_comment, posts);
-        this.posts = posts;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position,@Nullable  View convertView, @NonNull ViewGroup parent) {
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View customView = inflater.inflate(R.layout.single_post, parent, false);
@@ -51,13 +50,16 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         //description.setText(mPostObject.getDescription());
         content.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
 
+        username.setText(sessionManager.getUser().getUserName());
+        description.setText(getItem(position).getDescription());
+        //WHY ARE IS THIS NULL GOD DAMN IT
+       // views.setText(getItem(position).toString());
+        //likes.setText(getItem(position).getLikes());
 
-        //views.setText(posts.get(position).getViews());
-        //likes.setText(posts.get(position).getLikes());
         if(comments != null) {
-            for(int i = 0; i < posts.get(position).getComments().length(); i++) {
+            for(int i = 0; i < getItem(position).getComments().length(); i++) {
                 try {
-                    comments.add(new Comment(posts.get(position).getComments().getJSONObject(i)));
+                    comments.add(new Comment(getItem(position).getComments().getJSONObject(i)));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

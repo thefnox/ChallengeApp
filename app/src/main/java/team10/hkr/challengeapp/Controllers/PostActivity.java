@@ -71,8 +71,8 @@ public class PostActivity extends AppCompatActivity {
 
     private void setTheFeed() {
 
-        final String url = "95.85.16.177:3000/api/post/5914cd3b46c5141865ef3340";
-        final JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        final String URL = "95.85.16.177:3000/api/post/5914cd3b46c5141865ef3340";
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.v("YUPPI", "Response; " + response.toString());
@@ -91,7 +91,7 @@ public class PostActivity extends AppCompatActivity {
                 Log.v("WTF", "Err: " + error.getLocalizedMessage());
             }
         });
-        Volley.newRequestQueue(this).add(jsonArrayRequest);
+        Volley.newRequestQueue(this).add(jsonObjectRequest);
 
         CommentListAdapter adapter = new CommentListAdapter(PostActivity.this, commentObjects);
         commentsListView = (ListView) findViewById(R.id.comment_list_post);
