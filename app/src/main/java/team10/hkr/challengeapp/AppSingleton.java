@@ -1,11 +1,14 @@
 package team10.hkr.challengeapp;
 
+import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,6 +27,7 @@ public class AppSingleton {
     private CookieManager manager = new CookieManager();
     private User user;
     private User updatedUser;
+    private Context context;
 
     private AppSingleton() {
 
@@ -64,6 +68,9 @@ public class AppSingleton {
                 Log.v("WTF on AppSingleton", "Err: " + error.getLocalizedMessage());
             }
         });
+
+        Volley.newRequestQueue(context.getApplicationContext()).add(jsonObjectRequest);
+
         if(updatedUser != null) {
             this.user = updatedUser;
         }

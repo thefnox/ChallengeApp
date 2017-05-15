@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.ScrollingMovementMethod;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,12 +60,34 @@ public class PostActivity extends AppCompatActivity {
     Post post;
     ArrayList<Comment> commentObjects = new ArrayList<Comment>();
     ListView commentsListView;
+    TextView firstCommentView;
+    TextView secondCommentView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CookieHandler.setDefault(sessionManager.getCookieManager());
         setContentView(R.layout.single_post);
         setTheFeed();
+
+        final StyleSpan boldStyle = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
+        final StyleSpan italicStyle = new StyleSpan(android.graphics.Typeface.ITALIC); //Span to make text italic
+
+        firstCommentView = (TextView) findViewById(R.id.username_comment_first);
+        secondCommentView = (TextView) findViewById(R.id.username_comment_second);
+
+        String holderUsernameFirst = "Mr.Falafelface";
+        String holderUsernameSecond = "SwedishMan";
+
+        String string = holderUsernameFirst + "What an amazingf comment we got here omg its just so greate so good I cant help but noticing..";
+        String second_string = holderUsernameSecond + "OMFG dude this is the shaaaayyyttt..";
+
+        SpannableString spannableStringFirst = new SpannableString(string);
+        SpannableString spannableStringSecond = new SpannableString(second_string);
+        spannableStringFirst.setSpan(boldStyle, 0, holderUsernameFirst.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannableStringSecond.setSpan(boldStyle, 0, holderUsernameSecond.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+
+        firstCommentView.setText(spannableStringFirst);
+        secondCommentView.setText(spannableStringSecond);
     }
 
     public void onReportClick(View view) {
@@ -71,7 +99,7 @@ public class PostActivity extends AppCompatActivity {
 
     private void setTheFeed() {
 
-        final String URL = "95.85.16.177:3000/api/post/5914cd3b46c5141865ef3340";
+        final String URL = "http://95.85.16.177:3000/api/post/5914cd3b46c5141865ef3340";
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -79,7 +107,8 @@ public class PostActivity extends AppCompatActivity {
                 try {
                     post = new Post(response);
                     for(int i = 0; i < post.getComments().length(); i++) {
-                        commentObjects.add(i, new Comment(post.getComments().getJSONObject(i)));
+                        commentObjects.add(new Comment(post.getComments().getJSONObject(i)));
+                        Log.v("YUPPI", String.valueOf(post.getComments().length()) + response.toString());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -93,9 +122,9 @@ public class PostActivity extends AppCompatActivity {
         });
         Volley.newRequestQueue(this).add(jsonObjectRequest);
 
-        CommentListAdapter adapter = new CommentListAdapter(PostActivity.this, commentObjects);
-        commentsListView = (ListView) findViewById(R.id.comment_list_post);
-        commentsListView.setAdapter(adapter);
+//        CommentListAdapter adapter = new CommentListAdapter(PostActivity.this, commentObjects);
+//        commentsListView = (ListView) findViewById(R.id.comment_list_post);
+//        commentsListView.setAdapter(adapter);
     }
 }
 
