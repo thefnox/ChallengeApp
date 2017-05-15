@@ -1,53 +1,36 @@
 package team10.hkr.challengeapp.Controllers;
 
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
 import java.net.CookieHandler;
-import java.util.HashMap;
-import java.util.Map;
 
 import team10.hkr.challengeapp.AppSingleton;
-import team10.hkr.challengeapp.Controllers.UploadPostActivity.CameraActivity;
+import team10.hkr.challengeapp.Controllers.SettingsActivity.SettingsActivityMainView;
 import team10.hkr.challengeapp.Controllers.UploadPostActivity.UploadPostDescriptionActivity;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.RequestQueueSingleton;
 import team10.hkr.challengeapp.SharedPref;
-
-import static android.R.color.white;
 
 
 public class PrimaryActivity extends AppCompatActivity {
@@ -143,7 +126,7 @@ public class PrimaryActivity extends AppCompatActivity {
 //            getFragmentManager().beginTransaction().replace(R.id.main_content,
 //                    new SettingsFragment()).commit();
 
-            Intent mIntent = new Intent(PrimaryActivity.this, SettingsActivity.class);
+            Intent mIntent = new Intent(PrimaryActivity.this, SettingsActivityMainView.class);
             startActivity(mIntent);
             return true;
 

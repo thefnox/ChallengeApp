@@ -31,13 +31,27 @@ public class SignUpActivity2FullNamePassword extends AppCompatActivity {
         EditText firstName = (EditText) findViewById(R.id.firstNameEditText);
         EditText lastName = (EditText) findViewById(R.id.lastNameEditText);
         EditText password = (EditText) findViewById(R.id.createPasswordEnterText);
+        EditText confirmPassword = (EditText) findViewById(R.id.confirmPasswordTextEdit);
 
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
 
         Matcher matcher = VALID_PASSWORD.matcher(password.getText().toString());
 
-        if (matcher.matches()) {
+
+        if (!matcher.matches()){
+
+            Toast.makeText(this, "Password Requirements: \n Minimum 10 Characters \n 1 Upper Case, 1 Number, 1 Special Character",
+                    Toast.LENGTH_SHORT).show();
+
+        }
+
+        else if(!password.getText().toString().equals(confirmPassword.getText().toString())){
+
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+        }
+
+        else if (matcher.matches() && password.getText().toString().equals(confirmPassword.getText().toString())){
 
             Intent myIntent = new Intent(SignUpActivity2FullNamePassword.this, SignUpActivity3UserName.class);
             myIntent.putExtra("email", email);
@@ -45,13 +59,8 @@ public class SignUpActivity2FullNamePassword extends AppCompatActivity {
             myIntent.putExtra("lastName", lastName.getText().toString());
             myIntent.putExtra("password", password.getText().toString());
             startActivity(myIntent);
-        }
-        else{
-            Toast.makeText(this, "Password Requirements: \n Minimum 10 Characters \n 1 Upper Case, 1 Number, 1 Special Character",
-                    Toast.LENGTH_SHORT).show();
-        }
 
-        //Add more action here
+        }
 
     }
 

@@ -3,71 +3,75 @@
     android:id="@+id/settings_layout">
 
 
-
-
     <PreferenceCategory android:title="Profile Settings">
 
-        <EditTextPreference
-            android:title="Name"
-            android:key="editNameButton"/>
+        <Preference
+            android:key="editNameButton"
+            android:summary="Change your name."
+            android:title="Name" />
 
-        <EditTextPreference
-            android:title="Email Address"
-            android:key="changeEmailButton"/>
+        <Preference
+            android:key="changeEmailButton"
+            android:summary="Change your email address."
+            android:title="Email Address" />
 
-        <EditTextPreference
-            android:title="Password"
-            android:key="changePasswordButton"/>
+        <Preference
+            android:key="changePasswordButton"
+            android:summary="Change your password"
+            android:title="Password" />
 
-        <EditTextPreference
-            android:title="Profile Picture"
-            android:key="changeProfilePictureButton"/>
+        <Preference
+            android:key="changeProfilePictureButton"
+            android:summary="Change your profile picture."
+            android:title="Profile Picture" />
+
 
     </PreferenceCategory>
 
 
     <PreferenceCategory android:title="Global Settings">
 
-       <PreferenceScreen android:title="Notification Settings">
+        <PreferenceScreen android:title="Notification Settings">
 
-           <CheckBoxPreference android:title="Turn on Notifications"
-               android:defaultValue="true"
-               android:key="turnOnNotificationsBox"/>
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="turnOnNotificationsBox"
+                android:title="Turn on Notifications" />
 
-                <PreferenceCategory android:title="Turn on notifications for:">
+            <PreferenceCategory android:title="Turn on notifications for:">
 
-                    <CheckBoxPreference
-                        android:title="Comments on your post"
-                        android:key="commentNotificationBox"
-                        android:defaultValue="true"
-                        android:dependency="turnOnNotificationsBox"/>
-                    <CheckBoxPreference
-                        android:title="Comment Replies"
-                        android:key="commentReplyNotificationBox"
-                        android:defaultValue="true"
-                        android:dependency="turnOnNotificationsBox"/>
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:dependency="turnOnNotificationsBox"
+                    android:key="commentNotificationBox"
+                    android:title="Comments on your post" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:dependency="turnOnNotificationsBox"
+                    android:key="commentReplyNotificationBox"
+                    android:title="Comment Replies" />
 
-                   <CheckBoxPreference
-                        android:title="Post Shares"
-                        android:key="postShareNotificationBox"
-                        android:defaultValue="true"
-                        android:dependency="turnOnNotificationsBox"/>
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:dependency="turnOnNotificationsBox"
+                    android:key="postShareNotificationBox"
+                    android:title="Post Shares" />
 
-                </PreferenceCategory>
+            </PreferenceCategory>
 
-        </PreferenceScreen>
+         </PreferenceScreen>
 
-        <!--<Preference-->
-            <!--android:title="Close Account"-->
-            <!--android:key="closeAccountPreference">-->
+        <Preference
+            android:key="closeAccountPreference"
+            android:title="Delete Account">
 
             <!--<Intent-->
-                <!--android:action="android.intent.action.VIEW"-->
-                <!--android:targetPackage="team10.hkr.challengeapp.Controllers"-->
-                <!--android:targetClass="CloseAccountActivity"-->
+            <!--android:action="android.intent.action.VIEW"-->
+            <!--android:targetPackage="team10.hkr.challengeapp.Controllers"-->
+            <!--android:targetClass="CloseAccountActivity"-->
             <!--/>-->
 
-        <!--</Preference>-->
+        </Preference>
 
     </PreferenceCategory>
 

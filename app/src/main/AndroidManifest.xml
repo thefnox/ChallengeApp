@@ -22,11 +22,13 @@
             android:name=".Controllers.PrimaryActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <meta-data
@@ -38,25 +40,28 @@
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity2FullNamePassword" />
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity3UserName" />
         <activity android:name=".Controllers.SignUpActivity.SignUpActivity5ProfilePhoto" />
-
         <activity
             android:name=".Controllers.LoginActivity"
             android:label="@string/title_activity_primary"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Controllers.ProfileActivity" />
         <activity android:name=".Controllers.UploadPostActivity.UploadPostDescriptionActivity" />
-        <activity android:name=".Controllers.SettingsActivity" />
+        <activity android:name=".Controllers.SettingsActivity.SettingsActivityMainView" />
         <activity android:name=".Controllers.UploadPostActivity.CameraActivity" />
         <activity android:name=".Controllers.PostActivity" />
-        <activity android:name=".Controllers.ReportActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-        <activity android:name=".Controllers.SearchActivity"></activity>
+        <activity
+            android:name=".Controllers.ReportActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".Controllers.SearchActivity" />
+        <activity android:name=".Controllers.SettingsActivity.ChangeNameView" />
+        <activity android:name=".Controllers.SettingsActivity.ChangeEmailView" />
+        <activity android:name=".Controllers.SettingsActivity.ChangePasswordView"></activity>
     </application>
 
 </manifest>

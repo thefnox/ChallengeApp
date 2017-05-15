@@ -20,10 +20,15 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.CookieHandler;
 import java.util.HashMap;
 import java.util.Map;
 import team10.hkr.challengeapp.AppSingleton;
+import team10.hkr.challengeapp.Models.User;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.Controllers.SignUpActivity.SignUpActivity1Email;
 import team10.hkr.challengeapp.RequestQueueSingleton;
@@ -103,6 +108,18 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPref.write("USERNAME_OR_EMAIL", "");
                     SharedPref.write("PASSWORD", "");
 
+                }
+
+                try {
+                    JSONObject json = new JSONObject(response);
+                    User user = new User(json);
+                    SharedPref.write("UUID", user.getUUID());
+                    SharedPref.write("EMAIL", user.getEmail());
+                    SharedPref.write("FIRST_NAME", user.getFirstName());
+                    SharedPref.write("LAST_NAME", user.getLastName());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
                 mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
