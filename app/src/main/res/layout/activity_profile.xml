@@ -196,7 +196,9 @@
         <ListView
             android:id="@+id/post_list_profile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            />
     </LinearLayout>
 
 </LinearLayout>

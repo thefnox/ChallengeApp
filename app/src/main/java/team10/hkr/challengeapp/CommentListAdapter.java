@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 import team10.hkr.challengeapp.Models.Comment;
@@ -38,6 +40,11 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
             TextView username = (TextView) customView.findViewById(R.id.username_comment);
             TextView comment = (TextView) customView.findViewById(R.id.comment_comment);
             comment.setText(comments.get(position).getText());
+            try {
+                username.setText(comments.get(position).getAuthor().getString("username"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         return customView;

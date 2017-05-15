@@ -72,8 +72,8 @@ public class PostActivity extends AppCompatActivity {
         final StyleSpan boldStyle = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
         final StyleSpan italicStyle = new StyleSpan(android.graphics.Typeface.ITALIC); //Span to make text italic
 
-        firstCommentView = (TextView) findViewById(R.id.username_comment_first);
-        secondCommentView = (TextView) findViewById(R.id.username_comment_second);
+//        firstCommentView = (TextView) findViewById(R.id.username_comment_first);
+//        secondCommentView = (TextView) findViewById(R.id.username_comment_second);
 
         String holderUsernameFirst = "Mr.Falafelface";
         String holderUsernameSecond = "SwedishMan";

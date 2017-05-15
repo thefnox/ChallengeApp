@@ -61,7 +61,8 @@
         <activity android:name=".Controllers.SearchActivity" />
         <activity android:name=".Controllers.SettingsActivity.ChangeNameView" />
         <activity android:name=".Controllers.SettingsActivity.ChangeEmailView" />
-        <activity android:name=".Controllers.SettingsActivity.ChangePasswordView"></activity>
+        <activity android:name=".Controllers.SettingsActivity.ChangePasswordView" />
+        <activity android:name=".CommentActivity"></activity>
     </application>
 
 </manifest>

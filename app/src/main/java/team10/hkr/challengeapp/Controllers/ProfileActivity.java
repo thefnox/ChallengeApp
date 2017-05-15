@@ -1,13 +1,22 @@
 package team10.hkr.challengeapp.Controllers;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Point;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +34,17 @@ import org.w3c.dom.Text;
 
 import java.net.CookieHandler;
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 import team10.hkr.challengeapp.AppSingleton;
+import team10.hkr.challengeapp.CommentListAdapter;
+import team10.hkr.challengeapp.Models.Comment;
 import team10.hkr.challengeapp.Models.Post;
 import team10.hkr.challengeapp.Models.User;
 import team10.hkr.challengeapp.PostListAdapter;
 import team10.hkr.challengeapp.R;
+
+import static java.security.AccessController.getContext;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -38,7 +52,11 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView profilePicture;
     TextView profileUsername;
     TextView profileName;
-    ListView postsListView;
+    private ListView postsListView;
+    private ImageView commentButton;
+    private ArrayList<Comment> commentArrayList = new ArrayList<Comment>();
+    private PopupWindow popupWindow;
+    private ViewGroup viewGroup;
     TextView profileDescription; //Not implemented in the server..
     ArrayList<Post> postArrayList = new ArrayList<Post>();
     User user;
@@ -47,10 +65,11 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
         CookieHandler.setDefault(sessionManager.getCookieManager());
+
         serverRequest();
         requestForFeed();
+
     }
 
     private void serverRequest(){
@@ -90,7 +109,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         Volley.newRequestQueue(this).add(jsonObjectRequest);
-
     }
 
     private void requestForFeed(){
@@ -103,9 +121,11 @@ public class ProfileActivity extends AppCompatActivity {
                         postArrayList.add(new Post(response.getJSONObject(i)));
                     }
                     Log.v("YUPPI", "Response; " + response.length() + " " + postArrayList.size() + " - >> "
-                            + postArrayList.get(0).getDescription() + response.toString());
+                            + postArrayList.get(0).getDescription() + response.toString() + " " + postArrayList.get(0).getComments().length() + " " + postArrayList.get(1).getComments().length());
+
                     postsListView = (ListView) findViewById(R.id.post_list_profile);
                     postsListView.setAdapter(new PostListAdapter(ProfileActivity.this, postArrayList));
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -120,5 +140,4 @@ public class ProfileActivity extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(jsonArrayRequest);
     }
-
 }

@@ -19,6 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginEnd="6dp"
-        android:text="What an amazingf comment we got here omg its just so greate so good I cant help but noticing.."/>
+        android:text=""/>
 
 </LinearLayout>

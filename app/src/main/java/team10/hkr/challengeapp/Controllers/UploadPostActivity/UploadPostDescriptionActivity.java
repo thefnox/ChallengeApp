@@ -152,7 +152,7 @@ public class UploadPostDescriptionActivity extends AppCompatActivity {
 //
 //            RequestQueueSingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
 
-        } else{
+        } else {
 
             Toast.makeText(this, "Description must have between 1 and 5 hashtags.", Toast.LENGTH_SHORT).show();
 
