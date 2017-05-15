@@ -7,8 +7,8 @@
     tools:context="team10.hkr.challengeapp.Controllers.UploadPostActivity.UploadPostDescriptionActivity">
 
     <RelativeLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+        android:layout_width="395dp"
+        android:layout_height="587dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
@@ -38,26 +38,6 @@
             android:layout_below="@+id/takePhotoButton"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="8dp"
-                android:paddingTop="24dp"
-                android:text="Enter Hashtags (Up to Five)"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/enterHashtagEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:paddingBottom="8dp"
-                android:paddingLeft="8dp"
-                android:paddingTop="24dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,10 +52,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:paddingBottom="8dp"
                 android:paddingLeft="8dp"
                 android:paddingTop="24dp"
-                android:text="Enter a description"
+                android:text="Enter a description \n (Must contain between 1 and 5 HashTags)"
+                android:textAlignment="center"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
