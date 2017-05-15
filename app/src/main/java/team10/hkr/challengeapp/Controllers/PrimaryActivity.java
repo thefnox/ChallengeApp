@@ -42,6 +42,7 @@ import java.util.Map;
 
 import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.Controllers.UploadPostActivity.CameraActivity;
+import team10.hkr.challengeapp.Controllers.UploadPostActivity.UploadPostDescriptionActivity;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.RequestQueueSingleton;
 import team10.hkr.challengeapp.SharedPref;
@@ -111,8 +112,8 @@ public class PrimaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent cameraIntent = new Intent(PrimaryActivity.this, CameraActivity.class);
-                startActivity(cameraIntent);
+            Intent newPostIntent = new Intent(PrimaryActivity.this, UploadPostDescriptionActivity.class);
+            startActivity(newPostIntent);
 
             }
         });

@@ -21,12 +21,6 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/takePhotoButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:text="Take Photo" />
         </LinearLayout>
 
         <LinearLayout
@@ -36,7 +30,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/takeVideoButton"
+                android:id="@+id/oldTakeVideoButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"

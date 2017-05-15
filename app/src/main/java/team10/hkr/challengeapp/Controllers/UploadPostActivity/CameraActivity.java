@@ -3,7 +3,6 @@ package team10.hkr.challengeapp.Controllers.UploadPostActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +21,7 @@ public class CameraActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-        takePhotoButton = (Button) findViewById(R.id.takePhotoButton);
-        takeVideoButton = (Button) findViewById(R.id.takeVideoButton);
+        takeVideoButton = (Button) findViewById(R.id.oldTakeVideoButton);
 
         takeVideoButton.setOnClickListener(new takeVideoButtonClicker());
         takePhotoButton.setOnClickListener(new takePhotoButtonClicker());

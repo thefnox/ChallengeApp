@@ -7,50 +7,35 @@
     tools:context="team10.hkr.challengeapp.Controllers.UploadPostActivity.UploadPostDescriptionActivity">
 
     <RelativeLayout
-        android:layout_width="395dp"
-        android:layout_height="587dp"
+        android:layout_width="368dp"
+        android:layout_height="495dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <LinearLayout
-            android:id="@+id/uploadThumbnailLayout"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
+            android:layout_height="152dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/profile_photo_logo" />
+
+        <Button
+            android:id="@+id/takePhotoButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
-
-            <Button
-                android:id="@+id/thumbnailUploadButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingBottom="8dp"
-                android:paddingLeft="8dp"
-                android:paddingTop="8dp"
-                android:text="Upload" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingBottom="8dp"
-                android:paddingLeft="8dp"
-                android:paddingTop="8dp"
-                android:text="Upload your own video thumbnail"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
-
-        </LinearLayout>
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_weight="0"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="Take a photo" />
 
         <LinearLayout
             android:id="@+id/enterHashtagLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/uploadThumbnailLayout"
+            android:layout_below="@+id/takePhotoButton"
             android:orientation="vertical">
 
             <TextView
@@ -61,11 +46,11 @@
                 android:paddingLeft="8dp"
                 android:paddingTop="24dp"
                 android:text="Enter Hashtags (Up to Five)"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/enterHashtagEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -90,12 +75,12 @@
                 android:paddingBottom="8dp"
                 android:paddingLeft="8dp"
                 android:paddingTop="24dp"
-                android:text="Upload a description "
-                android:textSize="18dp"
+                android:text="Enter a description"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/enterDescriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -106,11 +91,11 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/descriptionNextButton"
+            android:id="@+id/uploadButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="Next" />
+            android:text="Upload" />
 
     </RelativeLayout>
 
