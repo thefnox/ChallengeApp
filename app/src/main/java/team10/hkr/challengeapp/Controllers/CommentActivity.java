@@ -97,6 +97,7 @@ public class CommentActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.v("WTF", "Response; " + error.toString());
                         Toast.makeText(CommentActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
                     }
                 }) {
@@ -108,7 +109,6 @@ public class CommentActivity extends AppCompatActivity {
                         return params;
                     }
                 };
-
                 Volley.newRequestQueue(CommentActivity.this).add(stringRequest);
                 commentEditText.setText("");
             }
