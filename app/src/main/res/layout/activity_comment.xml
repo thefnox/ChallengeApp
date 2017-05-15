@@ -24,8 +24,7 @@
             android:layout_height="50dp"
             android:background="#fff"
             android:hint="Comment here!"
-            android:textAlignment="center"
-            />
+            android:layout_gravity="center_vertical"/>
         <ImageView
             android:id="@+id/comment_approve"
             android:src="@drawable/ic_approve"

@@ -1,10 +1,12 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -54,6 +56,8 @@ public class CommentActivity extends AppCompatActivity {
         commentListView = (ListView) findViewById(R.id.comment_list_view_comment_activity);
         approvalButton = (ImageView) findViewById(R.id.comment_approve);
         commentEditText = (EditText) findViewById(R.id.edit_text_comment_activity);
+
+
 
         //get the info passed with the intent
         Bundle extras = getIntent().getExtras();
