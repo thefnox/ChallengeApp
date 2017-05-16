@@ -10,8 +10,8 @@
     <uses-permission
         android:name="android.hardware.camera2"
         android:required="true" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -64,9 +64,9 @@
         <activity android:name=".Controllers.SettingsActivity.ChangeNameView" />
         <activity android:name=".Controllers.SettingsActivity.ChangeEmailView" />
         <activity android:name=".Controllers.SettingsActivity.ChangePasswordView" />
-        <activity android:name=".Controllers.CommentActivity"/>
-        <activity android:name=".Controllers.SettingsActivity.CloseAccountActivity"/>
-
+        <activity android:name=".Controllers.CommentActivity" />
+        <activity android:name=".Controllers.SettingsActivity.CloseAccountActivity" />
+        <activity android:name=".Controllers.SettingsActivity.ChangeProfilePictureActivity"></activity>
     </application>
 
 </manifest>

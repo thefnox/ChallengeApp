@@ -66,9 +66,10 @@ public class SettingsActivityMainView extends PreferenceActivity {
             @Override
             public boolean onPreferenceClick(Preference preference) {
 
-                //TODO
+                Intent intent = new Intent(SettingsActivityMainView.this, ChangeProfilePictureActivity.class);
+                startActivity(intent);
 
-                return false;
+                return true;
             }
         });
 

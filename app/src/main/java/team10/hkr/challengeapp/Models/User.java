@@ -21,6 +21,7 @@ public class User {
     private String profileDescription;
     private String city;
     private String country;
+    private String profilePictureURL;
     private JSONArray posts;
     private int stars;
     private int champions;
@@ -46,7 +47,10 @@ public class User {
         this.facebookLink = jsonObject.has("facebookLink") ? jsonObject.getString("facebookLink") : "";
         this.profileDescription = jsonObject.has("profileDescription") ? jsonObject.getString("profileDescription") : "";
         this.twitterHandle = jsonObject.has("twitterHandle") ? jsonObject.getString("twitterHandle") : "";
+        this.profilePictureURL = jsonObject.has("profileImageURL") ? jsonObject.getString("profileImageURL") : "";
     }
+
+
     public String getUUID() { return UUID; }
 
     public String getUserName() {
@@ -140,6 +144,8 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getProfilePictureURL() { return profilePictureURL; }
 
     public String getLastName() {
 

@@ -112,7 +112,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 try {
                     JSONObject json = new JSONObject(response);
+
                     User user = new User(json);
+                    AppSingleton.getInstance().setUser(user);
+
                     SharedPref.write("UUID", user.getUUID());
                     SharedPref.write("EMAIL", user.getEmail());
                     SharedPref.write("FIRST_NAME", user.getFirstName());
