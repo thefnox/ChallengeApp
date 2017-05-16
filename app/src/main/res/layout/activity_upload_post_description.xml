@@ -13,7 +13,7 @@
         tools:layout_editor_absoluteY="8dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/takenPhotoImageView"
             android:layout_width="match_parent"
             android:layout_height="152dp"
             android:layout_marginTop="16dp"
@@ -24,11 +24,10 @@
             android:id="@+id/takePhotoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
+            android:layout_below="@+id/takenPhotoImageView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
             android:layout_weight="0"
-            android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:text="Take a photo" />
 
