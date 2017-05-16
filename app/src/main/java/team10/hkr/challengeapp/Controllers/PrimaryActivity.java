@@ -48,6 +48,7 @@ public class PrimaryActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private ImageView actionBarLogo;
 
     AppSingleton sessionManager = AppSingleton.getInstance();
 
@@ -58,6 +59,15 @@ public class PrimaryActivity extends AppCompatActivity {
         SharedPref.init(getApplicationContext());
         CookieHandler.setDefault(sessionManager.getCookieManager());
 
+
+        actionBarLogo = (ImageView) findViewById(R.id.action_bar_logo);
+        actionBarLogo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(getIntent());
+            }
+        });
 
         ImageView profileButton = (ImageView)(findViewById(R.id.profile_button));
         profileButton.setOnClickListener(new View.OnClickListener() {

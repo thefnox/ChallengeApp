@@ -48,18 +48,18 @@ import static java.security.AccessController.getContext;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    AppSingleton sessionManager = AppSingleton.getInstance();
-    ImageView profilePicture;
-    TextView profileUsername;
-    TextView profileName;
+    private AppSingleton sessionManager = AppSingleton.getInstance();
+    private ImageView profilePicture;
+    private TextView profileUsername;
+    private TextView profileName;
     private ListView postsListView;
     private ImageView commentButton;
     private ArrayList<Comment> commentArrayList = new ArrayList<Comment>();
     private PopupWindow popupWindow;
     private ViewGroup viewGroup;
-    TextView profileDescription; //Not implemented in the server..
-    ArrayList<Post> postArrayList = new ArrayList<Post>();
-    User user;
+    private TextView profileDescription; //Not implemented in the server..
+    private ArrayList<Post> postArrayList = new ArrayList<Post>();
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void serverRequest(){
 
-
         final String URL = "http://95.85.16.177:3000/api/user/me";
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
@@ -88,8 +87,6 @@ public class ProfileActivity extends AppCompatActivity {
                     profileName = (TextView) findViewById(R.id.name_and_surname_profile);
                     profileUsername = (TextView) findViewById(R.id.username_profile);
                     //profileDescription = (TextView) findViewById(R.id.profile_description);
-
-                    Toast.makeText(ProfileActivity.this, response.getString("username"), Toast.LENGTH_LONG).show();
 
                     profileName.setText(user.getFirstName() + " " + user.getLastName());
                     profileUsername.setText(user.getUserName());
@@ -120,7 +117,7 @@ public class ProfileActivity extends AppCompatActivity {
                     for(int i=0; i < response.length(); i++) {
                         postArrayList.add(new Post(response.getJSONObject(i)));
                     }
-                    Log.v("YUPPI", "Response; " + response.length() + " " + postArrayList.size() + " - >> "
+                    Log.v("YUPPI", "Response; ##requestfeed profile## " + response.length() + " " + postArrayList.size() + " - >> "
                             + postArrayList.get(0).getDescription() + response.toString() + " " + postArrayList.get(0).getComments().length() + " " + postArrayList.get(1).getComments().length());
 
                     postsListView = (ListView) findViewById(R.id.post_list_profile);

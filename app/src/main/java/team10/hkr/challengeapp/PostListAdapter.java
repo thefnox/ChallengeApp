@@ -76,8 +76,12 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 
        // ################ declare #############
         profilePhoto.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
-
-        username.setText(sessionManager.getUser().getUserName());
+        username.setText("UsernameGoesHere");
+//        try {
+//            username.setText(getItem(position).getAuthor().getString("username"));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         description.setText(getItem(position).getDescription());
         //content
         //We do this to avoid the exception that we get for performing a network operation in the main thread
