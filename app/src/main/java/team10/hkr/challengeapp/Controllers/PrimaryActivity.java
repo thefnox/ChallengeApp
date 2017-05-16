@@ -27,7 +27,6 @@ import java.net.CookieHandler;
 
 import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.Controllers.SettingsActivity.SettingsActivityMainView;
-import team10.hkr.challengeapp.Controllers.UploadPostActivity.UploadPostDescriptionActivity;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.RequestQueueSingleton;
 import team10.hkr.challengeapp.SharedPref;
@@ -95,7 +94,7 @@ public class PrimaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-            Intent newPostIntent = new Intent(PrimaryActivity.this, UploadPostDescriptionActivity.class);
+            Intent newPostIntent = new Intent(PrimaryActivity.this, UploadPostActivity.class);
             startActivity(newPostIntent);
 
             }
