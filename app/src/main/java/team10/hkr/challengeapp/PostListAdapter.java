@@ -70,6 +70,9 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         content.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
         username.setText(sessionManager.getUser().getUserName());
         description.setText(getItem(position).getDescription());
+        //return type is problematic
+//        views.setText(getItem(position).getViews());
+//        likes.setText(getItem(position).getLikes());
 
         //for the profile photo
 //        try {
