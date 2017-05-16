@@ -2,8 +2,12 @@ package team10.hkr.challengeapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +17,11 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 import team10.hkr.challengeapp.Controllers.CommentActivity;
@@ -67,9 +76,32 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 
        // ################ declare #############
         profilePhoto.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
-        content.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
+
         username.setText(sessionManager.getUser().getUserName());
         description.setText(getItem(position).getDescription());
+        //content
+        //We do this to avoid the exception that we get for performing a network operation in the main thread
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL("http://95.85.16.177:3000" + getItem(position).getContent().getString("staticURL")).getContent());
+                if (isJpg(getItem(position).getContent().getString("staticURL"))) {
+                    content.setImageBitmap(bitmap);
+                } else {
+                    content.setImageResource(R.drawable.invalid_content);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
         //return type is problematic
 //        views.setText(getItem(position).getViews());
 //        likes.setText(getItem(position).getLikes());
@@ -105,6 +137,18 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         });
 
         return customView;
+    }
+
+    public boolean isJpg(String url) {
+        if (url.length() > 4) {
+            String tester = url.split("")[url.length()-2] + url.split("")[url.length()-1] + url.split("")[url.length()];
+            Log.d("JPGTESTERURL",url);
+            Log.d("JPGTESTER", tester);
+            if(tester.equals("jpg")) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
