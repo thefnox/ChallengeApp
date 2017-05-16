@@ -37,8 +37,6 @@ public class Tab2Fresh extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab2_primary_fresh, container, false);
-        freshPostsListView = (ListView) view.findViewById(R.id.fresh_content_list_view);
-        freshPostsListView.setAdapter(new PostListAdapter(getActivity(), postArrayList));
         return view;
     }
 
@@ -56,12 +54,16 @@ public class Tab2Fresh extends Fragment {
                 try {
                     for(int i=0; i < response.length(); i++) {
                         postArrayList.add(new Post(response.getJSONObject(i)));
+                        Log.d("postarraylistsize2: ",String.valueOf(postArrayList.size()));
                     }
                     Log.v("YUPPI", "Response; " + " FIND ME CHARLIE " + postArrayList.size() + " - >> "
                             + postArrayList.get(0).getDescription() + response.toString() + " " + postArrayList.get(0).getComments().length() + " " + postArrayList.get(1).getComments().length());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                freshPostsListView = (ListView) view.findViewById(R.id.fresh_content_list_view);
+                freshPostsListView.setAdapter(new PostListAdapter(getActivity(), postArrayList));
+                Log.d("postarraylistsize: ",String.valueOf(postArrayList.size()));
 
             }
         }, new Response.ErrorListener() {
