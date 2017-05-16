@@ -109,7 +109,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void requestForFeed(){
-        final String URL = "http://95.85.16.177:3000/api/user/5914cb9446c5141865ef3338/posts";
+        final String URL = "http://95.85.16.177:3000/api/user/" + sessionManager.getUser().getUUID() + "/posts";
         final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {

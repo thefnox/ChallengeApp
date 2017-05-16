@@ -24,12 +24,13 @@ public class Post {
     private int views;
     private int dailyLikes;
     private int dailyViews;
-    //private JSONObject author;
+    private JSONObject author;
 
     public Post(JSONObject jsonobj) throws JSONException
 
     {
-        //this.author = jsonobj.has("author") ? jsonobj.getJSONObject("author") : null;
+        //on profile post request author returns as a string of an user id
+//        this.author = jsonobj.has("author") ? jsonobj.getJSONObject("author") : null;
         this.comments = jsonobj.has("comments") ? jsonobj.getJSONArray("comments") : null;
         this.tags = jsonobj.has("tags")? jsonobj.getJSONArray("tags") : null;
         this.content = jsonobj.has("content")? jsonobj.getJSONObject("content") : null;
@@ -124,7 +125,7 @@ public class Post {
         return comments;
     }
 
-//    //public JSONObject getAuthor() {
+//    public JSONObject getAuthor() {
 //        return author;
 //    }
 }

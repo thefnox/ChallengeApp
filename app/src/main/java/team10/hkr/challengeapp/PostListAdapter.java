@@ -1,5 +1,4 @@
 package team10.hkr.challengeapp;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,17 +15,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-
 import org.json.JSONException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-
 import team10.hkr.challengeapp.Controllers.CommentActivity;
 import team10.hkr.challengeapp.Controllers.ReportActivity;
-import team10.hkr.challengeapp.Models.Comment;
 import team10.hkr.challengeapp.Models.Post;
 
 /**
@@ -35,8 +30,8 @@ import team10.hkr.challengeapp.Models.Post;
 
 public class PostListAdapter extends ArrayAdapter<Post> {
 
-    private PopupWindow popComments;
-    private ArrayList<Comment> comments = new ArrayList<Comment>();
+    //private PopupWindow popComments;
+    //private ArrayList<Comment> comments = new ArrayList<Comment>();
     private AppSingleton sessionManager = AppSingleton.getInstance();
     private ImageView profilePhoto;
     private TextView username;
@@ -73,17 +68,45 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         // Statistics
         views = (TextView) customView.findViewById(R.id.views_post);
         likes = (TextView) customView.findViewById(R.id.likes_post);
+        description.setText(getItem(position).getDescription());
 
        // ################ declare #############
+
         profilePhoto.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
-        username.setText("UsernameGoesHere");
+        likes.setText(String.valueOf(getItem(position).getLikes()) + " Likes");
+        views.setText(String.valueOf(getItem(position).getViews()) + " Views");
+
+        //              #user photo#               //
+        // profile photos need static ips as well
+//        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+//        if (SDK_INT > 8)
+//        {
+//            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+//                    .permitAll().build();
+//            StrictMode.setThreadPolicy(policy);
+//            try {
+//                Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL("http://95.85.16.177:3000" + getItem(position).getAuthor().getString("profileImageURL")).getContent());
+//                if (isJpg(getItem(position).getContent().getString("staticURL"))) {
+//                    content.setImageBitmap(bitmap);
+//                } else {
+//                    content.setImageResource(R.drawable.invalid_content);
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+        //                  #username#            //
+        //Server needs to be fixed for this one
 //        try {
 //            username.setText(getItem(position).getAuthor().getString("username"));
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-        description.setText(getItem(position).getDescription());
-        //content
+
+        //                 #content#             //
         //We do this to avoid the exception that we get for performing a network operation in the main thread
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
@@ -104,22 +127,6 @@ public class PostListAdapter extends ArrayAdapter<Post> {
                 e.printStackTrace();
             }
         }
-
-
-        //return type is problematic
-//        views.setText(getItem(position).getViews());
-//        likes.setText(getItem(position).getLikes());
-
-        //for the profile photo
-//        try {
-//            Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL().getContent());
-//            profilePhoto.setImageBitmap(bitmap);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
 
         // ##################  Click listeners ####################
 

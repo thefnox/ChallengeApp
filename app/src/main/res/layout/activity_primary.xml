@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="team10.hkr.challengeapp.Controllers.PrimaryActivity">
+    tools:context="team10.hkr.challengeapp.Controllers.PrimaryActivity"
+    android:layout_marginTop="-8dp">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -34,8 +35,8 @@
                 android:id="@+id/action_bar_logo"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/medal_with_shadow"
-                android:padding="8dp"
+                android:src="@drawable/medal_icon_white"
+                android:padding="9dp"
                 android:layout_gravity="center"
                 android:clickable="true"/>
 
@@ -55,7 +56,8 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginBottom="64dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
