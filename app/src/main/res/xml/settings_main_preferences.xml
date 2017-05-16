@@ -65,12 +65,6 @@
             android:key="closeAccountPreference"
             android:title="Delete Account">
 
-            <!--<Intent-->
-            <!--android:action="android.intent.action.VIEW"-->
-            <!--android:targetPackage="team10.hkr.challengeapp.Controllers"-->
-            <!--android:targetClass="CloseAccountActivity"-->
-            <!--/>-->
-
         </Preference>
 
     </PreferenceCategory>

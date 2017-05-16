@@ -25,6 +25,7 @@ public class SettingsActivityMainView extends PreferenceActivity {
         final Preference changeEmailPref = findPreference("changeEmailButton");
         final Preference changePasswordPref = findPreference("changePasswordButton");
         final Preference changeProfilePicPref = findPreference("changeProfilePictureButton");
+        final Preference closeAccountPref = findPreference("closeAccountPreference");
 
 
         changeEmailPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -68,6 +69,17 @@ public class SettingsActivityMainView extends PreferenceActivity {
                 //TODO
 
                 return false;
+            }
+        });
+
+        closeAccountPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Intent intent = new Intent(SettingsActivityMainView.this, CloseAccountActivity.class);
+                startActivity(intent);
+
+                return true;
             }
         });
     }
