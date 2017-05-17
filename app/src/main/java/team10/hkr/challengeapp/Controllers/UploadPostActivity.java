@@ -120,10 +120,9 @@ public class UploadPostActivity extends AppCompatActivity {
         String fileName = getPhotoFileName();
 
         SharedPref.write("photoFileName", fileName);
-
         File takenPhoto = new File(externalStoragePublicDirectory, fileName);
-        Uri pictureUri = Uri.fromFile(takenPhoto);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, pictureUri);
+        Uri imageURI = Uri.fromFile(takenPhoto);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
 
         startActivityForResult(intent, CAM_REQUEST);
     }
@@ -139,7 +138,7 @@ public class UploadPostActivity extends AppCompatActivity {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmSS");
         String timestamp = sdf.format(new Date());
-        return "/ChallengeAppVideo" + timestamp + ".mp4";
+        return "ChallengeAppVideo" + timestamp + ".mp4";
     }
 
 
@@ -153,9 +152,11 @@ public class UploadPostActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
 
-                File imageDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/ChallengeApp20170516_003324.jpg");
+                File imageDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + SharedPref.read("imageFileName", ""));
+                Bitmap bitmap = BitmapFactory.decodeFile(imageDirectory.getAbsolutePath());
 
-                showPhoto.setImageBitmap(BitmapFactory.decodeFile(imageDirectory.toString()));
+                showPhoto.setImageBitmap(bitmap);
+
                 Toast.makeText(this, "Photo saved to SD Card", Toast.LENGTH_SHORT).show();
 
             } else if (resultCode == RESULT_CANCELED) {

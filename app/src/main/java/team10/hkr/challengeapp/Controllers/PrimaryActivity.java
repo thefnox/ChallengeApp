@@ -104,7 +104,7 @@ public class PrimaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-            Intent newPostIntent = new Intent(PrimaryActivity.this, CameraActivityTesting.class);
+            Intent newPostIntent = new Intent(PrimaryActivity.this, UploadPostActivity.class);
             startActivity(newPostIntent);
 
             }
