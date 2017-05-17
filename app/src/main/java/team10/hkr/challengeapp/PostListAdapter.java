@@ -1,8 +1,11 @@
 package team10.hkr.challengeapp;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,8 +16,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.MediaController;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.VideoView;
+
 import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +44,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private TextView username;
     private TextView description;
     private ImageView content;
+    private VideoView contentVideo;
     private TextView views;
     private TextView likes;
     private ImageView commentButton;
@@ -51,7 +59,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 
     @NonNull
     @Override
-    public View getView(final int position, @Nullable  View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
         final View customView = inflater.inflate(R.layout.single_post, parent, false);
@@ -62,6 +70,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         description = (TextView) customView.findViewById(R.id.description_post);
         // Content
         content = (ImageView) customView.findViewById(R.id.content_view_post);
+        contentVideo = (VideoView) customView.findViewById(R.id.content_video_view_post);
         // Interaction buttons
         commentButton = (ImageView) customView.findViewById(R.id.comment_post);
         flagButton = (ImageView) customView.findViewById(R.id.flag_post);
@@ -108,6 +117,12 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 
         //                 #content#             //
         //We do this to avoid the exception that we get for performing a network operation in the main thread
+        String CONTENT_URL = "";
+        try {
+            CONTENT_URL = "http://95.85.16.177:3000" + getItem(position).getContent().getString("staticURL");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
         {
@@ -115,15 +130,27 @@ public class PostListAdapter extends ArrayAdapter<Post> {
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
             try {
-                Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL("http://95.85.16.177:3000" + getItem(position).getContent().getString("staticURL")).getContent());
                 if (isJpg(getItem(position).getContent().getString("staticURL"))) {
+                    Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(CONTENT_URL).getContent());
                     content.setImageBitmap(bitmap);
+                    content.setVisibility(View.VISIBLE);
+                } else if(CONTENT_URL.endsWith(".mp4")) {
+                    //Show video here
+                    MediaController mediaController = new MediaController(customView.getContext());
+                    mediaController.setAnchorView(contentVideo);
+                    Uri video_uri = Uri.parse(CONTENT_URL);
+                    contentVideo.setMediaController(mediaController);
+                    contentVideo.setVideoURI(video_uri);
+                    contentVideo.requestFocus();
+                    contentVideo.setVisibility(View.VISIBLE);
+                    Log.d("CheckURLifValid", CONTENT_URL);
+
                 } else {
                     content.setImageResource(R.drawable.invalid_content);
+                    content.setVisibility(View.VISIBLE);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (Exception e) {
+                Log.e("Error: ", e.getMessage());
                 e.printStackTrace();
             }
         }

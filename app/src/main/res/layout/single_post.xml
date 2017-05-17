@@ -55,17 +55,30 @@
             android:textStyle="italic"
             android:text="This is where the description for the post goes baby!"/>
     </LinearLayout>
-    <ImageView
-        android:id="@+id/content_view_post"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
-        android:src="@drawable/dummy_content"
-        android:background="#f0f0f0"/>
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/content_view_post"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/dummy_content"
+            android:background="#f0f0f0"
+            android:visibility="gone"/>
+        <VideoView
+            android:id="@+id/content_video_view_post"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
     <LinearLayout
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
         android:layout_width="match_parent"
         android:layout_height="40dp">
         <ImageView
