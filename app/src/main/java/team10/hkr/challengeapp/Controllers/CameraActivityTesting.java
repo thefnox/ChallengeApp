@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.android.volley.toolbox.Volley;
+
 import team10.hkr.challengeapp.R;
 
 public class CameraActivityTesting extends Activity {
