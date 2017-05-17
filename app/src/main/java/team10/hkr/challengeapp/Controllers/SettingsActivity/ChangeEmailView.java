@@ -17,11 +17,13 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.RequestQueueSingleton;
 import team10.hkr.challengeapp.SharedPref;
 
 public class ChangeEmailView extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class ChangeEmailView extends AppCompatActivity {
         setContentView(R.layout.activity_change_email_view);
         Button changeEmailButton = (Button) findViewById(R.id.changeEmailButton);
         TextView currentEmail = (TextView) findViewById(R.id.currentEmailTextView);
-        currentEmail.setText(SharedPref.read("EMAIL", ""));
+        currentEmail.setText(AppSingleton.getInstance().getUser().getEmail());
 
 
         changeEmailButton.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +47,8 @@ public class ChangeEmailView extends AppCompatActivity {
         final EditText newEmail = (EditText) findViewById(R.id.newEmailEditText);
         final String EMAIL = "email";
         final String URL = "http://95.85.16.177:3000/api/user";
+        final TextView currentEmail = (TextView) findViewById(R.id.currentEmailTextView);
+
 
         if (newEmail.getText().toString().equals("")) {
             Toast.makeText(this, "No Email Entered", Toast.LENGTH_SHORT).show();
@@ -57,7 +61,9 @@ public class ChangeEmailView extends AppCompatActivity {
                 public void onResponse(String response) {
                     Toast.makeText(ChangeEmailView.this, "Email changed successfully", Toast.LENGTH_LONG).show();
                     SharedPref.write("EMAIL", newEmail.getText().toString());
-
+                    AppSingleton.getInstance().getUser().setEmail(newEmail.getText().toString());
+                    currentEmail.setText(SharedPref.read("EMAIL", ""));
+                    newEmail.setText("");
                 }
             }, new Response.ErrorListener() {
                 @Override

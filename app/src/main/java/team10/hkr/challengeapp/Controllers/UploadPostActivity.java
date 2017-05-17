@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -76,7 +78,7 @@ public class UploadPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (SharedPref.read("postFilePath", "").endsWith(".jpg")){
+                if (SharedPref.read("fileName", "").endsWith(".jpg")){
                     try {
                         uploadPhotoPost();
                     } catch (JSONException e) {
@@ -84,7 +86,7 @@ public class UploadPostActivity extends AppCompatActivity {
                     }
                 }
 
-                else if (SharedPref.read("postFilePath", "").endsWith(".mp4")){
+                else if (SharedPref.read("fileName", "").endsWith(".mp4")){
 
                     try {
                         uploadVideoPost();
@@ -103,7 +105,7 @@ public class UploadPostActivity extends AppCompatActivity {
         String fileName = getVideoFileName();
 
         SharedPref.write("videoFileName", fileName);
-        SharedPref.write("postFilePath", externalStoragePublicDirectory.getAbsolutePath() + fileName);
+        SharedPref.write("fileName", fileName );
 
         File takenVideo = new File(externalStoragePublicDirectory, fileName);
         Uri videoURI = Uri.fromFile(takenVideo);
@@ -120,6 +122,7 @@ public class UploadPostActivity extends AppCompatActivity {
         String fileName = getPhotoFileName();
 
         SharedPref.write("photoFileName", fileName);
+        SharedPref.write("fileName", fileName);
         File takenPhoto = new File(externalStoragePublicDirectory, fileName);
         Uri imageURI = Uri.fromFile(takenPhoto);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
@@ -152,10 +155,20 @@ public class UploadPostActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
 
-                File imageDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + SharedPref.read("imageFileName", ""));
-                Bitmap bitmap = BitmapFactory.decodeFile(imageDirectory.getAbsolutePath());
+                File imageDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath(), SharedPref.read("photoFileName", ""));
 
-                showPhoto.setImageBitmap(bitmap);
+                Bitmap bitmap = null;
+
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.fromFile(imageDirectory));
+
+                    int nh = (int) ( bitmap.getHeight() * (512.0 / bitmap.getWidth()) );
+                    Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 512, nh, true);
+                    showPhoto.setImageBitmap(scaled);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 Toast.makeText(this, "Photo saved to SD Card", Toast.LENGTH_SHORT).show();
 
@@ -169,7 +182,7 @@ public class UploadPostActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
 
-                File videoDirectory = new File(SharedPref.read("postFilePath", ""));
+                File videoDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath(), SharedPref.read("videoFileName",""));
                 Bitmap thumbnail = ThumbnailUtils.createVideoThumbnail(videoDirectory.getAbsolutePath(), MediaStore.Video.Thumbnails.MINI_KIND);
                 showPhoto.setImageBitmap(thumbnail);
                 Toast.makeText(this, "Video saved to SD Card", Toast.LENGTH_SHORT).show();
@@ -194,7 +207,7 @@ public class UploadPostActivity extends AppCompatActivity {
 //        Matcher matcher = HASHTAG_MATCH.matcher(description.getText().toString());
         File environment = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         String fileName = SharedPref.read("photoFileName", "");
-        File takenPhoto = new File(environment, fileName);
+        final File takenPhoto = new File(environment, fileName);
 
 //        if(matcher.matches()) {
 
@@ -215,7 +228,8 @@ public class UploadPostActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(UploadPostActivity.this, "There was an error with the request.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UploadPostActivity.this, "There was an error with the request: " + error, Toast.LENGTH_SHORT).show();
+
             }
         }) {
             @Override
@@ -230,7 +244,12 @@ public class UploadPostActivity extends AppCompatActivity {
                 Map<String, DataPart> params = new HashMap<>();
                 // file name could found file base or direct access from real path
                 // for now just get bitmap data from ImageView
-                params.put("content", new DataPart("post_content.mp4", AppHelper.getFileDataFromDrawable(getBaseContext(), image.getDrawable())));
+                try {
+                    params.put("content", new DataPart("post_content.jpg", AppHelper.getFileDataFromFile(getBaseContext(), takenPhoto)));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    Toast.makeText(UploadPostActivity.this, "File not Found", Toast.LENGTH_SHORT).show();
+                }
                 return params;
             }
         };
@@ -245,7 +264,7 @@ public class UploadPostActivity extends AppCompatActivity {
         final EditText description = (EditText) findViewById(R.id.enterDescriptionEditText);
 //        Matcher matcher = HASHTAG_MATCH.matcher(description.getText().toString());
         File environment = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
-        final String fileName = SharedPref.read("postFilePath", "");
+        final String fileName = SharedPref.read("videoFileName", "");
         File takenVideo = new File(environment, fileName);
 
 //        if(matcher.matches()) {
@@ -258,7 +277,7 @@ public class UploadPostActivity extends AppCompatActivity {
             VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, POST_URL, new Response.Listener<NetworkResponse>() {
                 @Override
                 public void onResponse(NetworkResponse response) {
-                    Toast.makeText(UploadPostActivity.this, "Post Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadPostActivity.this, "Post Successful: " + response, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(UploadPostActivity.this, PrimaryActivity.class);
                     startActivity(intent);
 
@@ -266,7 +285,7 @@ public class UploadPostActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(UploadPostActivity.this, "There was an error with the request.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadPostActivity.this, "There was an error with the request: " + error.toString(), Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Override
@@ -279,8 +298,7 @@ public class UploadPostActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, DataPart> getByteData() {
                     Map<String, DataPart> params = new HashMap<>();
-                    // file name could found file base or direct access from real path
-                    // for now just get bitmap data from ImageView
+
                     try {
                         params.put("content", new DataPart("post_content.mp4", AppHelper.getFileDataFromFile(getBaseContext(), new File(fileName))));
                     } catch (FileNotFoundException e) {
