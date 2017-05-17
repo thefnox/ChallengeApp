@@ -211,7 +211,6 @@ public class UploadPostActivity extends AppCompatActivity {
 
 //        if(matcher.matches()) {
 
-        final ImageView image = (ImageView) findViewById(R.id.takenPhotoImageView);
         final String POST_URL = "http://95.85.16.177:3000/api/post";
         JSONObject json = new JSONObject();
         json.put("description", description.getText().toString());
@@ -265,7 +264,7 @@ public class UploadPostActivity extends AppCompatActivity {
 //        Matcher matcher = HASHTAG_MATCH.matcher(description.getText().toString());
         File environment = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
         final String fileName = SharedPref.read("videoFileName", "");
-        File takenVideo = new File(environment, fileName);
+        final File takenVideo = new File(environment, fileName);
 
 //        if(matcher.matches()) {
 
@@ -300,7 +299,7 @@ public class UploadPostActivity extends AppCompatActivity {
                     Map<String, DataPart> params = new HashMap<>();
 
                     try {
-                        params.put("content", new DataPart("post_content.mp4", AppHelper.getFileDataFromFile(getBaseContext(), new File(fileName))));
+                        params.put("content", new DataPart("post_content.mp4", AppHelper.getFileDataFromFile(getBaseContext(), takenVideo)));
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
