@@ -48,6 +48,18 @@
                 android:layout_marginTop="4dp"
                 android:visibility="gone"
                 />
+            <ImageButton
+                android:id="@+id/edit_button_post"
+                android:layout_centerVertical="true"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                android:layout_marginEnd="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:src="@drawable/ic_edit_post"
+                android:layout_toStartOf="@id/delete_button_post"
+                android:visibility="gone"/>
         </RelativeLayout>
 
     </LinearLayout>

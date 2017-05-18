@@ -72,6 +72,15 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
         if(holder.itemView.getContext().getClass() == ProfileActivity.class) {
             final Activity activity = (Activity) holder.itemView.getContext();
+
+            holder.editButtonImageButton.setVisibility(View.VISIBLE);
+            holder.deleteButtonImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //To do
+                }
+            });
+
             holder.deleteButtonImageButton.setVisibility(View.VISIBLE);
             holder.deleteButtonImageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -196,6 +205,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             CircleImageView profilePhotoView;
             TextView userNameTextView;
             ImageButton deleteButtonImageButton;
+            ImageButton editButtonImageButton;
             TextView challengeTagTextView;
             TextView challengeDescriptionTextView;
             ImageView contentIfPhotoView;
