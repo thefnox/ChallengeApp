@@ -97,6 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp">
         <ImageButton
+            android:background="#00000000"
             android:id="@+id/thumbsup_post"
             android:layout_width="28dp"
             android:layout_height="28dp"
@@ -104,6 +105,7 @@
             android:layout_marginStart="10dp"
             android:layout_gravity="center_vertical"/>
         <ImageButton
+            android:background="#00000000"
             android:id="@+id/comment_post"
             android:layout_width="28dp"
             android:layout_height="28dp"
@@ -111,6 +113,7 @@
             android:layout_marginStart="10dp"
             android:layout_gravity="center_vertical" />
         <ImageButton
+            android:background="#00000000"
             android:id="@+id/share_post"
             android:layout_width="28dp"
             android:layout_height="28dp"
@@ -121,6 +124,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageButton
+                android:background="#00000000"
                 android:id="@+id/flag_post"
                 android:layout_width="28dp"
                 android:layout_height="28dp"

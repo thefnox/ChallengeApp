@@ -181,7 +181,6 @@
             android:layout_marginStart="3dp"/>
     </LinearLayout>
     <View
-        android:layout_marginTop="6dp"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
         android:layout_width="match_parent"
@@ -191,15 +190,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginTop="6dp">
-        <ListView
+        android:layout_marginRight="6dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:dividerHeight="14dp"
             android:listSelector="@android:color/transparent"
-            android:id="@+id/post_list_profile"
+            android:id="@+id/profile_feed_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="false"
             />
+
     </LinearLayout>
 
 </LinearLayout>
