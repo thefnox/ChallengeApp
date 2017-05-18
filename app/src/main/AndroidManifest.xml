@@ -7,11 +7,15 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.hardware.camera2" android:required="true" />
-    <uses-feature android:name="android.hardware.camera"/>
+    <uses-permission
+        android:name="android.hardware.camera2"
+        android:required="true" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -66,7 +70,8 @@
         <activity android:name=".Controllers.CommentActivity" />
         <activity android:name=".Controllers.SettingsActivity.CloseAccountActivity" />
         <activity android:name=".Controllers.SettingsActivity.ChangeProfilePictureActivity" />
-        <activity android:name=".Controllers.CameraActivityTesting"></activity>
+        <activity android:name=".Controllers.CameraActivityTesting" />
+        <activity android:name=".Controllers.EditPostActivity"></activity>
     </application>
 
 </manifest>

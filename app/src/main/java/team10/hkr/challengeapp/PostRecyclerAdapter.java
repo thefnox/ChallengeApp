@@ -35,6 +35,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import team10.hkr.challengeapp.Controllers.CommentActivity;
+import team10.hkr.challengeapp.Controllers.EditPostActivity;
 import team10.hkr.challengeapp.Controllers.LoginActivity;
 import team10.hkr.challengeapp.Controllers.PrimaryActivity;
 import team10.hkr.challengeapp.Controllers.ProfileActivity;
@@ -74,10 +75,20 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             final Activity activity = (Activity) holder.itemView.getContext();
 
             holder.editButtonImageButton.setVisibility(View.VISIBLE);
-            holder.deleteButtonImageButton.setOnClickListener(new View.OnClickListener() {
+            holder.editButtonImageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //To do
+
+                    Intent intent = new Intent(activity, EditPostActivity.class);
+                    intent.putExtra("postUUID", post.getUUID());
+                    intent.putExtra("postDescription", post.getDescription());
+                    try {
+                        intent.putExtra("contentURL", "http://95.85.16.177:3000" + post.getContent().getString("staticURL"));
+                        intent.putExtra("staticURL", post.getContent().getString("staticURL"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    activity.startActivity(intent);
                 }
             });
 
@@ -222,6 +233,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 profilePhotoView = (CircleImageView) itemView.findViewById(R.id.profile_photo_post);
                 userNameTextView = (TextView) itemView.findViewById(R.id.username_post);
                 deleteButtonImageButton = (ImageButton) itemView.findViewById(R.id.delete_button_post);
+                editButtonImageButton = (ImageButton) itemView.findViewById(R.id.edit_button_post);
                 challengeTagTextView = (TextView) itemView.findViewById(R.id.challenge_tag_post);
                 challengeDescriptionTextView = (TextView) itemView.findViewById(R.id.description_post);
                 contentIfPhotoView = (ImageView) itemView.findViewById(R.id.content_view_post);
