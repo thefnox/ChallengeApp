@@ -90,7 +90,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                                         @Override
                                         public void onResponse(String response) {
                                             Toast.makeText(activity,"Post Deleted", Toast.LENGTH_LONG).show();
-                                            Intent intent = new Intent(activity, PrimaryActivity.class);
+                                            Intent intent = new Intent(activity, ProfileActivity.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             activity.startActivity(intent);
 
