@@ -79,7 +79,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
                     new AlertDialog.Builder(activity)
 
-                            .setTitle("Close Account")
+                            .setTitle("Delete Post")
                             .setMessage("Are you sure you want to delete this post?")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
