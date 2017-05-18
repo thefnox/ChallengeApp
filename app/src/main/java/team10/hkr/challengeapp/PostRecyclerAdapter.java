@@ -26,6 +26,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import team10.hkr.challengeapp.Controllers.CommentActivity;
+import team10.hkr.challengeapp.Controllers.ProfileActivity;
 import team10.hkr.challengeapp.Controllers.ReportActivity;
 import team10.hkr.challengeapp.Models.Post;
 
@@ -56,6 +57,15 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
         holder.profilePhotoView.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
         holder.userNameTextView.setText("SakuraChan");
+        if(holder.itemView.getContext().getClass() == ProfileActivity.class) {
+            holder.deleteButtonImageButton.setVisibility(View.VISIBLE);
+            holder.deleteButtonImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //To do
+                }
+            });
+        }
         holder.challengeTagTextView.setText("#Not Implemented Yet");
         holder.challengeDescriptionTextView.setText(post.getDescription());
 
@@ -101,22 +111,22 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         holder.likesTextView.setText(post.getLikes() + R.string.likes);
 
                         //££##££##      CLICK_LISTENERS     ##££##££\\
-//        holder.commentImageButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+        holder.commentImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 //                Intent mIntent = new Intent(holder.itemView.getContext(), CommentActivity.class);
 //                mIntent.putExtra("post_id", post.getUUID());
 //                holder.itemView.getContext().startActivity(mIntent);
-//            }
-//        });
-//        holder.flagImageButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+            }
+        });
+        holder.flagImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 //                Intent mIntent = new Intent(, ReportActivity.class);
 //                mIntent.putExtra("post_id", post.getUUID());
 //                getContext().startActivity(mIntent);
-//            }
-//        });
+            }
+        });
 
 
     }
@@ -131,6 +141,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             View container;
             CircleImageView profilePhotoView;
             TextView userNameTextView;
+            ImageButton deleteButtonImageButton;
             TextView challengeTagTextView;
             TextView challengeDescriptionTextView;
             ImageView contentIfPhotoView;
@@ -146,6 +157,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 super(itemView);
                 profilePhotoView = (CircleImageView) itemView.findViewById(R.id.profile_photo_post);
                 userNameTextView = (TextView) itemView.findViewById(R.id.username_post);
+                deleteButtonImageButton = (ImageButton) itemView.findViewById(R.id.delete_button_post);
                 challengeTagTextView = (TextView) itemView.findViewById(R.id.challenge_tag_post);
                 challengeDescriptionTextView = (TextView) itemView.findViewById(R.id.description_post);
                 contentIfPhotoView = (ImageView) itemView.findViewById(R.id.content_view_post);
