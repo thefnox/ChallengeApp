@@ -1,7 +1,9 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +11,7 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import team10.hkr.challengeapp.Controllers.SettingsActivity.CloseAccountActivity;
 import team10.hkr.challengeapp.MultipartRequestLibraryCode.AppHelper;
 import team10.hkr.challengeapp.MultipartRequestLibraryCode.VolleyMultipartRequest;
 import team10.hkr.challengeapp.R;
@@ -80,22 +84,39 @@ public class UploadPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (SharedPref.read("fileName", "").endsWith(".jpg")){
-                    try {
-                        uploadPhotoPost();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
+                new AlertDialog.Builder(UploadPostActivity.this)
 
-                else if (SharedPref.read("fileName", "").endsWith(".mp4")){
+                        .setTitle("Upload Post")
+                        .setMessage("Are you sure you want to upload this post?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
 
-                    try {
-                        uploadVideoPost();
-                    } catch (JSONException e){
-                        e.printStackTrace();
-                    }
-                }
+                                if (SharedPref.read("fileName", "").endsWith(".jpg")){
+                                    try {
+                                        uploadPhotoPost();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                else if (SharedPref.read("fileName", "").endsWith(".mp4")){
+
+                                    try {
+                                        uploadVideoPost();
+                                    } catch (JSONException e){
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+
             }
         });
     }
@@ -227,6 +248,7 @@ public class UploadPostActivity extends AppCompatActivity {
                 Toast.makeText(UploadPostActivity.this, "Post Successful", Toast.LENGTH_SHORT).show();
                 hidePDialog();
                 Intent intent = new Intent(UploadPostActivity.this, PrimaryActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
 
             }
@@ -289,6 +311,7 @@ public class UploadPostActivity extends AppCompatActivity {
                     hidePDialog();
                     Toast.makeText(UploadPostActivity.this, "Post Successful: " + response, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(UploadPostActivity.this, PrimaryActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 
                 }
