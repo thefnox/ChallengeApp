@@ -7,6 +7,8 @@ import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -42,6 +44,7 @@ import team10.hkr.challengeapp.Models.Comment;
 import team10.hkr.challengeapp.Models.Post;
 import team10.hkr.challengeapp.Models.User;
 import team10.hkr.challengeapp.PostListAdapter;
+import team10.hkr.challengeapp.PostRecyclerAdapter;
 import team10.hkr.challengeapp.R;
 
 import static java.security.AccessController.getContext;
@@ -52,11 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView profilePicture;
     private TextView profileUsername;
     private TextView profileName;
-    private ListView postsListView;
-    private ImageView commentButton;
-    private ArrayList<Comment> commentArrayList = new ArrayList<Comment>();
-    private PopupWindow popupWindow;
-    private ViewGroup viewGroup;
+    private RecyclerView profileRecyclerView;
+    private PostRecyclerAdapter adapter;
     private TextView profileDescription; //Not implemented in the server..
     private ArrayList<Post> postArrayList = new ArrayList<Post>();
     private User user;
@@ -69,7 +69,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         serverRequest();
         requestForFeed();
-
     }
 
     private void serverRequest(){
@@ -114,14 +113,18 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    for(int i=0; i < response.length(); i++) {
+                    for(int i=response.length()-1; i >= 0; i--) {
                         postArrayList.add(new Post(response.getJSONObject(i)));
                     }
                     Log.v("YUPPI", "Response; ##requestfeed profile## " + response.length() + " " + postArrayList.size() + " - >> "
                             + postArrayList.get(0).getDescription() + response.toString() + " " + postArrayList.get(0).getComments().length() + " " + postArrayList.get(1).getComments().length());
 
-                    postsListView = (ListView) findViewById(R.id.post_list_profile);
-                    postsListView.setAdapter(new PostListAdapter(ProfileActivity.this, postArrayList));
+                    profileRecyclerView = (RecyclerView) findViewById(R.id.profile_feed_recycler);
+                    profileRecyclerView.setLayoutManager(new LinearLayoutManager(ProfileActivity.this));
+                    adapter = new PostRecyclerAdapter(ProfileActivity.this, postArrayList);
+                    profileRecyclerView.setAdapter(adapter);
+
+                    Log.d("profilepostarraysize: ", String.valueOf(postArrayList.size()));
 
                 } catch (Exception e) {
                     e.printStackTrace();

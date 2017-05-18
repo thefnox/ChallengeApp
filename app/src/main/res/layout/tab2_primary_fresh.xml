@@ -6,10 +6,10 @@
     android:paddingRight="6dp"
     android:paddingTop="1dp"
     tools:context="team10.hkr.challengeapp.Controllers.PrimaryActivity$PlaceholderFragment">
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:dividerHeight="14dp"
             android:listSelector="@android:color/transparent"
-            android:id="@+id/fresh_content_list_view"
+            android:id="@+id/fresh_content_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
