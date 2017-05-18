@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.MediaController;
@@ -52,6 +53,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private ListView commentListView;
     private TextView firstCommentView;
     private TextView secondCommentView;
+    private ImageButton playButton;
 
     public PostListAdapter(Context context, ArrayList<Post> posts) {
         super(context, R.layout.single_comment, posts);
@@ -71,6 +73,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         // Content
         content = (ImageView) customView.findViewById(R.id.content_view_post);
         contentVideo = (VideoView) customView.findViewById(R.id.content_video_view_post);
+        playButton = (ImageButton) customView.findViewById(R.id.content_play_button);
         // Interaction buttons
         commentButton = (ImageView) customView.findViewById(R.id.comment_post);
         flagButton = (ImageView) customView.findViewById(R.id.flag_post);
@@ -131,23 +134,25 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             StrictMode.setThreadPolicy(policy);
             try {
                 if (isJpg(getItem(position).getContent().getString("staticURL"))) {
+
                     Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(CONTENT_URL).getContent());
                     content.setImageBitmap(bitmap);
+
                     content.setVisibility(View.VISIBLE);
                 } else if(CONTENT_URL.endsWith(".mp4")) {
                     //Show video here
-                    MediaController mediaController = new MediaController(customView.getContext());
+                    contentVideo.setVisibility(View.VISIBLE);
+                    contentVideo.seekTo(3000);
+                    final MediaController mediaController = new MediaController(customView.getContext());
                     mediaController.setAnchorView(contentVideo);
                     Uri video_uri = Uri.parse(CONTENT_URL);
-                    contentVideo.setMediaController(mediaController);
                     contentVideo.setVideoURI(video_uri);
-                    contentVideo.requestFocus();
-                    contentVideo.setVisibility(View.VISIBLE);
+                    contentVideo.setMediaController(mediaController);
                     Log.d("CheckURLifValid", CONTENT_URL);
 
                 } else {
-                    content.setImageResource(R.drawable.invalid_content);
-                    content.setVisibility(View.VISIBLE);
+//                    content.setImageResource(R.drawable.invalid_content);
+         //           content.setVisibility(View.VISIBLE);
                 }
             } catch (Exception e) {
                 Log.e("Error: ", e.getMessage());
