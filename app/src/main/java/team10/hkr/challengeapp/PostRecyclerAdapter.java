@@ -201,8 +201,6 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 activity.startActivity(mIntent);
             }
         });
-
-
     }
 
     @Override
@@ -244,7 +242,6 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 flagImageButton = (ImageButton) itemView.findViewById(R.id.flag_post);
                 viewsTextView = (TextView) itemView.findViewById(R.id.views_post);
                 likesTextView = (TextView) itemView.findViewById(R.id.likes_post);
-
 
             }
         }
