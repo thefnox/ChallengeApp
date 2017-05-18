@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -111,20 +112,23 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         holder.likesTextView.setText(post.getLikes() + R.string.likes);
 
                         //££##££##      CLICK_LISTENERS     ##££##££\\
+
+        final Activity activity = (Activity) holder.itemView.getContext();
+
         holder.commentImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent mIntent = new Intent(holder.itemView.getContext(), CommentActivity.class);
-//                mIntent.putExtra("post_id", post.getUUID());
-//                holder.itemView.getContext().startActivity(mIntent);
+                Intent mIntent = new Intent(activity, CommentActivity.class);
+                mIntent.putExtra("post_id", post.getUUID());
+                activity.startActivity(mIntent);
             }
         });
         holder.flagImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent mIntent = new Intent(, ReportActivity.class);
-//                mIntent.putExtra("post_id", post.getUUID());
-//                getContext().startActivity(mIntent);
+                Intent mIntent = new Intent(activity, ReportActivity.class);
+                mIntent.putExtra("post_id", post.getUUID());
+                activity.startActivity(mIntent);
             }
         });
 
