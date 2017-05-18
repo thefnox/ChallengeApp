@@ -1,52 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="team10.hkr.challengeapp.Controllers.SettingsActivity.ChangeEmailView"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="team10.hkr.challengeapp.Controllers.SettingsActivity.ChangeEmailView">
-
+    android:layout_height="match_parent">
     <RelativeLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/current_mail_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="64dp"
-            android:text="Current Email Address" />
+            android:text="Current e-mail:" />
 
         <TextView
-            android:id="@+id/currentEmailTextView"
+            android:id="@+id/current_email_change_mail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView"
+            android:layout_below="@+id/current_mail_text"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="38dp"
             android:textAlignment="center"
+            android:text="charlie@tunasson.com"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/newEmailEditText"
+            android:id="@+id/new_email_edit_text_change_mail"
             android:layout_width="256dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/currentEmailTextView"
+            android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="64dp"
-            android:hint="Enter new email address"
-            android:inputType="textPersonName" />
+            android:hint="@string/new_email_edit_text"
+            android:inputType="textEmailAddress" />
 
         <Button
-            android:id="@+id/changeEmailButton"
+            android:id="@+id/change_email_button_change_mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="Change Email Address" />
+            android:text="@string/change_email_address_button"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@android:color/background_light"
+            android:background="#ed4f44"/>
     </RelativeLayout>
-</android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

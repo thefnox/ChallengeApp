@@ -28,9 +28,9 @@ public class ChangeEmailView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_email_view);
-        Button changeEmailButton = (Button) findViewById(R.id.changeEmailButton);
-        TextView currentEmail = (TextView) findViewById(R.id.currentEmailTextView);
+        setContentView(R.layout.activity_change_email);
+        Button changeEmailButton = (Button) findViewById(R.id.change_email_button_change_mail);
+        TextView currentEmail = (TextView) findViewById(R.id.current_email_change_mail);
         currentEmail.setText(AppSingleton.getInstance().getUser().getEmail());
 
 
@@ -44,10 +44,10 @@ public class ChangeEmailView extends AppCompatActivity {
 
     private void changeEmail() {
 
-        final EditText newEmail = (EditText) findViewById(R.id.newEmailEditText);
+        final EditText newEmail = (EditText) findViewById(R.id.new_email_edit_text_change_mail);
         final String EMAIL = "email";
         final String URL = "http://95.85.16.177:3000/api/user";
-        final TextView currentEmail = (TextView) findViewById(R.id.currentEmailTextView);
+        final TextView currentEmail = (TextView) findViewById(R.id.current_email_change_mail);
 
 
         if (newEmail.getText().toString().equals("")) {
