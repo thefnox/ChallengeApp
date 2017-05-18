@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -47,6 +48,7 @@ public class UploadPostActivity extends AppCompatActivity {
 
     static final int CAM_REQUEST = 1;
     static final int VIDEO_REQUEST = 2;
+    private ProgressDialog pDialog;
 
 
     @Override
@@ -208,6 +210,9 @@ public class UploadPostActivity extends AppCompatActivity {
         File environment = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         String fileName = SharedPref.read("photoFileName", "");
         final File takenPhoto = new File(environment, fileName);
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Uploading. Please wait...");
+        pDialog.show();
 
 //        if(matcher.matches()) {
 
@@ -220,6 +225,7 @@ public class UploadPostActivity extends AppCompatActivity {
             @Override
             public void onResponse(NetworkResponse response) {
                 Toast.makeText(UploadPostActivity.this, "Post Successful", Toast.LENGTH_SHORT).show();
+                hidePDialog();
                 Intent intent = new Intent(UploadPostActivity.this, PrimaryActivity.class);
                 startActivity(intent);
 
@@ -228,6 +234,7 @@ public class UploadPostActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(UploadPostActivity.this, "There was an error with the request: " + error, Toast.LENGTH_SHORT).show();
+                hidePDialog();
 
             }
         }) {
@@ -265,6 +272,9 @@ public class UploadPostActivity extends AppCompatActivity {
         File environment = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
         final String fileName = SharedPref.read("videoFileName", "");
         final File takenVideo = new File(environment, fileName);
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Uploading. Please wait...");
+        pDialog.show();
 
 //        if(matcher.matches()) {
 
@@ -276,6 +286,7 @@ public class UploadPostActivity extends AppCompatActivity {
             VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, POST_URL, new Response.Listener<NetworkResponse>() {
                 @Override
                 public void onResponse(NetworkResponse response) {
+                    hidePDialog();
                     Toast.makeText(UploadPostActivity.this, "Post Successful: " + response, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(UploadPostActivity.this, PrimaryActivity.class);
                     startActivity(intent);
@@ -285,6 +296,7 @@ public class UploadPostActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(UploadPostActivity.this, "There was an error with the request: " + error.toString(), Toast.LENGTH_SHORT).show();
+                    hidePDialog();
                 }
             }) {
                 @Override
@@ -309,6 +321,21 @@ public class UploadPostActivity extends AppCompatActivity {
             };
 
             RequestQueueSingleton.getInstance(this).addToRequestQueue(multipartRequest);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        hidePDialog();
+    }
+
+    private void hidePDialog(){
+
+        if (pDialog != null){
+            pDialog.dismiss();
+            pDialog = null;
+        }
 
     }
 
