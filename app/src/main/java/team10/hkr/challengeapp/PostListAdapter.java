@@ -72,8 +72,6 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         description = (TextView) customView.findViewById(R.id.description_post);
         // Content
         content = (ImageView) customView.findViewById(R.id.content_view_post);
-        contentVideo = (VideoView) customView.findViewById(R.id.content_video_view_post);
-        playButton = (ImageButton) customView.findViewById(R.id.content_play_button);
         // Interaction buttons
         commentButton = (ImageView) customView.findViewById(R.id.comment_post);
         flagButton = (ImageView) customView.findViewById(R.id.flag_post);

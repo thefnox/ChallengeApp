@@ -2,6 +2,8 @@ package team10.hkr.challengeapp.Controllers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.media.Image;
 import android.os.AsyncTask;
@@ -34,7 +36,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.CookieHandler;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.zip.Inflater;
 
@@ -73,7 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void serverRequest(){
 
-        final String URL = "http://95.85.16.177:3000/api/user/me";
+        final String URL = "http://95.85.16.177:3000/api/user/";
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -87,9 +92,10 @@ public class ProfileActivity extends AppCompatActivity {
                     profileUsername = (TextView) findViewById(R.id.username_profile);
                     //profileDescription = (TextView) findViewById(R.id.profile_description);
 
-                    profileName.setText(user.getFirstName() + " " + user.getLastName());
+                    // FILL THE INFO    //  //  //  //  //  //
+
+                    profileName.setText(String.valueOf(user.getFirstName() + " " + user.getLastName()));
                     profileUsername.setText(user.getUserName());
-                    profilePicture.setImageResource(R.drawable.profile_picture_test);
                     //profileDescription.setText(user.getProfileDescription());
 
                 } catch (JSONException e) {

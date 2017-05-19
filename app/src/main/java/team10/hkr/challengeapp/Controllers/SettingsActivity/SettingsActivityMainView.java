@@ -13,9 +13,6 @@ import team10.hkr.challengeapp.R;
 
 public class SettingsActivityMainView extends PreferenceActivity {
 
-
-
-
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);

@@ -43,17 +43,18 @@ import team10.hkr.challengeapp.Controllers.PrimaryActivity;
 import team10.hkr.challengeapp.Controllers.ProfileActivity;
 import team10.hkr.challengeapp.Controllers.ReportActivity;
 import team10.hkr.challengeapp.Controllers.SettingsActivity.CloseAccountActivity;
+import team10.hkr.challengeapp.Controllers.VideoActivity;
 import team10.hkr.challengeapp.Models.Post;
 
 /**
  * Created by Charlie on 18.05.2017.
  */
 
-public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.PostHolder> implements TextureView.SurfaceTextureListener {
+public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.PostHolder> {
 
     private ArrayList<Post> postList = new ArrayList<>();
     private LayoutInflater inflater;
-    private AppSingleton sessionManager = AppSingleton.getInstance();
+    private String CONTENT_URL = "";
 
     public PostRecyclerAdapter(Context context, ArrayList<Post> postList) {
         this.inflater = LayoutInflater.from(context);
@@ -70,6 +71,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     public void onBindViewHolder(PostHolder holder, int position) {
 
         final Post post = postList.get(position);
+        final Activity activity = (Activity) holder.itemView.getContext();
 
         holder.profilePhotoView.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
         holder.userNameTextView.setText("SakuraChan");
@@ -82,7 +84,6 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
        });
 
         if(holder.itemView.getContext().getClass() == ProfileActivity.class) {
-            final Activity activity = (Activity) holder.itemView.getContext();
 
             holder.editButtonImageButton.setVisibility(View.VISIBLE);
             holder.editButtonImageButton.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +152,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         holder.challengeDescriptionTextView.setText(post.getDescription());
 
         //              CONTENT             //
-        String CONTENT_URL = "";
+
         try {
             CONTENT_URL = "http://95.85.16.177:3000" + post.getContent().getString("staticURL");
         } catch (JSONException e) {
@@ -169,18 +170,17 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
                 } else if (CONTENT_URL.endsWith(".mp4")) {
                     //Show video here
-                    holder.contentIfVideoView.setVisibility(View.VISIBLE);
-                    holder.contentIfVideoView.seekTo(3000);
-                    final MediaController mediaController = new MediaController(holder.itemView.getContext());
-                    mediaController.setAnchorView(holder.contentIfVideoView);
-                    Uri video_uri = Uri.parse(CONTENT_URL);
-                    holder.contentIfVideoView.setVideoURI(video_uri);
-                    holder.contentIfVideoView.setMediaController(mediaController);
-                    Log.d("CheckURLifValid", CONTENT_URL);
-
+                    holder.videoStartClickTextView.setVisibility(View.VISIBLE);
+                    holder.videoStartClickTextView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(activity, VideoActivity.class);
+                            intent.putExtra("VideoURL", CONTENT_URL);
+                            activity.startActivity(intent);
+                        }
+                    });
                 } else {
-                    holder.contentIfPhotoView.setImageResource(R.drawable.invalid_content);
-                    holder.contentIfPhotoView.setVisibility(View.VISIBLE);
+                    holder.contentIfPhotoView = null;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -192,8 +192,6 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         holder.likesTextView.setText(post.getLikes() + R.string.likes);
 
                         //££##££##      CLICK_LISTENERS     ##££##££\\
-
-        final Activity activity = (Activity) holder.itemView.getContext();
 
         holder.commentImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,26 +212,6 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     }
 
     @Override
-    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-
-    }
-
-    @Override
-    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-
-    }
-
-    @Override
-    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-        return false;
-    }
-
-    @Override
-    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
-    }
-
-    @Override
     public int getItemCount() {
         return postList.size();
     }
@@ -241,7 +219,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     class PostHolder extends RecyclerView.ViewHolder {
 
             View container;
-            TextureView player;
+            TextView videoStartClickTextView;
             CircleImageView profilePhotoView;
             TextView userNameTextView;
             TextView followButtonTextView;
@@ -250,7 +228,6 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             TextView challengeTagTextView;
             TextView challengeDescriptionTextView;
             ImageView contentIfPhotoView;
-            VideoView contentIfVideoView;
             ImageButton thumbsUpImageButton;
             ImageButton commentImageButton;
             ImageButton shareImageButton;
@@ -260,7 +237,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
             public PostHolder(View itemView) {
                 super(itemView);
-                player = (TextureView) itemView.findViewById(R.id.player);
+                videoStartClickTextView = (TextView) itemView.findViewById(R.id.video_start_text);
                 profilePhotoView = (CircleImageView) itemView.findViewById(R.id.profile_photo_post);
                 userNameTextView = (TextView) itemView.findViewById(R.id.username_post);
                 followButtonTextView = (TextView) itemView.findViewById(R.id.follow_button_post);
@@ -269,7 +246,6 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 challengeTagTextView = (TextView) itemView.findViewById(R.id.challenge_tag_post);
                 challengeDescriptionTextView = (TextView) itemView.findViewById(R.id.description_post);
                 contentIfPhotoView = (ImageView) itemView.findViewById(R.id.content_view_post);
-                contentIfVideoView = (VideoView) itemView.findViewById(R.id.content_video_view_post);
                 thumbsUpImageButton = (ImageButton) itemView.findViewById(R.id.thumbsup_post);
                 commentImageButton = (ImageButton) itemView.findViewById(R.id.comment_post);
                 shareImageButton = (ImageButton) itemView.findViewById(R.id.share_post);
