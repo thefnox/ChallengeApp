@@ -70,7 +70,6 @@
         <activity android:name=".Controllers.CommentActivity" />
         <activity android:name=".Controllers.SettingsActivity.CloseAccountActivity" />
         <activity android:name=".Controllers.SettingsActivity.ChangeProfilePictureActivity" />
-        <activity android:name=".Controllers.CameraActivityTesting" />
         <activity android:name=".Controllers.EditPostActivity"></activity>
     </application>
 
