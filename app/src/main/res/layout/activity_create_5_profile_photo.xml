@@ -6,29 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".Controllers.SignUpActivity.SignUpActivity5ProfilePhoto">
 
-    <Button
-        android:id="@+id/uploadExistingPhotoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Upload Existing Photo"
-        android:textAlignment="center" />
-
-    <Button
-        android:id="@+id/takePhotoAndUploadButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/uploadExistingPhotoButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="Upload Camera Photo" />
-
     <ImageView
         android:id="@+id/createProfilePictureImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="128dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
@@ -38,37 +19,92 @@
         android:src="@drawable/profile_photo_logo" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/signInAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Your account has been created and you have been signed in."
+        android:textAlignment="center"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/uploadTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/createProfilePictureImageView"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
         android:padding="8dp"
         android:text="Upload a Profile Picture"
         android:textAlignment="center" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uploadTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/uploadExistingPhotoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_weight="1"
+            android:text="Gallery"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/takePhotoAndUploadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="false"
+            android:layout_centerHorizontal="false"
+            android:layout_weight="1"
+            android:text="Camera" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="This step is optional. You can upload a profile picture at any time from the Profile Settings page."
+        android:layout_below="@+id/signInAlert"
+        android:text="This step is optional. You can upload a profile picture at any time from the Settings page."
         android:textAlignment="center"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/finishButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="bottom|center"
-        android:onClick="onFinishClick"
-        android:padding="16dp"
-        android:text="Main Page"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/finishButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="2"
+            android:gravity="bottom|center"
+            android:onClick="onFinishClick"
+            android:padding="16dp"
+            android:text="Upload and Finish"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <Button
+            android:id="@+id/skipButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Skip" />
+    </LinearLayout>
 
 
 </RelativeLayout>
