@@ -9,8 +9,12 @@
     <VideoView
         android:id="@+id/video_view"
         android:layout_above="@+id/btn_play_pause"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"/>
     <ImageButton
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
