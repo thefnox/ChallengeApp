@@ -166,10 +166,12 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                     Log.d("halala", post.getContent().getString("staticURL"));
                     Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(CONTENT_URL).getContent());
                     holder.contentIfPhotoView.setImageBitmap(bitmap);
+                    holder.videoStartClickTextView.setVisibility(View.GONE);
                     holder.contentIfPhotoView.setVisibility(View.VISIBLE);
 
                 } else if (CONTENT_URL.endsWith(".mp4")) {
                     //Show video here
+                    holder.contentIfPhotoView.setVisibility(View.GONE);
                     holder.videoStartClickTextView.setVisibility(View.VISIBLE);
                     holder.videoStartClickTextView.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -180,7 +182,8 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                         }
                     });
                 } else {
-                    holder.contentIfPhotoView = null;
+                    holder.contentIfPhotoView.setVisibility(View.GONE);
+                    holder.videoStartClickTextView.setVisibility(View.GONE);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
