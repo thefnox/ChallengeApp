@@ -6,12 +6,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.SurfaceTexture;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -47,10 +49,11 @@ import team10.hkr.challengeapp.Models.Post;
  * Created by Charlie on 18.05.2017.
  */
 
-public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.PostHolder> {
+public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.PostHolder> implements TextureView.SurfaceTextureListener {
 
     private ArrayList<Post> postList = new ArrayList<>();
     private LayoutInflater inflater;
+    private AppSingleton sessionManager = AppSingleton.getInstance();
 
     public PostRecyclerAdapter(Context context, ArrayList<Post> postList) {
         this.inflater = LayoutInflater.from(context);
@@ -70,6 +73,13 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
         holder.profilePhotoView.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
         holder.userNameTextView.setText("SakuraChan");
+
+       holder.followButtonTextView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               
+           }
+       });
 
         if(holder.itemView.getContext().getClass() == ProfileActivity.class) {
             final Activity activity = (Activity) holder.itemView.getContext();
@@ -204,6 +214,26 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     }
 
     @Override
+    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+
+    }
+
+    @Override
+    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+
+    }
+
+    @Override
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+        return false;
+    }
+
+    @Override
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+
+    }
+
+    @Override
     public int getItemCount() {
         return postList.size();
     }
@@ -211,8 +241,10 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     class PostHolder extends RecyclerView.ViewHolder {
 
             View container;
+            TextureView player;
             CircleImageView profilePhotoView;
             TextView userNameTextView;
+            TextView followButtonTextView;
             ImageButton deleteButtonImageButton;
             ImageButton editButtonImageButton;
             TextView challengeTagTextView;
@@ -228,8 +260,10 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
             public PostHolder(View itemView) {
                 super(itemView);
+                player = (TextureView) itemView.findViewById(R.id.player);
                 profilePhotoView = (CircleImageView) itemView.findViewById(R.id.profile_photo_post);
                 userNameTextView = (TextView) itemView.findViewById(R.id.username_post);
+                followButtonTextView = (TextView) itemView.findViewById(R.id.follow_button_post);
                 deleteButtonImageButton = (ImageButton) itemView.findViewById(R.id.delete_button_post);
                 editButtonImageButton = (ImageButton) itemView.findViewById(R.id.edit_button_post);
                 challengeTagTextView = (TextView) itemView.findViewById(R.id.challenge_tag_post);
