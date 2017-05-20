@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -37,7 +38,10 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import team10.hkr.challengeapp.Controllers.CommentActivity;
@@ -50,6 +54,7 @@ import team10.hkr.challengeapp.Controllers.SettingsActivity.CloseAccountActivity
 import team10.hkr.challengeapp.Controllers.VideoActivity;
 import team10.hkr.challengeapp.Models.Post;
 import team10.hkr.challengeapp.Models.Tag;
+import team10.hkr.challengeapp.Models.User;
 
 /**
  * Created by Charlie on 18.05.2017.
@@ -77,7 +82,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     }
 
     @Override
-    public void onBindViewHolder(PostHolder holder, int position) {
+    public void onBindViewHolder(final PostHolder holder, int position) {
 
         final Activity activity = (Activity) holder.itemView.getContext();
         final Post post = postList.get(position);
@@ -268,16 +273,94 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                     activity.startActivity(mIntent);
                 }
             });
+
+            if (Arrays.asList(post.getLikesUsersArrayList(post.getLikesUsers())).contains(AppSingleton.getInstance().getUser().getUUID())) {
+
+                holder.thumbsUpImageButton.setBackgroundColor(0xffffbb33);
+
+            }
+
             holder.thumbsUpImageButton.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
-                    //To do here martin
+
+                    final User you = AppSingleton.getInstance().getUser();
+
+                    try {
+
+                        if (post.getAuthor().getString("_id").equals(you.getUUID())){
+
+                            Toast.makeText(activity, "You cannot like your own posts", Toast.LENGTH_SHORT).show();
+                        }
+
+                        else if (Arrays.asList(post.getLikesUsersArrayList(post.getLikesUsers())).contains(you.getUUID())) {
+
+                            final String URL = "http://95.85.16.177:3000/api/post/" + post.getUUID() + "/like";
+
+                            StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    Toast.makeText(activity, "Like Removed", Toast.LENGTH_LONG).show();
+                                    holder.thumbsUpImageButton.setBackgroundColor(0x00000000);
+
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(activity, "Something went wrong", Toast.LENGTH_LONG).show();
+                                }
+
+                            }) {
+                                @Override
+                                protected Map<String, String> getParams() throws AuthFailureError {
+
+                                    Map<String, String> params = new HashMap<String, String>();
+                                    params.put("post_id", post.getUUID());
+                                    return params;
+                                }
+                            };
+
+                            RequestQueueSingleton.getInstance(activity).addToRequestQueue(stringRequest);
+                        }
+
+                        else {
+
+                            final String URL = "http://95.85.16.177:3000/api/post/" + post.getUUID() + "/like";
+
+                            StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    Toast.makeText(activity, "Post Liked", Toast.LENGTH_LONG).show();
+                                    holder.thumbsUpImageButton.setBackgroundColor(0xffffbb33);
+
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(activity, "Something went wrong", Toast.LENGTH_LONG).show();
+                                }
+
+                            }) {
+                                @Override
+                                protected Map<String, String> getParams() throws AuthFailureError {
+
+                                    Map<String, String> params = new HashMap<String, String>();
+                                    params.put("post_id", post.getUUID());
+                                    return params;
+                                }
+                            };
+
+                            RequestQueueSingleton.getInstance(activity).addToRequestQueue(stringRequest);
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
-
         }
-
-
     }
 
     @Override
