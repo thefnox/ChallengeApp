@@ -107,7 +107,8 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                     e.printStackTrace();
                 }
                 holder.userNameTextView.setText(post.getAuthor().getString("username"));
-                if(post.getAuthor().get("_id") == sessionManager.getUser().getUUID()) {
+                Log.d("authorID:", (post.getAuthor().get("_id").toString()));
+                if(post.getAuthor().get("_id").toString().equals(sessionManager.getUser().getUUID())) {
                     isSameUser = true;
                     holder.followButtonTextView.setVisibility(View.GONE);
                 }
