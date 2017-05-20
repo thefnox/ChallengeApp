@@ -33,7 +33,9 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:onClick="onContinueClick"
-            android:text="Finish" />
+            android:text="Finish"
+            android:background="#FFED4F44"
+            android:textColor="@android:color/background_light"/>
 
         <TextView
             android:id="@+id/textView6"
