@@ -98,12 +98,16 @@ public class CommentActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(CommentActivity.this, "Success", Toast.LENGTH_LONG).show();
+                        commentEditText.setText("");
+                        finish();
+                        startActivity(getIntent());
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.v("WTF", "Response; " + error.toString());
                         Toast.makeText(CommentActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                        commentEditText.setText("");
                     }
                 }) {
                     @Override
@@ -115,7 +119,8 @@ public class CommentActivity extends AppCompatActivity {
                     }
                 };
                 RequestQueueSingleton.getInstance(getBaseContext()).addToRequestQueue(stringRequest);
-                commentEditText.setText("");
+
+
             }
         });
 
