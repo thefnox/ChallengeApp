@@ -211,7 +211,8 @@
             android:layout_marginStart="10dp"
             android:text="300 Views"
             android:layout_gravity="center_vertical"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:visibility="gone"/>
         <TextView
             android:id="@+id/likes_post"
             android:layout_width="wrap_content"
