@@ -25,10 +25,12 @@ public class Post {
     private int dailyLikes;
     private int dailyViews;
     private JSONObject author;
+    private boolean isSelected;
 
     public Post(JSONObject jsonobj) throws JSONException
 
     {
+        this.isSelected = false;
         //on profile post request author returns as a string of an user id
 //        this.author = jsonobj.has("author") ? jsonobj.getJSONObject("author") : null;
         this.comments = jsonobj.has("comments") ? jsonobj.getJSONArray("comments") : null;
@@ -128,4 +130,12 @@ public class Post {
 //    public JSONObject getAuthor() {
 //        return author;
 //    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 }

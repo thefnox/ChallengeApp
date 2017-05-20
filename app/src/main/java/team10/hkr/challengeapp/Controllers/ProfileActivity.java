@@ -93,6 +93,13 @@ public class ProfileActivity extends AppCompatActivity {
                     //profileDescription = (TextView) findViewById(R.id.profile_description);
 
                     // FILL THE INFO    //  //  //  //  //  //
+                    Log.d("PPURL", "http://95.85.16.177:3000" + user.getProfilePictureURL());
+                    try {
+                        Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL("http://95.85.16.177:3000" + user.getProfilePictureURL()).getContent());
+                        profilePicture.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                     profileName.setText(String.valueOf(user.getFirstName() + " " + user.getLastName()));
                     profileUsername.setText(user.getUserName());

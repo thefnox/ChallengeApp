@@ -26,22 +26,24 @@
             android:id="@+id/recordVideoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:text="Record A Video" />
+            android:text="Record A Video"
+            android:textColor="@android:color/background_light"
+            android:background="#ed4f44"/>
 
         <Button
             android:id="@+id/takePhotoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/takenPhotoImageView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:text="Take a photo" />
+            android:text="Take a photo"
+            android:textColor="@android:color/background_light"
+            android:background="#ed4f44"/>
     </LinearLayout>
 
     <Button
@@ -49,7 +51,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Upload" />
+        android:text="Upload"
+        android:textColor="@android:color/background_light"
+        android:background="#ed4f44"/>
 
     <LinearLayout
         android:id="@+id/enterDescriptionText"

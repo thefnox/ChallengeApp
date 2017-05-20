@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.InputStream;
@@ -45,6 +46,7 @@ import team10.hkr.challengeapp.Controllers.ReportActivity;
 import team10.hkr.challengeapp.Controllers.SettingsActivity.CloseAccountActivity;
 import team10.hkr.challengeapp.Controllers.VideoActivity;
 import team10.hkr.challengeapp.Models.Post;
+import team10.hkr.challengeapp.Models.Tag;
 
 /**
  * Created by Charlie on 18.05.2017.
@@ -55,6 +57,8 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     private ArrayList<Post> postList = new ArrayList<>();
     private LayoutInflater inflater;
     private String CONTENT_URL = "";
+    private ArrayList<Tag> tags;
+    private String stringTagsHolder;
 
     public PostRecyclerAdapter(Context context, ArrayList<Post> postList) {
         this.inflater = LayoutInflater.from(context);
@@ -64,105 +68,127 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     @Override
     public PostHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.single_post, parent, false);
+        stringTagsHolder = "";
         return new PostHolder(view);
     }
 
     @Override
     public void onBindViewHolder(PostHolder holder, int position) {
 
-        final Post post = postList.get(position);
         final Activity activity = (Activity) holder.itemView.getContext();
+        final Post post = postList.get(position);
+        tags = new ArrayList<Tag>();
+        post.setSelected(true);
+        if(post.isSelected()) {
+            tags.clear();
+            try {
+                for(int i=0; i< post.getTags().length(); i++) {
+                    tags.add(new Tag(post.getTags().getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-        holder.profilePhotoView.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
-        holder.userNameTextView.setText("SakuraChan");
+            holder.profilePhotoView.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
+            holder.userNameTextView.setText("SakuraChan");
 
-       holder.followButtonTextView.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               
-           }
-       });
-
-        if(holder.itemView.getContext().getClass() == ProfileActivity.class) {
-
-            holder.editButtonImageButton.setVisibility(View.VISIBLE);
-            holder.editButtonImageButton.setOnClickListener(new View.OnClickListener() {
+            holder.followButtonTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = new Intent(activity, EditPostActivity.class);
-                    intent.putExtra("postUUID", post.getUUID());
-                    intent.putExtra("postDescription", post.getDescription());
-                    try {
-                        intent.putExtra("contentURL", "http://95.85.16.177:3000" + post.getContent().getString("staticURL"));
-                        intent.putExtra("staticURL", post.getContent().getString("staticURL"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                }
+            });
+
+
+
+            if(holder.itemView.getContext().getClass() == ProfileActivity.class) {
+
+                holder.editButtonImageButton.setVisibility(View.VISIBLE);
+                holder.editButtonImageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(activity, EditPostActivity.class);
+                        intent.putExtra("postUUID", post.getUUID());
+                        intent.putExtra("postDescription", post.getDescription());
+                        try {
+                            intent.putExtra("contentURL", "http://95.85.16.177:3000" + post.getContent().getString("staticURL"));
+                            intent.putExtra("staticURL", post.getContent().getString("staticURL"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        activity.startActivity(intent);
                     }
-                    activity.startActivity(intent);
-                }
-            });
+                });
 
-            holder.deleteButtonImageButton.setVisibility(View.VISIBLE);
-            holder.deleteButtonImageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                holder.deleteButtonImageButton.setVisibility(View.VISIBLE);
+                holder.deleteButtonImageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                    new AlertDialog.Builder(activity)
+                        new AlertDialog.Builder(activity)
 
-                            .setTitle("Delete Post")
-                            .setMessage("Are you sure you want to delete this post?")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
+                                .setTitle("Delete Post")
+                                .setMessage("Are you sure you want to delete this post?")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
 
-                                    final String URL = "http://95.85.16.177:3000/api/post/"+post.getUUID();
+                                        final String URL = "http://95.85.16.177:3000/api/post/"+post.getUUID();
 
-                                    StringRequest stringRequest = new StringRequest(Request.Method.DELETE, URL, new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            Toast.makeText(activity,"Post Deleted", Toast.LENGTH_LONG).show();
-                                            Intent intent = new Intent(activity, ProfileActivity.class);
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            activity.startActivity(intent);
+                                        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, URL, new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                Toast.makeText(activity,"Post Deleted", Toast.LENGTH_LONG).show();
+                                                Intent intent = new Intent(activity, ProfileActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                activity.startActivity(intent);
 
-                                        }
-                                    }, new Response.ErrorListener() {
-                                        @Override
-                                        public void onErrorResponse(VolleyError error) {
-                                            Toast.makeText(activity, "Something went wrong", Toast.LENGTH_LONG).show();
-                                        }
-                                    });
+                                            }
+                                        }, new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                Toast.makeText(activity, "Something went wrong", Toast.LENGTH_LONG).show();
+                                            }
+                                        });
 
-                                    RequestQueueSingleton.getInstance(activity).addToRequestQueue(stringRequest);
+                                        RequestQueueSingleton.getInstance(activity).addToRequestQueue(stringRequest);
 
 
-                                }
-                            })
-                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
 
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                }
-            });
-        }
-        holder.challengeTagTextView.setText("#Not Implemented Yet");
-        holder.challengeDescriptionTextView.setText(post.getDescription());
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+                    }
+                });
+            }
 
-        //              CONTENT             //
+            //       Post Tags
+            stringTagsHolder = "";
+            for(int i = 0; i < tags.size(); i++) {
+                stringTagsHolder = stringTagsHolder + tags.get(i).getName() + " ";
+            }
+            holder.challengeTagTextView.setText(stringTagsHolder);
+            //       Post description
+            holder.challengeDescriptionTextView.setText(post.getDescription());
 
-        try {
-            CONTENT_URL = "http://95.85.16.177:3000" + post.getContent().getString("staticURL");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+            //              CONTENT             //
 
-        try {
+            try {
+                CONTENT_URL = "http://95.85.16.177:3000" + post.getContent().getString("staticURL");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            try {
                 if (isJpg(CONTENT_URL)) {
+                    //Images here
                     Log.d("halala", post.getContent().getString("staticURL"));
                     Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(CONTENT_URL).getContent());
                     holder.contentIfPhotoView.setImageBitmap(bitmap);
@@ -170,7 +196,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                     holder.contentIfPhotoView.setVisibility(View.VISIBLE);
 
                 } else if (CONTENT_URL.endsWith(".mp4")) {
-                    //Show video here
+                    //Videos here
                     holder.contentIfPhotoView.setVisibility(View.GONE);
                     holder.videoStartClickTextView.setVisibility(View.VISIBLE);
                     holder.videoStartClickTextView.setOnClickListener(new View.OnClickListener() {
@@ -190,28 +216,31 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             }
 
 
-        //              LIKES AND VIEWS COUNTERS                //
-        holder.viewsTextView.setText(post.getViews() + R.string.views);
-        holder.likesTextView.setText(post.getLikes() + R.string.likes);
+            //              LIKES AND VIEWS COUNTERS                //
+            holder.viewsTextView.setText(post.getViews() + R.string.views);
+            holder.likesTextView.setText(post.getLikes() + R.string.likes);
 
-                        //££##££##      CLICK_LISTENERS     ##££##££\\
+            //££##££##      CLICK_LISTENERS     ##££##££\\
 
-        holder.commentImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mIntent = new Intent(activity, CommentActivity.class);
-                mIntent.putExtra("post_id", post.getUUID());
-                activity.startActivity(mIntent);
-            }
-        });
-        holder.flagImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mIntent = new Intent(activity, ReportActivity.class);
-                mIntent.putExtra("post_id", post.getUUID());
-                activity.startActivity(mIntent);
-            }
-        });
+            holder.commentImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent mIntent = new Intent(activity, CommentActivity.class);
+                    mIntent.putExtra("post_id", post.getUUID());
+                    activity.startActivity(mIntent);
+                }
+            });
+            holder.flagImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent mIntent = new Intent(activity, ReportActivity.class);
+                    mIntent.putExtra("post_id", post.getUUID());
+                    activity.startActivity(mIntent);
+                }
+            });
+        }
+
+
     }
 
     @Override
