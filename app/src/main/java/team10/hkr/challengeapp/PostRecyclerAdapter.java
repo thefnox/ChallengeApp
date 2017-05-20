@@ -289,6 +289,14 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 public void onClick(View v) {
                     Intent mIntent = new Intent(activity, ReportActivity.class);
                     mIntent.putExtra("post_id", post.getUUID());
+                    try {
+                        mIntent.putExtra("username", post.getAuthor().getString("username"));
+                        mIntent.putExtra("contentURL", "http://95.85.16.177:3000" + post.getContent().getString("staticURL"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    mIntent.putExtra("tags", holder.challengeTagTextView.getText());
                     activity.startActivity(mIntent);
                 }
             });

@@ -21,7 +21,7 @@
 
         <ImageView
 
-            android:id="@+id/profilePicture"
+            android:id="@+id/postBitmap"
             android:layout_width="match_parent"
             android:layout_height="187dp"
             android:layout_weight="1"
@@ -73,7 +73,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="top|left"
-            android:hint="Optional: Enter a short description..."
+            android:hint="Enter a short description..."
             android:lines="10"
             android:maxLength="150"
             android:maxLines="10"
