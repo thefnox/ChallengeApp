@@ -35,6 +35,7 @@ import team10.hkr.challengeapp.Controllers.ProfileActivity;
 import team10.hkr.challengeapp.Models.Comment;
 import team10.hkr.challengeapp.Models.User;
 import team10.hkr.challengeapp.R;
+import team10.hkr.challengeapp.RequestQueueSingleton;
 import team10.hkr.challengeapp.SharedPref;
 
 public class CommentActivity extends AppCompatActivity {
@@ -85,7 +86,7 @@ public class CommentActivity extends AppCompatActivity {
             }
         });
 
-        Volley.newRequestQueue(this).add(jsonObjectRequest);
+        RequestQueueSingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
 
         //Adding a comment with the button ad the editText
         final String COMMENT_KEY = "comment";
@@ -113,7 +114,7 @@ public class CommentActivity extends AppCompatActivity {
                         return params;
                     }
                 };
-                Volley.newRequestQueue(CommentActivity.this).add(stringRequest);
+                RequestQueueSingleton.getInstance(getBaseContext()).addToRequestQueue(stringRequest);
                 commentEditText.setText("");
             }
         });
