@@ -271,8 +271,9 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
 
             //              LIKES AND VIEWS COUNTERS                //
-            holder.viewsTextView.setText(post.getViews() + R.string.views);
-            holder.likesTextView.setText(post.getLikes() + R.string.likes);
+            holder.viewsTextView.setText(String.valueOf(post.getViews())  + " Views");
+            holder.likesTextView.setText(String.valueOf(post.getLikes())  + " Likes");
+            Log.d("LIKES:", String.valueOf(post.getLikes()));
 
             //££##££##      CLICK_LISTENERS     ##££##££\\
 
