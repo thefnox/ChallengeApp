@@ -7,13 +7,16 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.CookieManager;
+import java.util.ArrayList;
 
 import team10.hkr.challengeapp.Models.User;
 
@@ -28,6 +31,7 @@ public class AppSingleton {
     private User user;
     private User updatedUser;
     private Context context;
+    private ArrayList<String> followingUsers = new ArrayList<>();
 
     private AppSingleton() {
 
@@ -75,5 +79,31 @@ public class AppSingleton {
             this.user = updatedUser;
         }
         updatedUser = null;
+    }
+    public void updateFollowingUsers() {
+        final String URL = "95.85.16.177:3000/api/user/" + user.getUUID() + "/following";
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null, new Response.Listener<JSONArray>(){
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for(int i = 0; i < response.length(); i++) {
+                        followingUsers.add(response.getJSONObject(i).getString("_id"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("WTF on AppSingleton", "Err: " + error.getLocalizedMessage());
+            }
+        });
+
+        Volley.newRequestQueue(context.getApplicationContext()).add(jsonArrayRequest);
+    }
+
+    public ArrayList<String> getFollowingUsers() {
+        return followingUsers;
     }
 }

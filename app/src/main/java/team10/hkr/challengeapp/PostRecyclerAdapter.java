@@ -6,51 +6,36 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.SurfaceTexture;
-import android.net.Uri;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 import team10.hkr.challengeapp.Controllers.CommentActivity;
 import team10.hkr.challengeapp.Controllers.EditPostActivity;
-import team10.hkr.challengeapp.Controllers.LoginActivity;
-import team10.hkr.challengeapp.Controllers.PrimaryActivity;
 import team10.hkr.challengeapp.Controllers.ProfileActivity;
 import team10.hkr.challengeapp.Controllers.ReportActivity;
-import team10.hkr.challengeapp.Controllers.SettingsActivity.CloseAccountActivity;
 import team10.hkr.challengeapp.Controllers.VideoActivity;
 import team10.hkr.challengeapp.Models.Post;
 import team10.hkr.challengeapp.Models.Tag;
@@ -122,12 +107,46 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 e.printStackTrace();
             }
             if(!isSameUser) {
-                holder.followButtonTextView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Follow logic goes here
+                Log.d("AmI", "Here");
+                try {
+                    if(isFollowing(post.getAuthor().getString("_id"))) {
+                        holder.followButtonTextView.setText(String.valueOf("Unfollow"));
                     }
-                });
+                    if(!isFollowing(post.getAuthor().getString("_id"))) {
+                        Log.d("AmI", "Here2");
+                        holder.followButtonTextView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String author_id = "";
+                                try {
+                                    author_id = post.getAuthor().getString("_id");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                String url_follow = "http://95.85.16.177:3000/api/user/" + author_id + "/follow";
+                                StringRequest stringRequest = new StringRequest(Request.Method.GET, url_follow, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        if(holder.followButtonTextView.getText().equals("Follow")) {
+                                            holder.followButtonTextView.setText(String.valueOf("Unfollow"));
+                                        } else {
+                                            holder.followButtonTextView.setText(String.valueOf("Follow"));
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Toast.makeText(activity, "Something went wrong", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                RequestQueueSingleton.getInstance(activity).addToRequestQueue(stringRequest);
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             if(holder.itemView.getContext().getClass() == ProfileActivity.class) {
@@ -416,6 +435,16 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             Log.d("JPGTESTERURL",url);
             Log.d("JPGTESTER", tester);
             if(tester.equals("jpg")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isFollowing(String id) {
+
+        for(int i = 0; i < sessionManager.getFollowingUsers().size(); i++) {
+            if (sessionManager.getFollowingUsers().get(i).equals(id)) {
                 return true;
             }
         }

@@ -58,8 +58,6 @@ public class Tab3CustomFeed extends Fragment {
                         postArrayList.add(new Post(response.getJSONObject(i)));
                         Log.d("postarraylistsize2: ", String.valueOf(postArrayList.size()));
                     }
-                    Log.v("YUPPI", "Response; " + " FIND ME CHARLIE " + postArrayList.size() + " - >> "
-                            + postArrayList.get(0).getDescription() + response.toString() + " " + postArrayList.get(0).getComments().length() + " " + postArrayList.get(1).getComments().length());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
