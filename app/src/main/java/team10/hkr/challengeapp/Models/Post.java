@@ -31,8 +31,7 @@ public class Post {
 
     {
         this.isSelected = false;
-        //on profile post request author returns as a string of an user id
-//        this.author = jsonobj.has("author") ? jsonobj.getJSONObject("author") : null;
+        this.author = jsonobj.has("author") ? jsonobj.getJSONObject("author") : null;
         this.comments = jsonobj.has("comments") ? jsonobj.getJSONArray("comments") : null;
         this.tags = jsonobj.has("tags")? jsonobj.getJSONArray("tags") : null;
         this.content = jsonobj.has("content")? jsonobj.getJSONObject("content") : null;
@@ -127,9 +126,9 @@ public class Post {
         return comments;
     }
 
-//    public JSONObject getAuthor() {
-//        return author;
-//    }
+    public JSONObject getAuthor() {
+        return author;
+    }
 
     public boolean isSelected() {
         return isSelected;

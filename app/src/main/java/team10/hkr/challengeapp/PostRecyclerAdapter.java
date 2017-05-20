@@ -31,7 +31,9 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +56,7 @@ import team10.hkr.challengeapp.Models.Tag;
 
 public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.PostHolder> {
 
+    private AppSingleton sessionManager = AppSingleton.getInstance();
     private ArrayList<Post> postList = new ArrayList<>();
     private LayoutInflater inflater;
     private String CONTENT_URL = "";
@@ -89,17 +92,36 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 e.printStackTrace();
             }
 
-            holder.profilePhotoView.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
-            holder.userNameTextView.setText("SakuraChan");
-
-            holder.followButtonTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
+            //holder.profilePhotoView.setImageResource(R.drawable.com_facebook_profile_picture_blank_portrait);
+            boolean isSameUser = false;
+            try {
+                Log.d("PPIMURL", post.getAuthor().getString("profileImageURL"));
+                try {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+                    Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL("http://95.85.16.177:3000" + post.getAuthor().getString("profileImageURL")).getContent());
+                    holder.profilePhotoView.setImageBitmap(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            });
+                holder.userNameTextView.setText(post.getAuthor().getString("username"));
+                if(post.getAuthor().get("_id") == sessionManager.getUser().getUUID()) {
+                    isSameUser = true;
+                    holder.followButtonTextView.setVisibility(View.GONE);
+                }
 
-
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if(!isSameUser) {
+                holder.followButtonTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Follow logic goes here
+                    }
+                });
+            }
 
             if(holder.itemView.getContext().getClass() == ProfileActivity.class) {
 
