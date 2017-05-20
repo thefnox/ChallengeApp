@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +15,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 import team10.hkr.challengeapp.CustomListAdapter;
+import team10.hkr.challengeapp.Models.Post;
+import team10.hkr.challengeapp.PostRecyclerAdapter;
 import team10.hkr.challengeapp.R;
 
 /**
@@ -23,8 +36,10 @@ import team10.hkr.challengeapp.R;
 
 public class Tab1Winning extends Fragment {
 
-    private ListView listView;
+    private RecyclerView winningRecyclerView;
+    private PostRecyclerAdapter adapter;
     private View view;
+    private ArrayList<Post> postArrayList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,41 +51,37 @@ public class Tab1Winning extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        requestForFeed();
+    }
 
-        //Instead of this we will be gettin our data from the server as an hashmap
-            //where we can separate the information as 'thumbnail' 'tag' 'username' or
-                // as whatever else we want.
-        ArrayList<Object> taglist = new ArrayList<>();
-        taglist.add("#Bucket");
-        taglist.add("#OneFinger");
-        taglist.add("#Planking");
-        taglist.add("#Mannequin");
-        taglist.add("#DontLaugh");
-        taglist.add("#CantThinkOFAnyOther");
-        taglist.add("#IStillNeedMore");
-        taglist.add("#Dummies");
-        taglist.add("#ToFill");
-        taglist.add("#ThisList");
-
-        //instead of getting 'this' I used getActivity() to get the activity of this fragment
-        //If this was a regular activity we would use a simple 'this' or 'Tab1Winning.this'
-        CustomListAdapter adapter = new CustomListAdapter(getActivity(), taglist);
-        //We found our ListView which is in the tab1_primary_winning layout
-        listView = (ListView) view.findViewById(R.id.winning_list);
-        listView.setAdapter(adapter);
-        //To add action for the list rows on click
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void requestForFeed() {
+        final String URL = "http://95.85.16.177:3000/api/post/winning";
+        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null, new Response.Listener<JSONArray>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onResponse(JSONArray response) {
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        postArrayList.add(new Post(response.getJSONObject(i)));
+                        Log.d("WinningSize: ", String.valueOf(postArrayList.size()));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                winningRecyclerView = (RecyclerView) view.findViewById(R.id.winning_content_recycler_view);
+                winningRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                adapter = new PostRecyclerAdapter(getActivity(), postArrayList);
+                winningRecyclerView.setAdapter(adapter);
+                Log.d("postarraylistsize: ", String.valueOf(postArrayList.size()));
 
-                Intent mIntent = new Intent(getActivity(), PostActivity.class);                                                                         //
-                startActivity(mIntent);
-
-                int myPosition = position;
-                String itemClickedId = listView.getItemAtPosition(myPosition).toString();
-                Toast.makeText(getActivity().getApplicationContext(), "ID Clicked: " + itemClickedId, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("WTF", "Err: " + error.getLocalizedMessage());
             }
         });
 
+        Volley.newRequestQueue(getActivity()).add(jsonArrayRequest);
     }
+
 }

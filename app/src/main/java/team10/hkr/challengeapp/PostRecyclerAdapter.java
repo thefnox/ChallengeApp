@@ -199,6 +199,12 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                     //Videos here
                     holder.contentIfPhotoView.setVisibility(View.GONE);
                     holder.videoStartClickTextView.setVisibility(View.VISIBLE);
+                    holder.videoThumbnail.setVisibility(View.VISIBLE);
+                    try {
+                        holder.videoThumbnail.setImageBitmap(GetVideoFrame.retriveVideoFrameFromVideo(CONTENT_URL));
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
                     holder.videoStartClickTextView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -252,6 +258,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
             View container;
             TextView videoStartClickTextView;
+            ImageView videoThumbnail;
             CircleImageView profilePhotoView;
             TextView userNameTextView;
             TextView followButtonTextView;
@@ -269,6 +276,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
             public PostHolder(View itemView) {
                 super(itemView);
+                videoThumbnail = (ImageView) itemView.findViewById(R.id.video_thumbnail_post);
                 videoStartClickTextView = (TextView) itemView.findViewById(R.id.video_start_text);
                 profilePhotoView = (CircleImageView) itemView.findViewById(R.id.profile_photo_post);
                 userNameTextView = (TextView) itemView.findViewById(R.id.username_post);
