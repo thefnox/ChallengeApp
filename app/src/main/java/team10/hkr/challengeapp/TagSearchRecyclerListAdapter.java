@@ -2,6 +2,7 @@ package team10.hkr.challengeapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+
+import team10.hkr.challengeapp.Controllers.SearchResultActivity;
 import team10.hkr.challengeapp.Models.Tag;
 
 /**
@@ -45,10 +48,19 @@ public class TagSearchRecyclerListAdapter extends RecyclerView.Adapter<TagSearch
         final Activity activity = (Activity) holder.itemView.getContext();
         final Tag tag = tagArrayList.get(position);
         //holder.tagNameTextView.setText(tag.getName());
+        //should've been tag.getName but this was implemented this way in the server by accident I assume
         Log.d("TagName", tag.getUUID());
         Log.d("Whtthe", "1234");
         holder.tagNameTextView.setText(tag.getUUID());
         holder.likesTextView.setText("3520 Likes");
+        holder.tagNameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, SearchResultActivity.class);
+                intent.putExtra("KEY_WORD", tag.getUUID().substring(1));
+                activity.startActivity(intent);
+            }
+        });
 
     }
 

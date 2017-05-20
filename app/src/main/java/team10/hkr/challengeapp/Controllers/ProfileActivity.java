@@ -130,8 +130,6 @@ public class ProfileActivity extends Activity {
                     for(int i=response.length()-1; i >= 0; i--) {
                         postArrayList.add(new Post(response.getJSONObject(i)));
                     }
-                    Log.v("YUPPI", "Response; ##requestfeed profile## " + response.length() + " " + postArrayList.size() + " - >> "
-                            + postArrayList.get(0).getDescription() + response.toString() + " " + postArrayList.get(0).getComments().length() + " " + postArrayList.get(1).getComments().length());
 
                     profileRecyclerView = (RecyclerView) findViewById(R.id.profile_feed_recycler);
                     profileRecyclerView.setLayoutManager(new LinearLayoutManager(ProfileActivity.this));

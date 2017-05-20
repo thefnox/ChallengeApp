@@ -1,10 +1,12 @@
 package team10.hkr.challengeapp;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -18,6 +20,7 @@ import org.json.JSONObject;
 import java.net.CookieManager;
 import java.util.ArrayList;
 
+import team10.hkr.challengeapp.Controllers.PrimaryActivity;
 import team10.hkr.challengeapp.Models.User;
 
 /**
@@ -99,8 +102,10 @@ public class AppSingleton {
                 Log.v("WTF on AppSingleton", "Err: " + error.getLocalizedMessage());
             }
         });
-
-        Volley.newRequestQueue(context.getApplicationContext()).add(jsonArrayRequest);
+        //THIS IS IT MARTIN, DO NOT DISAPPOINT ME!
+        //we need an activity/context pass in here but since this is a separate class(not an activity or anything else)
+        //I cant get any context to pass for the request
+//        RequestQueueSingleton.getInstance().addToRequestQueue(jsonArrayRequest);
     }
 
     public ArrayList<String> getFollowingUsers() {
