@@ -268,6 +268,13 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                     activity.startActivity(mIntent);
                 }
             });
+            holder.thumbsUpImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //To do here martin
+                }
+            });
+
         }
 
 
