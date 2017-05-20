@@ -32,47 +32,62 @@
             app:srcCompat="@drawable/profile_picture_test" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/reportProfileName"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="Profile Name Here"
-        android:textAlignment="center"
-        android:textSize="18sp" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/reportHashtag"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="#HashtagOfPost"
-        android:textAlignment="center"
-        android:textSize="18sp" />
+        <TextView
+            android:layout_alignParentTop="true"
+            android:id="@+id/reportProfileName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Profile Name Here"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
-    <Spinner
-        android:id="@+id/reportReasons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:textAlignment="center"
-        android:visibility="visible" />
+        <TextView
+            android:id="@+id/reportHashtag"
+            android:layout_below="@id/reportProfileName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="#HashtagOfPost"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/reportDescription"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="top|left"
-        android:hint="Optional: Enter a short description..."
-        android:lines="10"
-        android:maxLength="150"
-        android:maxLines="8"
-        android:minLines="11"
-        android:scrollbars="vertical" />
+        <Spinner
+            android:layout_below="@id/reportHashtag"
+            android:id="@+id/reportReasons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:visibility="visible" />
 
-    <Button
-        android:id="@+id/submitReportButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit Report" />
+        <EditText
+            android:layout_below="@id/reportReasons"
+            android:id="@+id/reportDescription"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:hint="Optional: Enter a short description..."
+            android:lines="10"
+            android:maxLength="150"
+            android:maxLines="10"
+            android:minLines="7"
+            android:scrollbars="vertical" />
+
+        <Button
+            android:id="@+id/submitReportButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit Report"
+            android:layout_alignParentBottom="true"
+            android:background="#FFED4F44"
+            android:textColor="@android:color/background_light"/>
+
+    </RelativeLayout>
+
+
 </LinearLayout>

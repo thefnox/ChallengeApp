@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Change Name" />
+        android:text="Change Name"
+        android:background="#FFED4F44"
+        android:textColor="@android:color/background_light" />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -63,18 +63,22 @@
                 android:id="@+id/galleryButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="false"
-                android:layout_alignParentStart="false"
                 android:layout_weight="1"
-                android:text="Gallery" />
+                android:text="Gallery"
+                android:background="#FFED4F44"
+                android:layout_marginEnd="1dp"
+                android:textColor="@android:color/background_light"/>
 
             <Button
                 android:id="@+id/cameraButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="false"
                 android:layout_weight="1"
-                android:text="Camera" />
+                android:text="Camera"
+                android:layout_marginStart="1dp"
+                android:background="#FFED4F44"
+                android:textColor="@android:color/background_light"
+                />
 
         </LinearLayout>
 
@@ -104,7 +108,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Change Profile Picture" />
+        android:text="Change Profile Picture"
+        android:background="#FFED4F44"
+        android:textColor="@android:color/background_light"/>
 
     <ImageView
         android:id="@+id/newProfilePictureImageView"

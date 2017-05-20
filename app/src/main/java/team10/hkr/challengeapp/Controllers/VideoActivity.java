@@ -18,48 +18,26 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
     ProgressDialog mDialog;
     VideoView videoView;
     ImageButton playPauseButton;
+    String intentData;
+    Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
-//                    Uri video_uri = Uri.parse(CONTENT_URL);
-//                    holder.contentIfVideoView.setVideoURI(video_uri);
-//                    holder.contentIfVideoView.setMediaController(mediaController);
-//                    Log.d("CheckURLifValid", CONTENT_URL);
-
-
         videoView = (VideoView) findViewById(R.id.video_view);
         playPauseButton = (ImageButton) findViewById(R.id.btn_play_pause);
         playPauseButton.setOnClickListener(this);
-    }
 
-    @Override
-    public void onClick(View v) {
         mDialog = new ProgressDialog(VideoActivity.this);
         mDialog.setMessage("Please wait...");
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
-        try {
-            if(!videoView.isPlaying()) {
-                Log.d("VideoURL:", getIntent().getStringExtra("VideoURL"));
-                Uri uri = Uri.parse(getIntent().getStringExtra("VideoURL"));
-                videoView.setVideoURI(uri);
-                videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        playPauseButton.setImageResource(R.drawable.ic_play_arrow);
-                    }
-                });
-            } else {
-                videoView.pause();
-                playPauseButton.setImageResource(R.drawable.ic_play_arrow);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
+        intentData = getIntent().getStringExtra("VideoURL");
+        uri = Uri.parse(intentData);
+        videoView.setVideoURI(uri);
         videoView.requestFocus();
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -70,5 +48,36 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
                 playPauseButton.setImageResource(R.drawable.ic_pause_button);
             }
         });
+        if (videoView.isPlaying()) {
+            playPauseButton.setImageResource(R.drawable.ic_pause_button);
+        }
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                playPauseButton.setImageResource(R.drawable.ic_play_arrow);
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if (videoView.isPlaying()) {
+            videoView.pause();
+            playPauseButton.setImageResource(R.drawable.ic_play_arrow);
+        }
+        if (!videoView.isPlaying()) {
+            videoView.resume();
+            playPauseButton.setImageResource(R.drawable.ic_pause_button);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        videoView.setVideoURI(null);
+        videoView.setMediaController(null);
+        uri = null;
+        intentData = null;
+        super.onBackPressed();
     }
 }

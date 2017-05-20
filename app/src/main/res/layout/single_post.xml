@@ -96,8 +96,7 @@
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="306dp"
-        android:background="@android:color/darker_gray">
+        android:layout_height="306dp">
         <ImageView
             android:id="@+id/content_view_post"
             android:layout_width="match_parent"

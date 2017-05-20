@@ -76,8 +76,10 @@
             android:id="@+id/editPostButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="Edit Post" />
+            android:text="Edit Post"
+            android:background="#FFED4F44"
+            android:layout_gravity="bottom"
+            android:textColor="@android:color/background_light"/>
 
     </LinearLayout>
 
