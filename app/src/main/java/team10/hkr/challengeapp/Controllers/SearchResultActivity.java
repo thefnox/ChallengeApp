@@ -1,10 +1,13 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.app.Activity;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -20,7 +23,7 @@ import team10.hkr.challengeapp.Models.Post;
 import team10.hkr.challengeapp.PostRecyclerAdapter;
 import team10.hkr.challengeapp.R;
 
-public class SearchResultActivity extends AppCompatActivity {
+public class SearchResultActivity extends Activity {
 
     private ArrayList<Post> postArrayList = new ArrayList<Post>();
     private PostRecyclerAdapter resultAdapter;

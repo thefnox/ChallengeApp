@@ -44,7 +44,7 @@ import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.RequestQueueSingleton;
 import team10.hkr.challengeapp.SharedPref;
 
-public class UploadPostActivity extends AppCompatActivity {
+public class UploadPostActivity extends Activity {
 
     ImageView photo;
     private static final Pattern HASHTAG_MATCH =

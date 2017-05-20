@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -14,7 +15,7 @@ import android.widget.VideoView;
 
 import team10.hkr.challengeapp.R;
 
-public class VideoActivity extends AppCompatActivity implements View.OnClickListener {
+public class VideoActivity extends Activity implements View.OnClickListener {
     ProgressDialog mDialog;
     VideoView videoView;
     ImageButton playPauseButton;
@@ -24,6 +25,7 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         setContentView(R.layout.activity_video);
 
         videoView = (VideoView) findViewById(R.id.video_view);

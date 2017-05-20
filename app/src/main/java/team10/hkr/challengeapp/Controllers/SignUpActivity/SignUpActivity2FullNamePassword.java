@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers.SignUpActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,7 @@ import java.util.regex.Pattern;
 
 import team10.hkr.challengeapp.R;
 
-public class SignUpActivity2FullNamePassword extends AppCompatActivity {
+public class SignUpActivity2FullNamePassword extends Activity {
 
     private static final Pattern VALID_PASSWORD =
             Pattern.compile("^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{10,}$");

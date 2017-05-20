@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team10.hkr.challengeapp.Controllers.UploadPostActivity">
+    tools:context="team10.hkr.challengeapp.Controllers.UploadPostActivity"
+    app:theme="@style/AppTheme.NoActionBar">
 
     <ImageView
         android:id="@+id/takenPhotoImageView"

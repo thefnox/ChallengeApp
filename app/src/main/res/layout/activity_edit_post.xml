@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:layout_above="@+id/editPostButton"
     android:layout_alignParentBottom="true"
-    tools:context="team10.hkr.challengeapp.Controllers.EditPostActivity">
+    tools:context="team10.hkr.challengeapp.Controllers.EditPostActivity"
+    app:theme="@style/AppTheme.NoActionBar">
 
 
     <LinearLayout

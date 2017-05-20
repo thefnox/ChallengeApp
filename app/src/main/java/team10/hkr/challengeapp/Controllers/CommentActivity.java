@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +39,7 @@ import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.RequestQueueSingleton;
 import team10.hkr.challengeapp.SharedPref;
 
-public class CommentActivity extends AppCompatActivity {
+public class CommentActivity extends Activity {
 
     private ListView commentListView;
     private String data;

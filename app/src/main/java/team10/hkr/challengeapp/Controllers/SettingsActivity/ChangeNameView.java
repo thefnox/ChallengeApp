@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers.SettingsActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.RequestQueueSingleton;
 import team10.hkr.challengeapp.SharedPref;
 
-public class ChangeNameView extends AppCompatActivity {
+public class ChangeNameView extends Activity {
 
 
 

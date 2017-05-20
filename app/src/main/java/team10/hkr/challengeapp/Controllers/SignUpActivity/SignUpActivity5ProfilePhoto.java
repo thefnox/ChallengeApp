@@ -49,7 +49,7 @@ import team10.hkr.challengeapp.SharedPref;
 
 import static team10.hkr.challengeapp.Controllers.SettingsActivity.ChangeProfilePictureActivity.getPath;
 
-public class SignUpActivity5ProfilePhoto extends AppCompatActivity {
+public class SignUpActivity5ProfilePhoto extends Activity {
 
     AppSingleton sessionManager = AppSingleton.getInstance();
     static final int CAM_REQUEST = 1;

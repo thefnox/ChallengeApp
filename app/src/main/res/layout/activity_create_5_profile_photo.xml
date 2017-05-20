@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controllers.SignUpActivity.SignUpActivity5ProfilePhoto">
+    tools:context=".Controllers.SignUpActivity.SignUpActivity5ProfilePhoto"
+    app:theme="@style/AppTheme.NoActionBar">
 
     <ImageView
         android:id="@+id/createProfilePictureImageView"

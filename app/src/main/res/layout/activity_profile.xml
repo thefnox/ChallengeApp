@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="team10.hkr.challengeapp.Controllers.ProfileActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:theme="@style/AppTheme.NoActionBar">
     
     <LinearLayout
         android:layout_width="match_parent"

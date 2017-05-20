@@ -91,7 +91,8 @@
         android:layout_below="@+id/relativeLayout2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:text="Selected picture:" />
+        android:text="Selected picture:"
+        app:theme="@style/AppTheme.NoActionBar"/>
 
     <TextView
         android:id="@+id/newPicturePath"

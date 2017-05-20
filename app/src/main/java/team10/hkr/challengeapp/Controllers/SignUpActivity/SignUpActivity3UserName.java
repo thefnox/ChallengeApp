@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers.SignUpActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ import team10.hkr.challengeapp.Models.User;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.RequestQueueSingleton;
 
-public class SignUpActivity3UserName extends AppCompatActivity {
+public class SignUpActivity3UserName extends Activity {
 
 
 

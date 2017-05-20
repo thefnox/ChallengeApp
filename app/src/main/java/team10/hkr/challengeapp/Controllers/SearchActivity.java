@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ import team10.hkr.challengeapp.PostRecyclerAdapter;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.TagSearchRecyclerListAdapter;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends Activity {
 
     AppSingleton sessionManager = AppSingleton.getInstance();
     private ArrayList<Tag> tagArrayList = new ArrayList<Tag>();

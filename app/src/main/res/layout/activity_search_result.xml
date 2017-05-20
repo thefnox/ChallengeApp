@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team10.hkr.challengeapp.Controllers.SearchResultActivity">
+    tools:context="team10.hkr.challengeapp.Controllers.SearchResultActivity"
+    app:theme="@style/AppTheme.NoActionBar">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_result_recycler_view_search"

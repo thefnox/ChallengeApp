@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers.SignUpActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +9,7 @@ import android.widget.EditText;
 
 import team10.hkr.challengeapp.R;
 
-public class SignUpActivity1Email extends AppCompatActivity {
+public class SignUpActivity1Email extends Activity {
 
 
 

@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers.SettingsActivity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -18,7 +19,7 @@ import team10.hkr.challengeapp.Controllers.LoginActivity;
 import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.RequestQueueSingleton;
 
-public class CloseAccountActivity extends AppCompatActivity {
+public class CloseAccountActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

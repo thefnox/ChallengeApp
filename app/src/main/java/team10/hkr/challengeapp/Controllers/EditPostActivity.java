@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -39,7 +40,7 @@ import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.RequestQueueSingleton;
 import team10.hkr.challengeapp.SharedPref;
 
-public class EditPostActivity extends AppCompatActivity {
+public class EditPostActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

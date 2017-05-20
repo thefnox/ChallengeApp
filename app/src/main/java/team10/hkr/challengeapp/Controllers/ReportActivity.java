@@ -16,7 +16,7 @@ import org.w3c.dom.Text;
 
 import team10.hkr.challengeapp.R;
 
-public class ReportActivity extends AppCompatActivity {
+public class ReportActivity extends Activity {
 
     private Spinner reportSpinner;
     private ArrayAdapter<CharSequence> spinnerAdapter;

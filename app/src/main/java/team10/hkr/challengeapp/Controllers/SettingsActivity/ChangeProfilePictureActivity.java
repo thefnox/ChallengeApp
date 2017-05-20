@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers.SettingsActivity;
 
+import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -42,7 +43,7 @@ import team10.hkr.challengeapp.R;
 import team10.hkr.challengeapp.RequestQueueSingleton;
 import team10.hkr.challengeapp.SharedPref;
 
-public class ChangeProfilePictureActivity extends AppCompatActivity {
+public class ChangeProfilePictureActivity extends Activity {
 
     static final int CAM_REQUEST = 1;
     private final int PICK_IMAGE_REQUEST = 2;

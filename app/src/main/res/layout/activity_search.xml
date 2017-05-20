@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="team10.hkr.challengeapp.Controllers.SearchActivity"
     android:background="@android:color/background_light"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:theme="@style/AppTheme.NoActionBar">
 
     <LinearLayout
         android:orientation="horizontal"

@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -54,7 +55,7 @@ import team10.hkr.challengeapp.R;
 
 import static android.R.attr.id;
 
-public class PostActivity extends AppCompatActivity {
+public class PostActivity extends Activity {
 
     AppSingleton sessionManager = AppSingleton.getInstance();
     Post post;

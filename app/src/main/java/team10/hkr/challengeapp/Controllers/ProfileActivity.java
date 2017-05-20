@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -54,7 +55,7 @@ import team10.hkr.challengeapp.R;
 
 import static java.security.AccessController.getContext;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends Activity {
 
     private AppSingleton sessionManager = AppSingleton.getInstance();
     private ImageView profilePicture;
