@@ -29,7 +29,6 @@ public class User {
     private int commentCount;
     private boolean isAdmin;
 
-
     public User(JSONObject jsonObject) throws JSONException {
         this.posts = jsonObject.has("posts") ? jsonObject.getJSONArray("posts") : null;
         this.isAdmin = jsonObject.has("isAdmin") ? jsonObject.getBoolean("isAdmin") : false;
@@ -49,7 +48,6 @@ public class User {
         this.twitterHandle = jsonObject.has("twitterHandle") ? jsonObject.getString("twitterHandle") : "";
         this.profilePictureURL = jsonObject.has("profileImageURL") ? jsonObject.getString("profileImageURL") : "";
     }
-
 
     public String getUUID() { return UUID; }
 

@@ -71,7 +71,8 @@
         <activity android:name=".Controllers.SettingsActivity.CloseAccountActivity" />
         <activity android:name=".Controllers.SettingsActivity.ChangeProfilePictureActivity" />
         <activity android:name=".Controllers.EditPostActivity" />
-        <activity android:name=".Controllers.VideoActivity"></activity>
+        <activity android:name=".Controllers.VideoActivity" />
+        <activity android:name=".Controllers.SearchResultActivity"></activity>
     </application>
 
 </manifest>
