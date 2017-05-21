@@ -262,6 +262,12 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                                 intent.putExtra("authorUUID", post.getAuthor().get("_id").toString());
                                 intent.putExtra("description", post.getDescription());
                                 intent.putExtra("tags", holder.challengeTagTextView.getText());
+                                intent.putExtra("likesUsers", post.getLikesUsersArrayList(post.getLikesUsers()));
+                                if(Arrays.asList(post.getLikesUsersArrayList(post.getLikesUsers())).contains(sessionManager.getUser().getUUID())) {
+                                    intent.putExtra("isLiked", true);
+                                } else {
+                                    intent.putExtra("isLiked", false);
+                                }
                                 activity.startActivity(intent);
                             } catch (JSONException e) {
                                 e.printStackTrace();

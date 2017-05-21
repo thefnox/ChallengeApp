@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -25,11 +26,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -46,6 +49,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -57,6 +63,7 @@ import team10.hkr.challengeapp.Models.Pokemon;
 import team10.hkr.challengeapp.Models.Post;
 import team10.hkr.challengeapp.Models.User;
 import team10.hkr.challengeapp.R;
+import team10.hkr.challengeapp.RequestQueueSingleton;
 
 import static android.R.attr.id;
 import static android.R.attr.tag;
@@ -92,6 +99,14 @@ public class PostActivity extends Activity {
         flagButton = (ImageButton) findViewById(R.id.flag_post);
         likesCount = (TextView) findViewById(R.id.likes_post);
         followButton = (TextView) findViewById(R.id.follow_button_post);
+        boolean isLiked = getIntent().getExtras().getBoolean("isLiked");
+
+        if(getIntent().getExtras().getBoolean("isLiked")) {
+            likeButton.setBackgroundColor(0xffffbb33);
+
+        } else
+            likeButton.setBackgroundColor(0x00000000);
+
 
         try {
             Log.d("URL1", getIntent().getStringExtra("profileImageURL"));
@@ -109,7 +124,7 @@ public class PostActivity extends Activity {
         tags.setText(getIntent().getStringExtra("tags"));
         description.setText(getIntent().getStringExtra("description"));
 
-        if(getIntent().getExtras().getBoolean("isFollowingBool")) {
+        if (getIntent().getExtras().getBoolean("isFollowingBool")) {
             followButton.setText(String.valueOf("Unfollow"));
         }
 
@@ -135,12 +150,60 @@ public class PostActivity extends Activity {
             }
         });
 
-        if(getIntent().getStringExtra("authorUUID").equals(sessionManager.getUser().getUUID())) {
+        if (getIntent().getStringExtra("authorUUID").equals(sessionManager.getUser().getUUID())) {
             followButton.setVisibility(View.GONE);
         } else {
             //follow-unfollow logic here.
         }
+        Log.d("HereC", "1Ami");
+        likeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User you = AppSingleton.getInstance().getUser();
+                Log.d("HereC", "2Ami");
+
+                if (getIntent().getStringExtra("authorUUID").equals(you.getUUID())) {
+                    Toast.makeText(PostActivity.this, "You cannot like your own posts", Toast.LENGTH_SHORT).show();
+
+                } else if (getIntent().getExtras().getBoolean("isLiked")) {
+
+                    final String URL = "http://95.85.16.177:3000/api/post/" + getIntent().getStringExtra("UUID") + "/like";
+
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+                        //This needs to be fixed!
+                        @Override
+                        public void onResponse(String response) {
+                            ColorDrawable butColor = (ColorDrawable) likeButton.getBackground();
+                            ColorDrawable white = new ColorDrawable(0x00000000);
+                            if (!getIntent().getStringArrayListExtra("likesUsers").contains(sessionManager.getUser().getUUID())) {
+                                Log.d("HereC", "Ami");
+                                likeButton.setBackgroundColor(0xffffbb33);
+                            } else {
+                                likeButton.setBackgroundColor(0x00000000);
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(PostActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                        }
+
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("post_id", getIntent().getStringExtra("UUID"));
+                            return params;
+                        }
+                    };
+                    RequestQueueSingleton.getInstance(PostActivity.this).addToRequestQueue(stringRequest);
+                }
+            }
+        });
     }
+}
+
 
     //Saving this if we will ever need to have an actual request for the post
 //    private void setThePost(String UUID) {
@@ -169,5 +232,3 @@ public class PostActivity extends Activity {
 //        Volley.newRequestQueue(this).add(jsonObjectRequest);
 //
 //    }
-}
-
