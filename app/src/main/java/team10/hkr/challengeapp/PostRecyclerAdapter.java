@@ -71,6 +71,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
         final Activity activity = (Activity) holder.itemView.getContext();
         final Post post = postList.get(position);
+        sessionManager.updateFollowingUsers(activity);
         tags = new ArrayList<Tag>();
         post.setSelected(true);
         if(post.isSelected()) {

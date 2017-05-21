@@ -83,8 +83,8 @@ public class AppSingleton {
         }
         updatedUser = null;
     }
-    public void updateFollowingUsers() {
-        final String URL = "95.85.16.177:3000/api/user/" + user.getUUID() + "/following";
+    public void updateFollowingUsers(Context context) {
+        final String URL = "http://95.85.16.177:3000/api/user/" + user.getUUID() + "/following";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null, new Response.Listener<JSONArray>(){
             @Override
             public void onResponse(JSONArray response) {
@@ -102,10 +102,7 @@ public class AppSingleton {
                 Log.v("WTF on AppSingleton", "Err: " + error.getLocalizedMessage());
             }
         });
-        //THIS IS IT MARTIN, DO NOT DISAPPOINT ME!
-        //we need an activity/context pass in here but since this is a separate class(not an activity or anything else)
-        //I cant get any context to pass for the request
-//        RequestQueueSingleton.getInstance().addToRequestQueue(jsonArrayRequest);
+        RequestQueueSingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
     public ArrayList<String> getFollowingUsers() {

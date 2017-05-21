@@ -1,5 +1,6 @@
 package team10.hkr.challengeapp.Controllers;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,12 +40,15 @@ public class LoginActivity extends AppCompatActivity {
     LoginButton facebook_login_button;
     CallbackManager callbackManager;
     AppSingleton sessionManager = AppSingleton.getInstance();
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
+
+        context = LoginActivity.this;
 
         initializeControls();
         loginWithFB();
@@ -170,6 +174,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-        sessionManager.updateFollowingUsers();
+        sessionManager.updateFollowingUsers(context);
     }
 }
