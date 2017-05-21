@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.CustomGridLayoutManager;
 import team10.hkr.challengeapp.Models.Post;
+import team10.hkr.challengeapp.Models.SearchTag;
 import team10.hkr.challengeapp.Models.Tag;
 import team10.hkr.challengeapp.PostRecyclerAdapter;
 import team10.hkr.challengeapp.R;
@@ -33,7 +34,7 @@ import team10.hkr.challengeapp.TagSearchRecyclerListAdapter;
 public class SearchActivity extends Activity {
 
     AppSingleton sessionManager = AppSingleton.getInstance();
-    private ArrayList<Tag> tagArrayList = new ArrayList<Tag>();
+    private ArrayList<SearchTag> tagArrayList = new ArrayList<SearchTag>();
     private TagSearchRecyclerListAdapter adapter;
 
     private RecyclerView popularRecyclerView;
@@ -73,7 +74,7 @@ public class SearchActivity extends Activity {
             public void onResponse(JSONArray response) {
                 try {
                     for (int i = 0; i < response.length(); i++) {
-                        tagArrayList.add(new Tag(response.getJSONObject(i)));
+                        tagArrayList.add(new SearchTag(response.getJSONObject(i)));
                         Log.d("tagArrayListSize: ", String.valueOf(tagArrayList.size()));
                     }
                 } catch (Exception e) {

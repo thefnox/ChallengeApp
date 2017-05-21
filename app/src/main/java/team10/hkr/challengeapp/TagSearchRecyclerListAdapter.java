@@ -20,6 +20,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 import team10.hkr.challengeapp.Controllers.SearchResultActivity;
+import team10.hkr.challengeapp.Models.SearchTag;
 import team10.hkr.challengeapp.Models.Tag;
 
 /**
@@ -28,10 +29,10 @@ import team10.hkr.challengeapp.Models.Tag;
 
 public class TagSearchRecyclerListAdapter extends RecyclerView.Adapter<TagSearchRecyclerListAdapter.TagHolder> {
 
-    private ArrayList<Tag> tagArrayList = new ArrayList<>();
+    private ArrayList<SearchTag> tagArrayList = new ArrayList<>();
     private LayoutInflater inflater;
 
-    public TagSearchRecyclerListAdapter(Context context, ArrayList<Tag> tagArrayList) {
+    public TagSearchRecyclerListAdapter(Context context, ArrayList<SearchTag> tagArrayList) {
         this.inflater = LayoutInflater.from(context);
         this.tagArrayList = tagArrayList;
     }
@@ -42,22 +43,20 @@ public class TagSearchRecyclerListAdapter extends RecyclerView.Adapter<TagSearch
         return new TagHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(TagSearchRecyclerListAdapter.TagHolder holder, int position) {
         final Activity activity = (Activity) holder.itemView.getContext();
-        final Tag tag = tagArrayList.get(position);
+        final SearchTag tag = tagArrayList.get(position);
         //holder.tagNameTextView.setText(tag.getName());
         //should've been tag.getName but this was implemented this way in the server by accident I assume
-        Log.d("TagName", tag.getUUID());
-        Log.d("Whtthe", "1234");
-        holder.tagNameTextView.setText(tag.getUUID());
-        holder.likesTextView.setText("3520 Likes");
+        Log.d("TagName", tag.getName());
+        holder.tagNameTextView.setText(tag.getName());
+        holder.likesTextView.setText(String.valueOf(tag.getCount() + " Posts"));
         holder.tagNameTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, SearchResultActivity.class);
-                intent.putExtra("KEY_WORD", tag.getUUID().substring(1));
+                intent.putExtra("KEY_WORD", tag.getName().substring(1));
                 activity.startActivity(intent);
             }
         });
