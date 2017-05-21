@@ -262,7 +262,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                                 intent.putExtra("description", post.getDescription());
                                 intent.putExtra("tags", holder.challengeTagTextView.getText());
                                 intent.putExtra("likesUsers", post.getLikesUsersArrayList(post.getLikesUsers()));
-                                if(Arrays.asList(post.getLikesUsersArrayList(post.getLikesUsers())).contains(sessionManager.getUser().getUUID())) {
+                                if(post.getLikesUsersArrayList(post.getLikesUsers()).contains(sessionManager.getUser().getUUID())) {
                                     intent.putExtra("isLiked", true);
                                 } else {
                                     intent.putExtra("isLiked", false);
@@ -317,6 +317,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                     activity.startActivity(mIntent);
                 }
             });
+
             holder.flagImageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -334,7 +335,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 }
             });
 
-            if (Arrays.asList(post.getLikesUsersArrayList(post.getLikesUsers())).contains(AppSingleton.getInstance().getUser().getUUID())) {
+            if (post.getLikesUsersArrayList(post.getLikesUsers()).contains(AppSingleton.getInstance().getUser().getUUID())) {
 
                 holder.thumbsUpImageButton.setBackgroundColor(0xffffbb33);
 
@@ -354,8 +355,8 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                             Toast.makeText(activity, "You cannot like your own posts", Toast.LENGTH_SHORT).show();
                         }
 
-                        else if (Arrays.asList(post.getLikesUsersArrayList(post.getLikesUsers())).contains(you.getUUID())) {
-
+                        else if (post.getLikesUsersArrayList(post.getLikesUsers()).contains(you.getUUID())) {
+                            Log.d("Am I ", "Here now");
                             final String URL = "http://95.85.16.177:3000/api/post/" + post.getUUID() + "/like";
 
                             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {

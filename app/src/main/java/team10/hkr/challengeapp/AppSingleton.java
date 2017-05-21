@@ -83,6 +83,7 @@ public class AppSingleton {
         }
         updatedUser = null;
     }
+
     public void updateFollowingUsers(Context context) {
         followingUsers.clear();
         followingUsers = new ArrayList<String>();
@@ -108,9 +109,7 @@ public class AppSingleton {
         });
         RequestQueueSingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
-    public void updatePostLikes(Context context) {
 
-    }
     public ArrayList<String> getFollowingUsers() {
         return followingUsers;
     }

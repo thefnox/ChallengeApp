@@ -82,6 +82,7 @@ public class PostActivity extends Activity {
     private ImageButton flagButton;
     private TextView likesCount;
     private TextView followButton;
+    int i = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,16 +157,37 @@ public class PostActivity extends Activity {
             //follow-unfollow logic here.
         }
         Log.d("HereC", "1Ami");
+
+        if(getIntent().getStringArrayListExtra("likesUsers").contains(sessionManager.getUser().getUUID())) {
+            likeButton.setBackgroundColor(0xffffbb33);
+        } else {
+            likeButton.setBackgroundColor(0x00000000);
+        }
+
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 User you = AppSingleton.getInstance().getUser();
                 Log.d("HereC", "2Ami");
+                if ((i%2)==0) {
+                    likeButton.setBackgroundColor(0xffffbb33);
+                    Log.d("HereC", "Red");
+                    i++;
+                } else {
+                    likeButton.setBackgroundColor(0x00000000);
+                    if(i%2 != 0) {
+                        Log.d("HereC", "White");
+                        i++;
+                    } else {
+                        i++;
+                        i++;
+                    }
+                }
 
                 if (getIntent().getStringExtra("authorUUID").equals(you.getUUID())) {
                     Toast.makeText(PostActivity.this, "You cannot like your own posts", Toast.LENGTH_SHORT).show();
 
-                } else if (getIntent().getExtras().getBoolean("isLiked")) {
+                } else {
 
                     final String URL = "http://95.85.16.177:3000/api/post/" + getIntent().getStringExtra("UUID") + "/like";
 
@@ -173,14 +195,7 @@ public class PostActivity extends Activity {
                         //This needs to be fixed!
                         @Override
                         public void onResponse(String response) {
-                            ColorDrawable butColor = (ColorDrawable) likeButton.getBackground();
-                            ColorDrawable white = new ColorDrawable(0x00000000);
-                            if (!getIntent().getStringArrayListExtra("likesUsers").contains(sessionManager.getUser().getUUID())) {
-                                Log.d("HereC", "Ami");
-                                likeButton.setBackgroundColor(0xffffbb33);
-                            } else {
-                                likeButton.setBackgroundColor(0x00000000);
-                            }
+                            //!getIntent().getStringArrayListExtra("likesUsers").contains(sessionManager.getUser().getUUID())
                         }
                     }, new Response.ErrorListener() {
                         @Override
