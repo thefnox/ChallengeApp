@@ -122,6 +122,19 @@ public class PostActivity extends Activity {
                 startActivity(mIntent);
             }
         });
+
+        flagButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(PostActivity.this, ReportActivity.class);
+                mIntent.putExtra("post_id", getIntent().getStringExtra("UUID"));
+                mIntent.putExtra("username", getIntent().getStringExtra("username"));
+                mIntent.putExtra("contentURL", getIntent().getStringExtra("contentURL"));
+                mIntent.putExtra("tags", getIntent().getStringExtra("tags"));
+                startActivity(mIntent);
+            }
+        });
+
         if(getIntent().getStringExtra("authorUUID").equals(sessionManager.getUser().getUUID())) {
             followButton.setVisibility(View.GONE);
         } else {
