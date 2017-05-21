@@ -54,6 +54,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     private String CONTENT_URL = "";
     private ArrayList<Tag> tags;
     private String stringTagsHolder;
+    int colorHolder = 2;
 
     public PostRecyclerAdapter(Context context, ArrayList<Post> postList) {
         this.inflater = LayoutInflater.from(context);
@@ -336,15 +337,22 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             });
 
             if (post.getLikesUsersArrayList(post.getLikesUsers()).contains(AppSingleton.getInstance().getUser().getUUID())) {
-
                 holder.thumbsUpImageButton.setBackgroundColor(0xffffbb33);
-
+                colorHolder = 3;
             }
 
             holder.thumbsUpImageButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
+
+                    if(colorHolder%2 == 0) {
+                        holder.thumbsUpImageButton.setBackgroundColor(0xffffbb33);
+                        colorHolder++;
+                    } else {
+                        holder.thumbsUpImageButton.setBackgroundColor(0x00000000);
+                        colorHolder++;
+                    }
 
                     final User you = AppSingleton.getInstance().getUser();
 
@@ -362,9 +370,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    Toast.makeText(activity, "Like Removed", Toast.LENGTH_LONG).show();
-                                    holder.thumbsUpImageButton.setBackgroundColor(0x00000000);
-
+                                    Log.d("Success", "like action");
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
@@ -392,14 +398,12 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    Toast.makeText(activity, "Post Liked", Toast.LENGTH_LONG).show();
-                                    holder.thumbsUpImageButton.setBackgroundColor(0xffffbb33);
-
+                                    Log.d("Success", "like action");
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(activity, "Something went wrong", Toast.LENGTH_LONG).show();
+
                                 }
 
                             }) {
