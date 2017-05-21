@@ -25,6 +25,7 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
+import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.CustomListAdapter;
 import team10.hkr.challengeapp.Models.Post;
 import team10.hkr.challengeapp.PostRecyclerAdapter;
@@ -36,6 +37,7 @@ import team10.hkr.challengeapp.R;
 
 public class Tab1Winning extends Fragment {
 
+    private AppSingleton sessionManager = AppSingleton.getInstance();
     private RecyclerView winningRecyclerView;
     private PostRecyclerAdapter adapter;
     private View view;

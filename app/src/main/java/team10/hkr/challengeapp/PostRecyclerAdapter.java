@@ -115,8 +115,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                         holder.followButtonTextView.setText(String.valueOf("Unfollow"));
                         Log.d("AMI", "Here4");
 
-                    } else if(!isFollowing(post.getAuthor().getString("_id"))) {
-
+                    }
                         Log.d("AmI", "Here2");
                         holder.followButtonTextView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -147,7 +146,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                                 RequestQueueSingleton.getInstance(activity).addToRequestQueue(stringRequest);
                             }
                         });
-                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

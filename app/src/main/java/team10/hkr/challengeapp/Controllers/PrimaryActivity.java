@@ -58,7 +58,7 @@ public class PrimaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_primary);
         SharedPref.init(getApplicationContext());
         CookieHandler.setDefault(sessionManager.getCookieManager());
-
+        sessionManager.updateFollowingUsers(this);
 
         actionBarLogo = (ImageView) findViewById(R.id.action_bar_logo);
         actionBarLogo.setOnClickListener(new View.OnClickListener(){
