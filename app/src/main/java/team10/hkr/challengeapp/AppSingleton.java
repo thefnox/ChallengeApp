@@ -57,8 +57,8 @@ public class AppSingleton {
         this.user = user;
     }
 
-    public void updateUser() { //havent tested yet
-        final String URL = "95.85.16.177:3000/api/user/me";
+    public void updateUser(Context context) { //havent tested yet
+        final String URL = "http://95.85.16.177:3000/api/user/";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>(){
             @Override
             public void onResponse(JSONObject response) {
@@ -76,7 +76,7 @@ public class AppSingleton {
             }
         });
 
-        Volley.newRequestQueue(context.getApplicationContext()).add(jsonObjectRequest);
+        Volley.newRequestQueue(context).add(jsonObjectRequest);
 
         if(updatedUser != null) {
             this.user = updatedUser;
@@ -84,7 +84,11 @@ public class AppSingleton {
         updatedUser = null;
     }
     public void updateFollowingUsers(Context context) {
+        followingUsers.clear();
+        followingUsers = new ArrayList<String>();
+
         final String URL = "http://95.85.16.177:3000/api/user/" + user.getUUID() + "/following";
+
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null, new Response.Listener<JSONArray>(){
             @Override
             public void onResponse(JSONArray response) {

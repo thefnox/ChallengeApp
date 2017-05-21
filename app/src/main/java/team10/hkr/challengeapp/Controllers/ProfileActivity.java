@@ -61,6 +61,8 @@ public class ProfileActivity extends Activity {
     private ImageView profilePicture;
     private TextView profileUsername;
     private TextView profileName;
+    private TextView followingCount;
+    private TextView followersCount;
     private RecyclerView profileRecyclerView;
     private PostRecyclerAdapter adapter;
     private TextView profileDescription; //Not implemented in the server..
@@ -91,6 +93,7 @@ public class ProfileActivity extends Activity {
                     profilePicture = (ImageView) findViewById(R.id.photo_profile);
                     profileName = (TextView) findViewById(R.id.name_and_surname_profile);
                     profileUsername = (TextView) findViewById(R.id.username_profile);
+                    followingCount = (TextView) findViewById(R.id.following_count_profile);
                     //profileDescription = (TextView) findViewById(R.id.profile_description);
 
                     // FILL THE INFO    //  //  //  //  //  //
@@ -104,6 +107,7 @@ public class ProfileActivity extends Activity {
 
                     profileName.setText(String.valueOf(user.getFirstName() + " " + user.getLastName()));
                     profileUsername.setText(user.getUserName());
+                    followingCount.setText(String.valueOf(sessionManager.getFollowingUsers().size()));
                     //profileDescription.setText(user.getProfileDescription());
 
                 } catch (JSONException e) {

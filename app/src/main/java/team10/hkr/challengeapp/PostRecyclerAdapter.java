@@ -111,9 +111,12 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 Log.d("AmI", "Here");
                 try {
                     if(isFollowing(post.getAuthor().getString("_id"))) {
+                        //This does not work for some reason // check it later
                         holder.followButtonTextView.setText(String.valueOf("Unfollow"));
-                    }
-                    if(!isFollowing(post.getAuthor().getString("_id"))) {
+                        Log.d("AMI", "Here4");
+
+                    } else if(!isFollowing(post.getAuthor().getString("_id"))) {
+
                         Log.d("AmI", "Here2");
                         holder.followButtonTextView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -133,6 +136,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                                         } else {
                                             holder.followButtonTextView.setText(String.valueOf("Follow"));
                                         }
+                                        sessionManager.updateFollowingUsers(activity);
                                     }
                                 }, new Response.ErrorListener() {
                                     @Override

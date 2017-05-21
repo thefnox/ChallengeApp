@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp">
                 <TextView
-                    android:id="@+id/following_profile"
+                    android:id="@+id/following_count_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -51,7 +51,7 @@
                     android:textSize="14sp"
                     android:layout_gravity="center_vertical"/>
                 <TextView
-                    android:id="@+id/followers_profile"
+                    android:id="@+id/followers_count_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
