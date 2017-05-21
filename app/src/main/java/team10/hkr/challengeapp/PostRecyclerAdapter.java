@@ -34,6 +34,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 import team10.hkr.challengeapp.Controllers.CommentActivity;
 import team10.hkr.challengeapp.Controllers.EditPostActivity;
+import team10.hkr.challengeapp.Controllers.PostActivity;
 import team10.hkr.challengeapp.Controllers.ProfileActivity;
 import team10.hkr.challengeapp.Controllers.ReportActivity;
 import team10.hkr.challengeapp.Controllers.VideoActivity;
@@ -71,7 +72,6 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
         final Activity activity = (Activity) holder.itemView.getContext();
         final Post post = postList.get(position);
-        sessionManager.updateFollowingUsers(activity);
         tags = new ArrayList<Tag>();
         post.setSelected(true);
         if(post.isSelected()) {
@@ -247,6 +247,27 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                     holder.contentIfPhotoView.setImageBitmap(bitmap);
                     holder.videoStartClickTextView.setVisibility(View.GONE);
                     holder.contentIfPhotoView.setVisibility(View.VISIBLE);
+                    holder.contentIfPhotoView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //Opening a single post activity by clicking the content view
+                            Intent intent = new Intent(activity, PostActivity.class);
+                            try {
+                                intent.putExtra("username", post.getAuthor().getString("username"));
+                                intent.putExtra("profileImageURL", post.getAuthor().getString("profileImageURL"));
+                                intent.putExtra("isFollowingBool", isFollowing(post.getAuthor().getString("_id")));
+                                intent.putExtra("likesCount", String.valueOf(post.getLikes()));
+                                intent.putExtra("contentURL", "http://95.85.16.177:3000" + post.getContent().getString("staticURL"));
+                                intent.putExtra("UUID", post.getUUID());
+                                intent.putExtra("authorUUID", post.getAuthor().get("_id").toString());
+                                intent.putExtra("description", post.getDescription());
+                                intent.putExtra("tags", holder.challengeTagTextView.getText());
+                                activity.startActivity(intent);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
 
                 } else if (CONTENT_URL.endsWith(".mp4")) {
                     //Videos here

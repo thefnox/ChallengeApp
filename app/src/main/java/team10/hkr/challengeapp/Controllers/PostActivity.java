@@ -2,6 +2,9 @@ package team10.hkr.challengeapp.Controllers;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -44,6 +48,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.CommentListAdapter;
 import team10.hkr.challengeapp.CustomListAdapter;
@@ -54,78 +59,102 @@ import team10.hkr.challengeapp.Models.User;
 import team10.hkr.challengeapp.R;
 
 import static android.R.attr.id;
+import static android.R.attr.tag;
 
 public class PostActivity extends Activity {
 
     AppSingleton sessionManager = AppSingleton.getInstance();
-    Post post;
-    ArrayList<Comment> commentObjects = new ArrayList<Comment>();
-    ListView commentsListView;
-    TextView firstCommentView;
-    TextView secondCommentView;
+    private TextView authorName;
+    private CircleImageView authorPhoto;
+    private TextView tags;
+    private TextView description;
+    private ImageView content;
+    private ImageButton likeButton;
+    private ImageButton commentButton;
+    private ImageButton shareButton;
+    private ImageButton flagButton;
+    private TextView likesCount;
+    private TextView followButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CookieHandler.setDefault(sessionManager.getCookieManager());
         setContentView(R.layout.single_post);
-        setTheFeed();
+        authorName = (TextView) findViewById(R.id.username_post);
+        authorPhoto = (CircleImageView) findViewById(R.id.profile_photo_post);
+        tags = (TextView) findViewById(R.id.challenge_tag_post);
+        description = (TextView) findViewById(R.id.description_post);
+        content = (ImageView) findViewById(R.id.content_view_post);
+        likeButton = (ImageButton) findViewById(R.id.thumbsup_post);
+        commentButton = (ImageButton) findViewById(R.id.comment_post);
+        shareButton = (ImageButton) findViewById(R.id.share_post);
+        flagButton = (ImageButton) findViewById(R.id.flag_post);
+        likesCount = (TextView) findViewById(R.id.likes_post);
+        followButton = (TextView) findViewById(R.id.follow_button_post);
 
-        final StyleSpan boldStyle = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
-        final StyleSpan italicStyle = new StyleSpan(android.graphics.Typeface.ITALIC); //Span to make text italic
+        try {
+            Log.d("URL1", getIntent().getStringExtra("profileImageURL"));
+            Log.d("URL2", getIntent().getStringExtra("contentURL"));
+            Bitmap bitmapUserPhoto = BitmapFactory.decodeStream((InputStream) new URL("http://95.85.16.177:3000" + getIntent().getStringExtra("profileImageURL")).getContent());
+            Bitmap bitmapContent = BitmapFactory.decodeStream((InputStream) new URL(getIntent().getStringExtra("contentURL")).getContent());
+            authorPhoto.setImageBitmap(bitmapUserPhoto);
+            content.setVisibility(View.VISIBLE);
+            content.setImageBitmap(bitmapContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        authorName.setText(getIntent().getStringExtra("username"));
+        likesCount.setText(String.valueOf(getIntent().getStringExtra("likesCount") + " Likes"));
+        tags.setText(getIntent().getStringExtra("tags"));
+        description.setText(getIntent().getStringExtra("description"));
 
-//        firstCommentView = (TextView) findViewById(R.id.username_comment_first);
-//        secondCommentView = (TextView) findViewById(R.id.username_comment_second);
+        if(getIntent().getExtras().getBoolean("isFollowingBool")) {
+            followButton.setText(String.valueOf("Unfollow"));
+        }
 
-        String holderUsernameFirst = "Mr.Falafelface";
-        String holderUsernameSecond = "SwedishMan";
-
-        String string = holderUsernameFirst + "What an amazingf comment we got here omg its just so greate so good I cant help but noticing..";
-        String second_string = holderUsernameSecond + "OMFG dude this is the shaaaayyyttt..";
-
-        SpannableString spannableStringFirst = new SpannableString(string);
-        SpannableString spannableStringSecond = new SpannableString(second_string);
-        spannableStringFirst.setSpan(boldStyle, 0, holderUsernameFirst.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        spannableStringSecond.setSpan(boldStyle, 0, holderUsernameSecond.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-
-        firstCommentView.setText(spannableStringFirst);
-        secondCommentView.setText(spannableStringSecond);
-    }
-
-    public void onReportClick(View view) {
-
-        Intent reportIntent = new Intent(this, ReportActivity.class);
-        startActivity(reportIntent);
-
-    }
-
-    private void setTheFeed() {
-
-        final String URL = "http://95.85.16.177:3000/api/post/5914cd3b46c5141865ef3340";
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+        //Click Listeners
+        commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(JSONObject response) {
-                Log.v("YUPPI", "Response; " + response.toString());
-                try {
-                    post = new Post(response);
-                    for(int i = 0; i < post.getComments().length(); i++) {
-                        commentObjects.add(new Comment(post.getComments().getJSONObject(i)));
-                        Log.v("YUPPI", String.valueOf(post.getComments().length()) + response.toString());
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.v("WTF", "Err: " + error.getLocalizedMessage());
+            public void onClick(View v) {
+                Intent mIntent = new Intent(PostActivity.this, CommentActivity.class);
+                mIntent.putExtra("post_id", getIntent().getStringExtra("UUID"));
+                startActivity(mIntent);
             }
         });
-        Volley.newRequestQueue(this).add(jsonObjectRequest);
-
-//        CommentListAdapter adapter = new CommentListAdapter(PostActivity.this, commentObjects);
-//        commentsListView = (ListView) findViewById(R.id.comment_list_post);
-//        commentsListView.setAdapter(adapter);
+        if(getIntent().getStringExtra("authorUUID").equals(sessionManager.getUser().getUUID())) {
+            followButton.setVisibility(View.GONE);
+        } else {
+            //follow-unfollow logic here.
+        }
     }
+
+    //Saving this if we will ever need to have an actual request for the post
+//    private void setThePost(String UUID) {
+//
+//        final String URL = "http://95.85.16.177:3000/api/post/" + UUID;
+//        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                Log.v("YUPPI", "Response; " + response.toString());
+//                try {
+//                    post = new Post(response);
+//                    for(int i = 0; i < post.getComments().length(); i++) {
+//                        commentObjects.add(new Comment(post.getComments().getJSONObject(i)));
+//                        Log.v("YUPPI", String.valueOf(post.getComments().length()) + response.toString());
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.v("WTF", "Err: " + error.getLocalizedMessage());
+//            }
+//        });
+//        Volley.newRequestQueue(this).add(jsonObjectRequest);
+//
+//    }
 }
 
