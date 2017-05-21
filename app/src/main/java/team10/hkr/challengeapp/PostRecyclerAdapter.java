@@ -54,7 +54,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     private String CONTENT_URL = "";
     private ArrayList<Tag> tags;
     private String stringTagsHolder;
-    int colorHolder = 2;
+    int colorHolder = 4;
 
     public PostRecyclerAdapter(Context context, ArrayList<Post> postList) {
         this.inflater = LayoutInflater.from(context);
