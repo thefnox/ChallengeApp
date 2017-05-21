@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -143,14 +144,14 @@ public class Post {
         isSelected = selected;
     }
 
-    public String[] getLikesUsersArrayList(JSONArray jsonArray){
+    public ArrayList<String> getLikesUsersArrayList(JSONArray jsonArray){
 
         if(jsonArray != null){
             int length = jsonArray.length();
-            String[] likesUsersArray = new String[length];
+            ArrayList<String> likesUsersArray = new ArrayList<>();
 
             for (int i = 0; i<jsonArray.length(); i++){
-                likesUsersArray[i] = jsonArray.optString(i);
+                likesUsersArray.add(jsonArray.optString(i));
 
             }
             return likesUsersArray;

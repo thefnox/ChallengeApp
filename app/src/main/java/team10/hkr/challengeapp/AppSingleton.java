@@ -108,7 +108,9 @@ public class AppSingleton {
         });
         RequestQueueSingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
+    public void updatePostLikes(Context context) {
 
+    }
     public ArrayList<String> getFollowingUsers() {
         return followingUsers;
     }
