@@ -111,7 +111,7 @@ public class ChangeProfilePictureActivity extends Activity {
         File externalStoragePublicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         String fileName = getFileName();
 
-        SharedPref.write("currentProfilePicture", fileName);
+        SharedPref.write("newProfilePicture", fileName);
 
         File takenPhoto = new File(externalStoragePublicDirectory, fileName);
         Uri pictureUri = Uri.fromFile(takenPhoto);
@@ -139,7 +139,7 @@ public class ChangeProfilePictureActivity extends Activity {
             if (resultCode == RESULT_OK) {
 
                 ImageView newProfilePicture = (ImageView) findViewById(R.id.newProfilePictureImageView);
-                File imageDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/ProfilePicture20170516_023452.jpg");
+                File imageDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/" + SharedPref.read("newProfilePicture", ""));
                 pictureDirectory.setText(imageDirectory.toString());
                 newProfilePicture.setImageBitmap(BitmapFactory.decodeFile(imageDirectory.toString()));
 
@@ -192,6 +192,7 @@ public class ChangeProfilePictureActivity extends Activity {
             @Override
             public void onResponse(NetworkResponse response) {
                 Toast.makeText(ChangeProfilePictureActivity.this, "Profile Picture Successfully Changed", Toast.LENGTH_SHORT).show();
+                AppSingleton.getInstance().updateUser(getBaseContext());
                 Intent intent = new Intent(ChangeProfilePictureActivity.this, PrimaryActivity.class);
                 startActivity(intent);
 

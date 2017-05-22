@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 
+import team10.hkr.challengeapp.AppSingleton;
+import team10.hkr.challengeapp.Models.User;
 import team10.hkr.challengeapp.R;
 
 /**
@@ -18,12 +20,16 @@ public class SettingsActivityMainView extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings_main_preferences);
 
+        User user = AppSingleton.getInstance().getUser();
+
         final Preference changeNamePref = findPreference("editNameButton");
         final Preference changeEmailPref = findPreference("changeEmailButton");
         final Preference changePasswordPref = findPreference("changePasswordButton");
         final Preference changeProfilePicPref = findPreference("changeProfilePictureButton");
         final Preference closeAccountPref = findPreference("closeAccountPreference");
 
+        changeEmailPref.setSummary("Current Email:  " + user.getEmail());
+        changeNamePref.setSummary("Current Name: " + user.getFirstName() + " " + user.getLastName());
 
         changeEmailPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override

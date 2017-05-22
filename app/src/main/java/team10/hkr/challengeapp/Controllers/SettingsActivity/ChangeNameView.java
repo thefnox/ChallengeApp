@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import team10.hkr.challengeapp.AppSingleton;
 import team10.hkr.challengeapp.Controllers.LoginActivity;
 import team10.hkr.challengeapp.Controllers.PrimaryActivity;
 import team10.hkr.challengeapp.Models.User;
@@ -37,10 +38,11 @@ public class ChangeNameView extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_name_view);
+
+        User user = AppSingleton.getInstance().getUser();
         TextView currentName = (TextView) findViewById(R.id.currentNameTextView);
         Button changeNameButton = (Button) findViewById(R.id.changeNameButton);
-        currentName.setText(SharedPref.read("FIRST_NAME", "") + " " + SharedPref.read("LAST_NAME", ""));
-
+        currentName.setText(user.getFirstName() + " " + user.getLastName());
 
         changeNameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +60,7 @@ public class ChangeNameView extends Activity {
         final String LAST_NAME = "lastName";
         final String URL = "http://95.85.16.177:3000/api/user";
         final TextView currentName = (TextView) findViewById(R.id.currentNameTextView);
+        final User user = AppSingleton.getInstance().getUser();
 
 
         if (newFirstName.getText().toString().equals("") && newLastName.getText().toString().equals("")) {
@@ -76,8 +79,8 @@ public class ChangeNameView extends Activity {
                 @Override
                 public void onResponse(String response) {
                     Toast.makeText(ChangeNameView.this, "Name changed successfully", Toast.LENGTH_LONG).show();
-                    SharedPref.write("FIRST_NAME", newFirstName.getText().toString());
-                    SharedPref.write("LAST_NAME", newLastName.getText().toString());
+                    user.setFirstName(newFirstName.getText().toString());
+                    user.setLastName(newLastName.getText().toString());
                     currentName.setText(SharedPref.read("FIRST_NAME", "") + " " + SharedPref.read("LAST_NAME", ""));
 
                 }

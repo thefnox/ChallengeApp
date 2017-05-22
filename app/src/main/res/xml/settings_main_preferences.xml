@@ -7,13 +7,13 @@
 
         <Preference
             android:key="editNameButton"
-            android:summary="Change your name."
-            android:title="Name" />
+            android:summary=""
+            android:title="Change Name" />
 
         <Preference
             android:key="changeEmailButton"
-            android:summary="Change your email address."
-            android:title="Email Address" />
+            android:summary=""
+            android:title="Change Email Address" />
 
         <Preference
             android:key="changePasswordButton"

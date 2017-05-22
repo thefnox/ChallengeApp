@@ -33,8 +33,6 @@ public class ChangeEmailView extends Activity {
         Button changeEmailButton = (Button) findViewById(R.id.change_email_button_change_mail);
         TextView currentEmail = (TextView) findViewById(R.id.current_email_change_mail);
         currentEmail.setText(AppSingleton.getInstance().getUser().getEmail());
-
-
         changeEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
