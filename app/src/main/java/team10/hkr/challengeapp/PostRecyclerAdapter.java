@@ -93,8 +93,17 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
                     StrictMode.setThreadPolicy(policy);
-                    Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL("http://95.85.16.177:3000" + post.getAuthor().getString("profileImageURL")).getContent());
+
+                    final BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 8;
+
+                    Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL("http://95.85.16.177:3000" + post.getAuthor().getString("profileImageURL")).getContent(), null, options);
                     holder.profilePhotoView.setImageBitmap(bitmap);
+                    if(bitmap!=null)
+                    {
+                        bitmap.recycle();
+                        bitmap=null;
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
